@@ -537,7 +537,7 @@
         `baw contract-call preview --binanceChainId ${cfg.chainId} --from ${account} --to ${cfg.contractAddress} --value 0 --inputData ${plan.calldata} --json`;
       elements.agenticPrompt.value = formatAgenticPrompt(plan, elements.agenticCommand.value);
       elements.agenticOutput.hidden = false;
-      agenticStatus('Agent prompt ready. Copy it into Binance AI Pro for a preview.', 'success');
+      agenticStatus('Receipt preview prompt ready. Paste it into your Binance AI Pro chat.', 'success');
       await readCounters(publicRead, plan.block.number);
     } catch (error) {
       agenticStatus(error?.message || 'Could not prepare the receipt.', 'error');

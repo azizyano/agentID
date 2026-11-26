@@ -98,7 +98,7 @@
             <section class="agentic-path" id="agentic-receipt" aria-labelledby="agentic-title">
               <h3 id="agentic-title">Record with Binance Agentic Wallet</h3>
               <p>Start with your own Agent ID name or Agentic Wallet address. The receipt sends <strong>0 BNB</strong> plus network gas.</p>
-              <p>Sign in to your Agentic Wallet in <a href="https://web3.binance.com/en/dev-docs/products/agentic-wallet/ai-pro" target="_blank" rel="noreferrer">Binance AI Pro</a>. The receipt preview requires active <a href="https://web3.binance.com/en/dev-docs/products/agentic-wallet/use-cases/developer-mode" target="_blank" rel="noreferrer">Developer Mode</a>. Prepare a fresh receipt prompt if the five-minute snapshot expires.</p>
+              <p>Use the AI icon in the Binance App to open your AI Pro chat and sign in to your Agentic Wallet. The receipt preview requires active <a href="https://web3.binance.com/en/dev-docs/products/agentic-wallet/use-cases/developer-mode" target="_blank" rel="noreferrer">Developer Mode</a>. Prepare a fresh receipt prompt if the five-minute snapshot expires.</p>
               <form id="agentic-prepare" class="agentic-form">
                 <label for="agentic-address">Your Agent ID name or public BSC address</label>
                 <input id="agentic-address" type="text" placeholder="name.ai or 0x…" maxlength="42" spellcheck="false" autocomplete="off" autocapitalize="off" required>
@@ -108,21 +108,15 @@
               <div class="agentic-output" id="agentic-name-output" hidden>
                 <label for="agentic-name-prompt">Find my BSC address</label>
                 <textarea id="agentic-name-prompt" rows="3" readonly spellcheck="false"></textarea>
-                <div class="agentic-actions">
-                  <button class="button button-primary" id="agentic-copy-name-prompt" type="button">Copy address prompt</button>
-                  <a class="button button-secondary" href="https://ai.binance.com/" target="_blank" rel="noreferrer">Open Binance AI Pro</a>
-                </div>
-                <p>Paste this prompt into your signed-in Binance AI Pro chat. Replace the name above with the public 0x address from Binance, then select <strong>Prepare prompt</strong> again.</p>
+                <button class="button button-primary" id="agentic-copy-name-prompt" type="button">Copy address prompt</button>
+                <p>Paste this read-only prompt into your Binance AI Pro chat. Replace the name above with the public 0x address from Binance, then select <strong>Prepare prompt</strong> again to get your receipt preview prompt.</p>
               </div>
               <div class="agentic-output" id="agentic-output" hidden>
                 <p id="agentic-summary"></p>
                 <label for="agentic-prompt">Receipt preview prompt</label>
                 <textarea id="agentic-prompt" rows="4" readonly spellcheck="false"></textarea>
-                <div class="agentic-actions">
-                  <button class="button button-primary" id="agentic-copy-prompt" type="button">Copy prompt</button>
-                  <a class="button button-secondary" href="https://ai.binance.com/" target="_blank" rel="noreferrer">Open Binance AI Pro</a>
-                </div>
-                <p>Keep this tab open. Paste the prompt into your signed-in Binance AI Pro chat. Review the exact call and its fees. Continue only if the preview is clean and requires confirmation in the Binance App.</p>
+                <button class="button button-primary" id="agentic-copy-prompt" type="button">Copy receipt preview prompt</button>
+                <p>Keep this tab open. Return to your Binance AI Pro chat and paste the receipt preview prompt. Review the exact call and its fees. Continue only if the preview is clean and requires confirmation in the Binance App.</p>
                 <form id="agentic-verify" class="agentic-form">
                   <label for="agentic-hash">Public transaction hash</label>
                   <input id="agentic-hash" type="text" pattern="0[xX][a-fA-F0-9]{64}" placeholder="0x…" maxlength="66" spellcheck="false" autocomplete="off" autocapitalize="off" required>

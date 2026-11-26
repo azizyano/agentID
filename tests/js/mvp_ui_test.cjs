@@ -65,7 +65,9 @@ test('page is responsive, accessible, and avoids unsafe DOM injection', () => {
   assert.match(html, /<meta name="viewport"/);
   assert.match(html, /class="skip-link"/);
   assert.match(html, /button-primary" href="#agentic-receipt"/);
-  assert.match(html, /href="https:\/\/ai\.binance\.com\/" target="_blank" rel="noreferrer"/);
+  assert.doesNotMatch(html, /href="https:\/\/ai\.binance\.com\b|Open Binance AI Pro/);
+  assert.match(html, /AI icon in the Binance App/);
+  assert.match(html, /Copy receipt preview prompt/);
   assert.match(css, /@media \(max-width: 680px\)/);
   assert.match(css, /prefers-reduced-motion/);
   assert.doesNotMatch(app, /\.innerHTML\s*=/);

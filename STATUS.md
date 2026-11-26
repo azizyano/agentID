@@ -1,3 +1,11 @@
+# In-app Binance AI handoff — 2026-11-26
+
+The owner tried the read-only address prompt and asked to use the Binance App's AI icon instead of external launch buttons. Removed both AI Pro launch buttons and labeled the two copy actions **Copy address prompt** and **Copy receipt preview prompt**. The second prompt still carries the exact unsigned call and requires a fresh review before any approval.
+
+Ran `node --test --test-reporter=dot tests/js/mvp_contract_test.cjs tests/js/mvp_deploy_browser_test.cjs tests/js/mvp_deployment_test.cjs tests/js/mvp_ui_test.cjs tests/js/provider_submit_startup_test.cjs`. All 39 passed. `node --check apps/web/dist/app.js` and `git diff --check` passed. Changes are local. After redeploy, the owner can try both prompts from the same in-app chat. The live receipt approval remains pending.
+
+---
+
 # Agent ID name entry — 2026-11-26
 
 The local console accepts an Agent ID name or a public BSC address. For a name, it generates a read-only prompt that asks AI Pro to check the name on the user's own signed-in Agentic Wallet and return its BSC address. This step issues no network requests from VeriAbstain. The user pastes the address into the same field to run the existing holder checks and prepare the exact receipt. There is no public name-to-wallet lookup. See the [official wallet commands](https://github.com/binance/binance-skills-hub/blob/main/skills/binance-web3/binance-agentic-wallet/SKILL.md) and [hackathon rules](https://www.binance.com/en/support/announcement/detail/95f5dbe0ea674a48a739b59e046648bf).
