@@ -1,3 +1,31 @@
+# Binance Wallet Web route check — 2026-11-26
+
+The owner relayed a response pointing to Binance Wallet Web for an explicit fee and approval preview for Developer Mode calls. The [official BSC Portfolio](https://web3.binance.com/en/portfolio/bsc/) and [Wallet Web FAQ](https://www.binance.com/en-IA/support/faq/detail/a0d5e977e0064c32a4a3cb6e587fb0c4) document the desktop trading product and its fees. The [Agentic Wallet FAQ](https://www.binance.com/en-IA/support/faq/detail/3ff00e2d488a41c4aaa4aabb6fc36763) describes the Agentic Wallet as separate from the regular wallet. The public docs reviewed did not confirm that Wallet Web can select the Agentic Wallet as the sender for an arbitrary Developer Mode call.
+
+Next, the owner can compare the public BSC address shown in Wallet Web with the Agentic Wallet ending `3670` and check for a custom contract preview without submitting anything. If the address or route differs, ask Binance for the exact first-party screen for this Agentic Wallet case. No wallet login, settings change, or transaction was attempted during this check. Verified this documentation edit with `git diff --check`.
+
+---
+
+# Independent Agentic Wallet fee estimate — 2026-11-26
+
+Added a BNB Chain RPC fee estimate to the console and the Agentic Wallet prompt. It multiplies the gas estimate for the exact zero-value call by the current RPC gas price and labels the result as an estimate. A missing or invalid price stops preparation. Binance's own preview and App confirmation checks remain in effect.
+
+- Ran `node --test --test-reporter=dot tests/js/mvp_contract_test.cjs tests/js/mvp_deploy_browser_test.cjs tests/js/mvp_deployment_test.cjs tests/js/mvp_ui_test.cjs tests/js/provider_submit_startup_test.cjs`. All 40 passed. `node --check apps/web/dist/app.js` and `git diff --check` passed.
+- Ran the updated page logic in a Node VM with the owner's public wallet ending `3670` and the official BNB Chain RPC. The finalized holder check passed at block 135910422 (`RPC_FINALIZED_READ`). The unsigned call's estimated network fee was 0.00000605035 BNB at the RPC price returned during the check. Only chain, block, bytecode, contract state, gas price and simulation reads ran. This was neither a Binance quote nor a fee cap.
+- [Binance external signing](https://github.com/binance/binance-skills-hub/blob/main/skills/binance-web3/binance-agentic-wallet/references/external-sign.md) documents separate user confirmation before execution and a conditional second confirmation in the App. The [wallet controls](https://www.binance.com/en-IN/blog/tech/7276731523787720812) document App handling for higher-risk calls. No supported way to force the App confirmation screen for this preview was found. The remaining question for Binance is whether it can present this exact clean custom call and its fee for App approval. Changes are local and the first live receipt remains pending.
+
+---
+
+# Follow-up Binance preview diagnosis — 2026-11-26
+
+The owner reported that address discovery worked. A second Binance AI Pro preview matched the holder, chain, target and exact decoded calldata, and reported a successful simulation. Binance again returned `requireConfirmation: false` and no fee estimate. Its source fetch returned HTTP 403. The preview stopped before any user approval or transaction.
+
+- Ran `node --test tests/js/mvp_contract_test.cjs tests/js/mvp_deployment_test.cjs tests/js/mvp_ui_test.cjs`. All 35 passed, including receipt recording by holders, rejection of non-holders and duplicates, and recompilation of the deployment package.
+- Ran a read-only Node script against the official BNB Chain RPC. It checked chain 56, fetched the finalized block and checked its canonical hash, compared `eth_getCode` byte for byte against the reviewed linked runtime, and read both counters at the same block. At block 135909719 the runtime matched, with Keccak-256 `0x9d92959c3d3facfa24ad21299ecd27f69c001f4576fd540a9a6b93dabfc4eb8c`. Both counters were zero. Assurance is `RPC_FINALIZED_READ`.
+- The evidence places the reported stop at the Binance confirmation and fee review and the AI retrieval path. It does not identify a contract revert or prove a successful mainnet write. Binance documents that a false flag can allow execution to broadcast directly without App confirmation. No contract changes, signing, or retries were performed. Next, identify a supported Binance confirmation path that displays the fee before any mainnet pilot. [Binance signing reference](https://github.com/binance/binance-skills-hub/blob/main/skills/binance-web3/binance-agentic-wallet/references/external-sign.md)
+
+---
+
 # In-app Binance AI handoff — 2026-11-26
 
 The owner tried the read-only address prompt and asked to use the Binance App's AI icon instead of external launch buttons. Removed both AI Pro launch buttons and labeled the two copy actions **Copy address prompt** and **Copy receipt preview prompt**. The second prompt still carries the exact unsigned call and requires a fresh review before any approval.

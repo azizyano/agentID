@@ -7,12 +7,13 @@
   const publicRpcUrl = 'https://bsc-dataseed.bnbchain.org/';
   const publicRpcMethods = new Set([
     'eth_chainId', 'eth_getBlockByNumber', 'eth_getCode', 'eth_call',
-    'eth_estimateGas', 'eth_getTransactionReceipt', 'eth_getTransactionByHash',
+    'eth_estimateGas', 'eth_gasPrice', 'eth_getTransactionReceipt', 'eth_getTransactionByHash',
   ]);
   const pendingKey = 'veriabstain.pendingReceipt';
   const disconnectKey = 'veriabstain.walletDisconnected';
   const maxSnapshotAge = 300;
   const maxGasEstimate = 300_000n;
+  const weiPerBnb = 10n ** 18n;
   const addressPattern = /^0x[0-9a-f]{40}$/i;
   const agentIdNamePattern = /^[a-z0-9]{3,15}\.ai$/i;
   const hashPattern = /^0x[0-9a-f]{64}$/i;
@@ -494,7 +495,7 @@
     agenticStatus('');
   }
 
-  function formatAgenticPrompt(plan, command) {
+  function formatAgenticPrompt(plan, command, feeBnb) {
     const expiresAt = BigInt(plan.block.timestamp) + BigInt(maxSnapshotAge);
     const signature = 'recordAssessment(bytes32,bytes32)';
     return [
@@ -503,6 +504,7 @@
       `Review the deployed contract source and ABI at https://bscscan.com/address/${cfg.contractAddress}#code. The expected call is ${signature} (selector ${cfg.selectors[signature]}). It checks the sender's Agent ID and emits an AssessmentRecorded event with two public digests. Verify this against the source and decoded calldata before any approval.`,
       `The expected ABI arguments are evidenceDigest = ${plan.evidenceDigest} and assessmentDigest = ${plan.assessmentDigest}. Native value is 0 wei. Network gas is the only expected asset cost. Use this exact preview command.`,
       command,
+      `VeriAbstain estimated ${feeBnb} BNB in network gas from the exact call and the BNB Chain RPC gas price. Label this as an independent estimate. It is neither a Binance quote nor a fee cap.`,
       `The VeriAbstain snapshot expires at Unix time ${expiresAt} (seconds). Show me the sender, chain, target, calldata, native value, estimated fee, simulation, risk findings, and balance, allowance and authority changes. Stop if data is missing, fields differ, either the snapshot or Binance preview has expired, a warning is present, assets change beyond gas, or requireConfirmation is not exactly true.`,
       'Wait for my separate explicit approval of this exact preview. Only then may you request confirmation in the Binance App for the same fresh preview. Do not sign a message, grant an approval, transfer assets, change settings, substitute another call or retry automatically.',
       'If submitted, return the public transaction hash so I can verify it in VeriAbstain. If the outcome is unknown, check wallet activity before considering another receipt.',
@@ -526,16 +528,25 @@
     agenticStatus('Checking Agent ID eligibility and simulating the unsigned receipt…');
     try {
       const plan = await inspectReceipt(account, publicRead);
-      const {estimate} = await recheckSimulation(plan, publicRead);
+      const [{estimate}, gasPrice] = await Promise.all([
+        recheckSimulation(plan, publicRead),
+        publicRead('eth_gasPrice'),
+      ]);
+      if (typeof gasPrice !== 'string' || !quantityPattern.test(gasPrice) || gasPrice.length > 66 || BigInt(gasPrice) === 0n) {
+        throw new Error('BNB Chain did not provide a usable network fee estimate.');
+      }
+      const feeWei = estimate * BigInt(gasPrice);
+      const feeFraction = (feeWei % weiPerBnb).toString().padStart(18, '0');
+      const feeBnb = `${feeWei / weiPerBnb}.${feeFraction}`.replace(/\.?0+$/, '');
       checkFreshBlock(plan.block);
       agenticPlan = plan;
       elements.agenticSummary.textContent =
         `Agent ID verified at finalized block ${BigInt(plan.block.number).toLocaleString()}. ` +
         `${plan.hasParticipated ? 'This address already counts toward the unique-holder goal. ' : ''}` +
-        `BNB Smart Chain • 0 BNB + gas (estimated ${estimate} gas units)`;
+        `BNB Smart Chain • 0 BNB sent • estimated network fee ${feeBnb} BNB (BNB Chain RPC estimate)`;
       elements.agenticCommand.value =
         `baw contract-call preview --binanceChainId ${cfg.chainId} --from ${account} --to ${cfg.contractAddress} --value 0 --inputData ${plan.calldata} --json`;
-      elements.agenticPrompt.value = formatAgenticPrompt(plan, elements.agenticCommand.value);
+      elements.agenticPrompt.value = formatAgenticPrompt(plan, elements.agenticCommand.value, feeBnb);
       elements.agenticOutput.hidden = false;
       agenticStatus('Receipt preview prompt ready. Paste it into your Binance AI Pro chat.', 'success');
       await readCounters(publicRead, plan.block.number);

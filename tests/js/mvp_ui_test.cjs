@@ -133,7 +133,7 @@ for (const scenario of [
   'confirmed', 'pending', 'uncertain', 'stale', 'changed account',
   'non-holder', 'duplicate', 'simulation rejected', 'gas above bound', 'wallet declined',
   'select exposed account', 'disconnect before send',
-  'agentic finalize', 'agentic wrong transaction', 'agentic non-holder', 'agentic wrong chain',
+  'agentic finalize', 'agentic wrong transaction', 'agentic non-holder', 'agentic wrong chain', 'agentic invalid gas price',
 ]) {
 test(`receipt records reviewed calldata and handles ${scenario} safely`, async () => {
   const config = loadConfig();
@@ -184,6 +184,7 @@ test(`receipt records reviewed calldata and handles ${scenario} safely`, async (
         (params[0] === 'finalized' && finalized) ? mined : block;
       if (method === 'eth_getCode') return config.expectedRuntime;
       if (method === 'eth_estimateGas') return scenario === 'gas above bound' ? '0x493e1' : '0x186a0';
+      if (method === 'eth_gasPrice') return scenario === 'agentic invalid gas price' ? '0x0' : '0x2faf080';
       if (method === 'eth_sendTransaction') {
         assert.ok([...saved.values()].some(value => JSON.parse(value).hash === null));
         sent = params[0];
@@ -234,7 +235,7 @@ test(`receipt records reviewed calldata and handles ${scenario} safely`, async (
       assert.equal(options.credentials, 'omit');
       assert.equal(options.redirect, 'error');
       const request = JSON.parse(options.body);
-      assert.match(request.method, /^eth_(chainId|getBlockByNumber|getCode|call|estimateGas|getTransactionReceipt|getTransactionByHash)$/);
+      assert.match(request.method, /^eth_(chainId|getBlockByNumber|getCode|call|estimateGas|gasPrice|getTransactionReceipt|getTransactionByHash)$/);
       const result = await provider.request(request);
       return {ok: true, async json() { return {jsonrpc: '2.0', id: request.id, result}; }};
     },
@@ -307,9 +308,9 @@ test(`receipt records reviewed calldata and handles ${scenario} safely`, async (
     await handlers['agentic-prepare:submit'](event);
     assert.equal(get('agentic-name-output').hidden, true);
     assert.equal(get('agentic-name-prompt').value, '');
-    if (scenario === 'agentic non-holder' || scenario === 'agentic wrong chain') {
+    if (['agentic non-holder', 'agentic wrong chain', 'agentic invalid gas price'].includes(scenario)) {
       assert.equal(get('agentic-output').hidden, true);
-      assert.match(get('agentic-status').textContent, /does not currently hold|mainnet is required/);
+      assert.match(get('agentic-status').textContent, /does not currently hold|mainnet is required|did not provide a usable network fee estimate/);
       assert.equal(get('agentic-prompt').value, '');
       assert.equal(get('agentic-preview-command').value, '');
       return;
@@ -324,6 +325,9 @@ test(`receipt records reviewed calldata and handles ${scenario} safely`, async (
     assert.ok(data.startsWith(config.selectors['recordAssessment(bytes32,bytes32)']));
     const prompt = get('agentic-prompt').value;
     assert.ok(prompt.split('\n\n').includes(command));
+    assert.match(get('agentic-summary').textContent, /estimated network fee 0\.000005 BNB/);
+    assert.match(prompt, /estimated 0\.000005 BNB in network gas/);
+    assert.match(prompt, /neither a Binance quote nor a fee cap/);
     assert.ok(prompt.includes(`https://bscscan.com/address/${config.contractAddress}#code`));
     assert.ok(prompt.includes(`(selector ${data.slice(0, 10)})`));
     const receiptAbi = new ethers.Interface(['function recordAssessment(bytes32,bytes32)']);

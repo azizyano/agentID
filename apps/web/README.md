@@ -37,8 +37,10 @@ Agentic Wallet address that Binance has not exposed.
    Paste the public address into the same field and select **Prepare prompt**
    again. You can also enter the public Agentic Wallet address directly.
    The browser checks the deployed contract, registry and holder eligibility
-   through BNB Chain RPC, and simulates the exact zero-value call. No browser
-   wallet connection is needed.
+   through BNB Chain RPC, and simulates the exact zero-value call. It also
+   shows an independent network fee estimate for that call using the current
+   BNB Chain RPC gas price. The estimate can change and does not represent a
+   Binance quote or fee cap. No browser wallet connection is needed.
 3. Select **Copy receipt preview prompt** and paste it into the same AI Pro
    chat. You can also use an agent already connected through Binance's official
    skill or copy the preview command for the official CLI. Keep VeriAbstain open.
