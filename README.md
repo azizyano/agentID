@@ -23,6 +23,14 @@ You can explore the console while disconnected. For a runnable example of the un
 
 The CLI demo uses simulated evidence to show how the validator checks a structured allowance or escrow-job status against a pinned observation. It runs offline and needs no API key, wallet, or gas. [CLI guide](docs/LOCAL_HANDOFF.md)
 
+## Record with your Agentic Wallet
+
+Select **Use your Agent ID**, enter your public Agentic Wallet address, and copy
+the preview prompt into Binance AI Pro or an agent already connected through
+Binance's official skill. Review the call in Binance and return with the public
+transaction hash. The website verifies the receipt after finality.
+[Agentic Wallet walkthrough](apps/web/README.md#binance-agentic-wallet)
+
 ## How the on-chain receipt works
 
 1. **Check.** The web MVP runs a built-in contract integrity check. It compares the deployed bytecode with the reviewed build, checks the registry binding, and reads the connected address’s Agent ID status at a finalized BNB Chain block.
@@ -44,7 +52,7 @@ The contract has no owner, upgrade path, or access to user assets. The recording
 | --- | --- |
 | BNB Smart Chain mainnet | Deployment confirmed at `0x8ACF294c769e25dAb44aCbEb83fc401cA0702388` |
 | Hosted console | [Production console](https://agentid-web.vercel.app/). [MetaMask report #316275](https://github.com/MetaMask/eth-phishing-detect/issues/316275) is resolved. The first live Agent ID receipt test is pending. |
-| Wallet compatibility | The app uses an injected EVM provider. A successful test with the actual Agent ID holder address in Binance Wallet remains pending. |
+| Wallet compatibility | The local console prepares a Binance AI Pro preview prompt from a public Agentic Wallet address. The first live preview and App confirmation for this call are pending. |
 | Innovation Award | The rules require a live product and at least 30 distinct Agent ID addresses interacting with the project contract during the submission window. The deadline is December 9, 2026 at 08:00 UTC. |
 
 The first live holder receipt and campaign participation remain to be verified. [Finalized deployment evidence](artifacts/mvp/deployment-confirmed.json) · [Project status](STATUS.md)

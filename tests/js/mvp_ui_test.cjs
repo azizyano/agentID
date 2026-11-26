@@ -57,11 +57,15 @@ test('page is responsive, accessible, and avoids unsafe DOM injection', () => {
   const html = fs.readFileSync(path.join(dist, 'index.html'), 'utf8');
   const css = fs.readFileSync(path.join(dist, 'styles.css'), 'utf8');
   const app = fs.readFileSync(path.join(dist, 'app.js'), 'utf8');
-  for (const id of ['proof-console', 'primary-action', 'record-action', 'status-message', 'unique-count']) {
+  for (const id of ['proof-console', 'primary-action', 'record-action', 'status-message', 'unique-count',
+    'agentic-receipt', 'agentic-address', 'agentic-prepare', 'agentic-prompt', 'agentic-copy-prompt',
+    'agentic-preview-command', 'agentic-verify']) {
     assert.match(html, new RegExp(`id="${id}"`));
   }
   assert.match(html, /<meta name="viewport"/);
   assert.match(html, /class="skip-link"/);
+  assert.match(html, /button-primary" href="#agentic-receipt"/);
+  assert.match(html, /href="https:\/\/ai\.binance\.com\/" target="_blank" rel="noreferrer"/);
   assert.match(css, /@media \(max-width: 680px\)/);
   assert.match(css, /prefers-reduced-motion/);
   assert.doesNotMatch(app, /\.innerHTML\s*=/);
@@ -127,9 +131,11 @@ for (const scenario of [
   'confirmed', 'pending', 'uncertain', 'stale', 'changed account',
   'non-holder', 'duplicate', 'simulation rejected', 'gas above bound', 'wallet declined',
   'select exposed account', 'disconnect before send',
+  'agentic finalize', 'agentic wrong transaction', 'agentic non-holder', 'agentic wrong chain',
 ]) {
 test(`receipt records reviewed calldata and handles ${scenario} safely`, async () => {
   const config = loadConfig();
+  const agentic = scenario.startsWith('agentic ');
   const participant = '0x' + '34'.repeat(20);
   const otherWallet = '0x' + '56'.repeat(20);
   const calls = [];
@@ -145,6 +151,7 @@ test(`receipt records reviewed calldata and handles ${scenario} safely`, async (
       className: '',
       classList: {add() {}, remove() {}},
       style: {setProperty() {}},
+      select() { this.selected = true; },
       replaceChildren(...children) { this.options = children; },
       addEventListener(name, fn) { handlers[`${id}:${name}`] = fn; },
       querySelector() { return {textContent: ''}; },
@@ -160,13 +167,14 @@ test(`receipt records reviewed calldata and handles ${scenario} safely`, async (
   const txHash = '0x' + 'cd'.repeat(32);
   const saved = new Map();
   const tabSession = new Map();
+  const clipboard = [];
   let account = participant;
   let sent;
   let finalized = false;
   const provider = {
     async request({method, params = []}) {
       calls.push({method, params});
-      if (method === 'eth_chainId') return config.chainIdHex;
+      if (method === 'eth_chainId') return scenario === 'agentic wrong chain' ? '0x1' : config.chainIdHex;
       if (method === 'eth_accounts' || method === 'eth_requestAccounts') {
         return scenario === 'select exposed account' ? [otherWallet, account] : [account];
       }
@@ -194,12 +202,14 @@ test(`receipt records reviewed calldata and handles ${scenario} safely`, async (
         if (data === config.selectors['agentIdRegistry()'].toLowerCase()) return addressWord(config.officialRegistry);
         if (data === config.selectors['BSC_AGENT_ID_REGISTRY()'].toLowerCase()) return addressWord(config.officialRegistry);
         if (data === config.selectors['BSC_MAINNET_CHAIN_ID()'].toLowerCase()) return word(56);
-        if (data === config.selectors['receiptCount()'].toLowerCase()) return word(0);
-        if (data === config.selectors['uniqueAgentCount()'].toLowerCase()) return word(0);
+        if (data === config.selectors['receiptCount()'].toLowerCase() ||
+            data === config.selectors['uniqueAgentCount()'].toLowerCase()) {
+          return word(agentic && params[1] === mined.number ? 1 : 0);
+        }
         if (data.startsWith(config.selectors['balanceOf(address)'].toLowerCase()) ||
             data.startsWith(config.selectors['isAgentIdHolder(address)'].toLowerCase())) {
           const wrongAccount = scenario === 'select exposed account' && data.endsWith(otherWallet.slice(2));
-          return word(scenario === 'non-holder' || wrongAccount ? 0 : 1);
+          return word(['non-holder', 'agentic non-holder'].includes(scenario) || wrongAccount ? 0 : 1);
         }
         if (data.startsWith(config.selectors['hasParticipated(address)'].toLowerCase())) return word(0);
         if (data.startsWith(config.selectors['recorded(address,bytes32)'].toLowerCase())) return word(scenario === 'duplicate' ? 1 : 0);
@@ -216,7 +226,16 @@ test(`receipt records reviewed calldata and handles ${scenario} safely`, async (
   };
   const context = {
     globalThis: null,
-    ethereum: provider,
+    ethereum: agentic ? undefined : provider,
+    async fetch(url, options) {
+      assert.equal(url, 'https://bsc-dataseed.bnbchain.org/');
+      assert.equal(options.credentials, 'omit');
+      assert.equal(options.redirect, 'error');
+      const request = JSON.parse(options.body);
+      assert.match(request.method, /^eth_(chainId|getBlockByNumber|getCode|call|estimateGas|getTransactionReceipt|getTransactionByHash)$/);
+      const result = await provider.request(request);
+      return {ok: true, async json() { return {jsonrpc: '2.0', id: request.id, result}; }};
+    },
     VERIABSTAIN_CONFIG: config,
     VeriAbstainCore: core,
     document: {
@@ -228,7 +247,13 @@ test(`receipt records reviewed calldata and handles ${scenario} safely`, async (
       },
     },
     Date: {now: () => now},
-    navigator: {locks: {request: (_key, _options, handler) => handler({})}},
+    navigator: {
+      locks: {request: (_key, _options, handler) => handler({})},
+      clipboard: {async writeText(value) {
+        if (scenario === 'agentic wrong transaction') throw new Error('Clipboard access denied');
+        clipboard.push(value);
+      }},
+    },
     sessionStorage: {
       getItem: key => tabSession.get(key) ?? null,
       setItem: (key, value) => tabSession.set(key, value),
@@ -249,6 +274,71 @@ test(`receipt records reviewed calldata and handles ${scenario} safely`, async (
   const appSource = fs.readFileSync(path.join(dist, 'app.js'), 'utf8');
   vm.runInNewContext(appSource, context);
   await new Promise(resolve => setTimeout(resolve, 20));
+
+  if (agentic) {
+    assert.equal(calls.length, 0);
+    const event = {preventDefault() {}};
+    get('agentic-address').value = 'not an address';
+    await handlers['agentic-prepare:submit'](event);
+    assert.equal(calls.length, 0);
+    get('agentic-address').value = participant;
+    await handlers['agentic-prepare:submit'](event);
+    if (scenario === 'agentic non-holder' || scenario === 'agentic wrong chain') {
+      assert.equal(get('agentic-output').hidden, true);
+      assert.match(get('agentic-status').textContent, /does not currently hold|mainnet is required/);
+      assert.equal(get('agentic-prompt').value, '');
+      assert.equal(get('agentic-preview-command').value, '');
+      return;
+    }
+    assert.equal(get('agentic-output').hidden, false);
+    const command = get('agentic-preview-command').value;
+    const prefix = `baw contract-call preview --binanceChainId 56 --from ${participant} --to ${config.contractAddress} --value 0 --inputData `;
+    assert.ok(command.startsWith(prefix));
+    assert.ok(command.endsWith(' --json'));
+    const data = command.slice(prefix.length, -' --json'.length);
+    assert.equal(data.length, 138);
+    assert.ok(data.startsWith(config.selectors['recordAssessment(bytes32,bytes32)']));
+    const prompt = get('agentic-prompt').value;
+    assert.ok(prompt.split('\n\n').includes(command));
+    assert.match(prompt, /authorizes a preview only/);
+    assert.match(prompt, /separate explicit approval/);
+    assert.match(prompt, /requireConfirmation is not exactly true/);
+    assert.match(prompt, new RegExp(`Unix time ${BigInt(block.timestamp) + 300n}`));
+    now += 301_000;
+    await handlers['agentic-copy-prompt:click']();
+    assert.deepEqual(clipboard, []);
+    assert.match(get('agentic-status').textContent, /snapshot expired/);
+    now -= 301_000;
+    await handlers['agentic-copy-prompt:click']();
+    if (scenario === 'agentic wrong transaction') {
+      assert.equal(get('agentic-prompt').selected, true);
+      assert.match(get('agentic-status').textContent, /selected prompt/);
+    } else {
+      await handlers['agentic-copy:click']();
+      assert.deepEqual(clipboard, [prompt, command]);
+    }
+    const simulations = calls.filter(call => call.method === 'eth_call' && call.params[0].data === data);
+    assert.equal(simulations.length, 2);
+    assert.equal(simulations[0].params[0].from, participant);
+    assert.ok(!calls.some(call => call.method === 'eth_sendTransaction'));
+    assert.equal(saved.size, 0);
+
+    sent = {from: participant, to: config.contractAddress, data, value: '0x0'};
+    get('agentic-hash').value = txHash;
+    await handlers['agentic-verify:submit'](event);
+    assert.match(get('agentic-status').textContent, /not finalized/);
+    finalized = true;
+    if (scenario === 'agentic wrong transaction') sent.from = otherWallet;
+    await handlers['agentic-verify:submit'](event);
+    assert.match(get('agentic-status').textContent, scenario === 'agentic finalize' ? /Receipt confirmed/ : /could not be reconciled/);
+    assert.equal(get('unique-count').textContent, scenario === 'agentic finalize' ? '1' : '0');
+    get('agentic-address').value = otherWallet;
+    handlers['agentic-address:input']();
+    assert.equal(get('agentic-output').hidden, true);
+    assert.equal(get('agentic-prompt').value, '');
+    assert.equal(get('agentic-preview-command').value, '');
+    return;
+  }
 
   assert.equal(get('header-wallet').textContent, 'Disconnect');
   if (scenario === 'select exposed account') {

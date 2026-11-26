@@ -4,6 +4,11 @@
   const cfg = globalThis.VERIABSTAIN_CONFIG;
   const core = globalThis.VeriAbstainCore;
   const provider = globalThis.ethereum;
+  const publicRpcUrl = 'https://bsc-dataseed.bnbchain.org/';
+  const publicRpcMethods = new Set([
+    'eth_chainId', 'eth_getBlockByNumber', 'eth_getCode', 'eth_call',
+    'eth_estimateGas', 'eth_getTransactionReceipt', 'eth_getTransactionByHash',
+  ]);
   const pendingKey = 'veriabstain.pendingReceipt';
   const disconnectKey = 'veriabstain.walletDisconnected';
   const maxSnapshotAge = 300;
@@ -13,6 +18,8 @@
   const quantityPattern = /^0x(?:0|[1-9a-f][0-9a-f]*)$/i;
   const $ = id => document.getElementById(id);
   const state = {account: null, accounts: [], chainId: null, plan: null, busy: false, disconnected: false};
+  let agenticPlan = null;
+  let agenticBusy = false;
 
   const elements = {
     headerWallet: $('header-wallet'),
@@ -33,6 +40,19 @@
     evidence: $('evidence-digest'),
     assessment: $('assessment-digest'),
     block: $('audit-block'),
+    agenticForm: $('agentic-prepare'),
+    agenticAddress: $('agentic-address'),
+    agenticPrepare: $('agentic-prepare-button'),
+    agenticOutput: $('agentic-output'),
+    agenticSummary: $('agentic-summary'),
+    agenticPrompt: $('agentic-prompt'),
+    agenticCopyPrompt: $('agentic-copy-prompt'),
+    agenticCommand: $('agentic-preview-command'),
+    agenticCopy: $('agentic-copy'),
+    agenticVerifyForm: $('agentic-verify'),
+    agenticHash: $('agentic-hash'),
+    agenticVerify: $('agentic-verify-button'),
+    agenticStatus: $('agentic-status'),
   };
 
   function setMessage(text, kind = '') {
@@ -89,10 +109,28 @@
     return provider.request({method, params});
   }
 
-  async function ethCall(to, data, blockTag = 'latest', from) {
+  async function publicRead(method, params = []) {
+    if (!publicRpcMethods.has(method)) throw new Error('Only read-only chain requests are supported.');
+    const response = await fetch(publicRpcUrl, {
+      method: 'POST',
+      credentials: 'omit',
+      redirect: 'error',
+      headers: {'Content-Type': 'application/json'},
+      signal: globalThis.AbortSignal?.timeout?.(12_000),
+      body: JSON.stringify({jsonrpc: '2.0', id: 1, method, params}),
+    });
+    if (!response.ok) throw new Error('BNB Chain RPC is unavailable. Try again later.');
+    const reply = await response.json();
+    if (reply?.jsonrpc !== '2.0' || reply.id !== 1 || reply.error || !Object.hasOwn(reply, 'result')) {
+      throw new Error('BNB Chain could not complete the read or simulation.');
+    }
+    return reply.result;
+  }
+
+  async function ethCall(to, data, blockTag = 'latest', from, request = rpc) {
     const transaction = {to, data};
     if (from) transaction.from = from;
-    return rpc('eth_call', [transaction, blockTag]);
+    return request('eth_call', [transaction, blockTag]);
   }
 
   function readPending() {
@@ -124,19 +162,19 @@
     }
   }
 
-  async function checkCanonical(block) {
-    const current = await rpc('eth_getBlockByNumber', [block.number, false]);
+  async function checkCanonical(block, request = rpc) {
+    const current = await request('eth_getBlockByNumber', [block.number, false]);
     if (current?.number !== block.number || current?.hash?.toLowerCase() !== block.hash.toLowerCase()) {
       throw new Error('The snapshot changed. Run a new integrity check.');
     }
   }
 
-  async function readCounters() {
-    if (!provider?.request || state.chainId !== cfg.chainIdHex) return;
+  async function readCounters(request = rpc, blockTag = 'latest') {
+    if (request === rpc && (!provider?.request || state.chainId !== cfg.chainIdHex)) return;
     try {
       const [receipts, unique] = await Promise.all([
-        ethCall(cfg.contractAddress, cfg.selectors['receiptCount()']),
-        ethCall(cfg.contractAddress, cfg.selectors['uniqueAgentCount()']),
+        ethCall(cfg.contractAddress, cfg.selectors['receiptCount()'], blockTag, undefined, request),
+        ethCall(cfg.contractAddress, cfg.selectors['uniqueAgentCount()'], blockTag, undefined, request),
       ]);
       const receiptCount = core.decodeUint(receipts);
       const uniqueCount = core.decodeUint(unique);
@@ -239,39 +277,37 @@
     }
   }
 
-  async function runAudit() {
-    if (!state.account || state.chainId !== cfg.chainIdHex) throw new Error('Connect on BNB Smart Chain first');
-    const account = state.account;
-    resetChecks();
-    setMessage('Reading one finalized BNB Chain snapshot…');
-    const block = await rpc('eth_getBlockByNumber', ['finalized', false]);
+  async function inspectReceipt(account, request, reportCheck = () => {}) {
+    if (await request('eth_chainId') !== cfg.chainIdHex) throw new Error('BNB Smart Chain mainnet is required.');
+    const call = (to, data, blockTag, from) => ethCall(to, data, blockTag, from, request);
+    const block = await request('eth_getBlockByNumber', ['finalized', false]);
     checkFreshBlock(block);
-    const code = String(await rpc('eth_getCode', [cfg.contractAddress, block.number])).toLowerCase();
+    const code = String(await request('eth_getCode', [cfg.contractAddress, block.number])).toLowerCase();
     const runtimeMatch = code === cfg.expectedRuntime;
-    setCheck('runtime', runtimeMatch ? 'pass' : 'fail', runtimeMatch ? 'Exact match' : 'Mismatch');
+    reportCheck('runtime', runtimeMatch ? 'pass' : 'fail', runtimeMatch ? 'Exact match' : 'Mismatch');
     if (!runtimeMatch) throw new Error('Deployed runtime does not match the reviewed build');
 
     const [registryRaw, constantRaw, chainRaw, balanceRaw, holderRaw, participatedRaw] = await Promise.all([
-      ethCall(cfg.contractAddress, cfg.selectors['agentIdRegistry()'], block.number),
-      ethCall(cfg.contractAddress, cfg.selectors['BSC_AGENT_ID_REGISTRY()'], block.number),
-      ethCall(cfg.contractAddress, cfg.selectors['BSC_MAINNET_CHAIN_ID()'], block.number),
-      ethCall(cfg.officialRegistry, core.encodeAddressCall(cfg.selectors['balanceOf(address)'], account), block.number),
-      ethCall(cfg.contractAddress, core.encodeAddressCall(cfg.selectors['isAgentIdHolder(address)'], account), block.number),
-      ethCall(cfg.contractAddress, core.encodeAddressCall(cfg.selectors['hasParticipated(address)'], account), block.number),
+      call(cfg.contractAddress, cfg.selectors['agentIdRegistry()'], block.number),
+      call(cfg.contractAddress, cfg.selectors['BSC_AGENT_ID_REGISTRY()'], block.number),
+      call(cfg.contractAddress, cfg.selectors['BSC_MAINNET_CHAIN_ID()'], block.number),
+      call(cfg.officialRegistry, core.encodeAddressCall(cfg.selectors['balanceOf(address)'], account), block.number),
+      call(cfg.contractAddress, core.encodeAddressCall(cfg.selectors['isAgentIdHolder(address)'], account), block.number),
+      call(cfg.contractAddress, core.encodeAddressCall(cfg.selectors['hasParticipated(address)'], account), block.number),
     ]);
     const registry = core.decodeAddress(registryRaw).toLowerCase();
     const registryConstant = core.decodeAddress(constantRaw).toLowerCase();
     const configuredChain = core.decodeUint(chainRaw);
     const registryMatch = registry === cfg.officialRegistry.toLowerCase() && registryConstant === registry && configuredChain === 56n;
-    setCheck('registry', registryMatch ? 'pass' : 'fail', registryMatch ? 'Official' : 'Mismatch');
+    reportCheck('registry', registryMatch ? 'pass' : 'fail', registryMatch ? 'Official' : 'Mismatch');
     if (!registryMatch) throw new Error('Contract registry configuration does not match');
 
     const balance = core.decodeUint(balanceRaw);
     const holder = core.decodeBool(holderRaw);
     const hasParticipated = core.decodeBool(participatedRaw);
     const eligible = balance > 0n && holder;
-    setCheck('holder', eligible ? 'pass' : 'fail', eligible ? `${balance} Agent ID` : 'Not eligible');
-    if (!eligible) throw new Error('This wallet address does not currently hold an Agent ID. Select the address that holds it and reconnect if needed.');
+    reportCheck('holder', eligible ? 'pass' : 'fail', eligible ? `${balance} Agent ID` : 'Not eligible');
+    if (!eligible) throw new Error('This wallet address does not currently hold an Agent ID. Use the address that holds it.');
 
     const evidencePayload = {
       schema_version: 1,
@@ -306,19 +342,28 @@
       native_value_wei: 0,
     };
     const assessmentDigest = await core.sha256Hex(assessmentPayload);
-    const duplicateRaw = await ethCall(
+    const duplicateRaw = await call(
       cfg.contractAddress,
       core.encodeAddressBytes32Call(cfg.selectors['recorded(address,bytes32)'], account, evidenceDigest),
       block.number,
     );
     if (core.decodeBool(duplicateRaw)) throw new Error('This finalized snapshot was already recorded by this wallet');
     const calldata = core.buildRecordCalldata(cfg.selectors['recordAssessment(bytes32,bytes32)'], evidenceDigest, assessmentDigest);
-    if (await ethCall(cfg.contractAddress, calldata, block.number, account) !== '0x') {
+    if (await call(cfg.contractAddress, calldata, block.number, account) !== '0x') {
       throw new Error('Unexpected simulation response.');
     }
-    await checkCanonical(block);
-    await checkWallet(account);
+    await checkCanonical(block, request);
+    return {account, block, calldata, evidenceDigest, assessmentDigest, hasParticipated};
+  }
 
+  async function runAudit() {
+    if (!state.account || state.chainId !== cfg.chainIdHex) throw new Error('Connect on BNB Smart Chain first');
+    const account = state.account;
+    resetChecks();
+    setMessage('Reading one finalized BNB Chain snapshot…');
+    const {block, calldata, evidenceDigest, assessmentDigest, hasParticipated} =
+      await inspectReceipt(account, rpc, setCheck);
+    await checkWallet(account);
     state.plan = {account, block, calldata};
     elements.evidence.textContent = evidenceDigest;
     elements.assessment.textContent = assessmentDigest;
@@ -362,21 +407,15 @@
     });
   }
 
-  async function reconcile(pending) {
-    if (!hashPattern.test(pending.hash) || typeof pending.account !== 'string' ||
-        typeof pending.calldata !== 'string') {
-      throw new Error('The previous request could not be matched. Review wallet activity before retrying.');
-    }
-    await checkWallet(pending.account);
+  async function inspectRecordedTransaction(pending, request) {
     const [receipt, tx, finalized] = await Promise.all([
-      rpc('eth_getTransactionReceipt', [pending.hash]),
-      rpc('eth_getTransactionByHash', [pending.hash]),
-      rpc('eth_getBlockByNumber', ['finalized', false]),
+      request('eth_getTransactionReceipt', [pending.hash]),
+      request('eth_getTransactionByHash', [pending.hash]),
+      request('eth_getBlockByNumber', ['finalized', false]),
     ]);
     if (!receipt || !tx || !quantityPattern.test(finalized?.number) ||
         !quantityPattern.test(receipt.blockNumber) || BigInt(receipt.blockNumber) > BigInt(finalized.number)) {
-      setMessage(`Waiting for finality. Check again shortly. Transaction ${pending.hash}`);
-      return;
+      return null;
     }
     if (receipt.transactionHash?.toLowerCase() !== pending.hash.toLowerCase() ||
         tx.hash?.toLowerCase() !== pending.hash.toLowerCase() ||
@@ -387,7 +426,21 @@
         tx.value !== '0x0' || !['0x0', '0x1'].includes(receipt.status)) {
       throw new Error('The prior transaction could not be reconciled with your reviewed receipt.');
     }
-    await checkCanonical({number: receipt.blockNumber, hash: receipt.blockHash});
+    await checkCanonical({number: receipt.blockNumber, hash: receipt.blockHash}, request);
+    return receipt;
+  }
+
+  async function reconcile(pending) {
+    if (!hashPattern.test(pending.hash) || typeof pending.account !== 'string' ||
+        typeof pending.calldata !== 'string') {
+      throw new Error('The previous request could not be matched. Review wallet activity before retrying.');
+    }
+    await checkWallet(pending.account);
+    const receipt = await inspectRecordedTransaction(pending, rpc);
+    if (!receipt) {
+      setMessage(`Waiting for finality. Check again shortly. Transaction ${pending.hash}`);
+      return;
+    }
     await checkWallet(pending.account);
     localStorage.removeItem(pendingKey);
     resetChecks();
@@ -397,6 +450,122 @@
     }
     setMessage(`Receipt confirmed in finalized block ${BigInt(receipt.blockNumber).toLocaleString()}.`, 'success');
     await readCounters();
+  }
+
+  async function recheckSimulation(plan, request) {
+    const transaction = {from: plan.account, to: cfg.contractAddress, data: plan.calldata, value: '0x0'};
+    if (await request('eth_call', [transaction, 'latest']) !== '0x') {
+      throw new Error('The reviewed receipt could not be simulated.');
+    }
+    const estimate = await request('eth_estimateGas', [transaction]);
+    if (!quantityPattern.test(estimate) || BigInt(estimate) === 0n || BigInt(estimate) > maxGasEstimate) {
+      throw new Error('Gas estimate is outside the reviewed range.');
+    }
+    return {transaction, estimate: BigInt(estimate)};
+  }
+
+  function agenticStatus(message, kind = '') {
+    elements.agenticStatus.textContent = message;
+    elements.agenticStatus.className = `notice${kind ? ' ' + kind : ''}`;
+  }
+
+  function setAgenticBusy(busy) {
+    agenticBusy = busy;
+    elements.agenticAddress.disabled = busy;
+    elements.agenticPrepare.disabled = busy;
+    elements.agenticVerify.disabled = busy;
+    elements.agenticHash.disabled = busy;
+    elements.agenticCopyPrompt.disabled = busy || !agenticPlan;
+    elements.agenticCopy.disabled = busy || !agenticPlan;
+  }
+
+  function resetAgenticPlan() {
+    agenticPlan = null;
+    elements.agenticOutput.hidden = true;
+    elements.agenticPrompt.value = '';
+    elements.agenticCommand.value = '';
+    elements.agenticHash.value = '';
+    agenticStatus('');
+  }
+
+  function formatAgenticPrompt(plan, command) {
+    const expiresAt = BigInt(plan.block.timestamp) + BigInt(maxSnapshotAge);
+    return [
+      'Preview one VeriAbstain integrity receipt with the official Binance Agentic Wallet tool. This message authorizes a preview only.',
+      `First confirm the signed-in BNB Smart Chain Agentic Wallet address is ${plan.account}, it holds Agent ID, and Developer Mode is active. If any check fails or the official tool is unavailable, stop.`,
+      'Use this exact contract-call preview for recordAssessment(bytes32,bytes32). Native value is 0 wei. Network gas is the only expected asset cost.',
+      command,
+      `The VeriAbstain snapshot expires at Unix time ${expiresAt} (seconds). Show me the sender, chain, target, calldata, native value, estimated fee, simulation, risk findings, and balance, allowance and authority changes. Stop if data is missing, fields differ, either the snapshot or Binance preview has expired, a warning is present, assets change beyond gas, or requireConfirmation is not exactly true.`,
+      'Wait for my separate explicit approval of this exact preview. Only then may you request confirmation in the Binance App for the same fresh preview. Do not sign a message, grant an approval, transfer assets, change settings, substitute another call or retry automatically.',
+      'If submitted, return the public transaction hash so I can verify it in VeriAbstain. If the outcome is unknown, check wallet activity before considering another receipt.',
+    ].join('\n\n');
+  }
+
+  async function prepareAgenticReceipt(event) {
+    event.preventDefault();
+    if (agenticBusy) return;
+    resetAgenticPlan();
+    const account = elements.agenticAddress.value.trim().toLowerCase();
+    if (!addressPattern.test(account)) return agenticStatus('Enter the public 0x address of your Agentic Wallet.', 'error');
+    setAgenticBusy(true);
+    agenticStatus('Checking Agent ID eligibility and simulating the unsigned receipt…');
+    try {
+      const plan = await inspectReceipt(account, publicRead);
+      const {estimate} = await recheckSimulation(plan, publicRead);
+      checkFreshBlock(plan.block);
+      agenticPlan = plan;
+      elements.agenticSummary.textContent =
+        `Agent ID verified at finalized block ${BigInt(plan.block.number).toLocaleString()}. ` +
+        `${plan.hasParticipated ? 'This address already counts toward the unique-holder goal. ' : ''}` +
+        `BNB Smart Chain • 0 BNB + gas (estimated ${estimate} gas units)`;
+      elements.agenticCommand.value =
+        `baw contract-call preview --binanceChainId ${cfg.chainId} --from ${account} --to ${cfg.contractAddress} --value 0 --inputData ${plan.calldata} --json`;
+      elements.agenticPrompt.value = formatAgenticPrompt(plan, elements.agenticCommand.value);
+      elements.agenticOutput.hidden = false;
+      agenticStatus('Agent prompt ready. Copy it into Binance AI Pro for a preview.', 'success');
+      await readCounters(publicRead, plan.block.number);
+    } catch (error) {
+      agenticStatus(error?.message || 'Could not prepare the receipt.', 'error');
+    } finally {
+      setAgenticBusy(false);
+    }
+  }
+
+  async function copyAgenticText(field, label) {
+    if (!agenticPlan || agenticBusy) return;
+    try {
+      checkFreshBlock(agenticPlan.block);
+    } catch {
+      agenticStatus('The snapshot expired. Prepare a fresh preview before continuing.', 'error');
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(field.value);
+      agenticStatus(`Copied the ${label}.`, 'success');
+    } catch {
+      field.select();
+      agenticStatus(`Copy the selected ${label}.`);
+    }
+  }
+
+  async function verifyAgenticReceipt(event) {
+    event.preventDefault();
+    if (!agenticPlan || agenticBusy) return;
+    const hash = elements.agenticHash.value.trim();
+    if (!hashPattern.test(hash)) return agenticStatus('Enter the public transaction hash from the approved receipt.', 'error');
+    setAgenticBusy(true);
+    try {
+      if (await publicRead('eth_chainId') !== cfg.chainIdHex) throw new Error('BNB Smart Chain mainnet is required.');
+      const receipt = await inspectRecordedTransaction({...agenticPlan, hash}, publicRead);
+      if (!receipt) return agenticStatus('The transaction is not finalized yet. Check the same hash again.');
+      if (receipt.status !== '0x1') return agenticStatus('The transaction reverted and did not record a receipt.', 'error');
+      agenticStatus(`Receipt confirmed at finalized block ${BigInt(receipt.blockNumber).toLocaleString()}.`, 'success');
+      await readCounters(publicRead, receipt.blockNumber);
+    } catch (error) {
+      agenticStatus(error?.message || 'Could not verify the receipt.', 'error');
+    } finally {
+      setAgenticBusy(false);
+    }
   }
 
   async function recordProof() {
@@ -412,15 +581,8 @@
         await checkWallet(plan.account);
         checkFreshBlock(plan.block);
         await checkCanonical(plan.block);
-        const transaction = {from: plan.account, to: cfg.contractAddress, data: plan.calldata, value: '0x0'};
-        if (await rpc('eth_call', [transaction, 'latest']) !== '0x') {
-          throw new Error('The reviewed receipt could not be simulated.');
-        }
-        const estimate = await rpc('eth_estimateGas', [transaction]);
-        if (!quantityPattern.test(estimate) || BigInt(estimate) === 0n || BigInt(estimate) > maxGasEstimate) {
-          throw new Error('Gas estimate is outside the reviewed range.');
-        }
-        transaction.gas = '0x' + ((BigInt(estimate) * 120n + 99n) / 100n).toString(16);
+        const {transaction, estimate} = await recheckSimulation(plan, rpc);
+        transaction.gas = '0x' + ((estimate * 120n + 99n) / 100n).toString(16);
         await checkWallet(plan.account);
         checkFreshBlock(plan.block);
         if (state.plan !== plan) throw new Error('Wallet context changed. Run a new integrity check.');
@@ -503,5 +665,10 @@
   elements.accountSelect.addEventListener('change', selectAccount);
   elements.primary.addEventListener('click', auditAction);
   elements.record.addEventListener('click', recordProof);
+  elements.agenticForm.addEventListener('submit', prepareAgenticReceipt);
+  elements.agenticAddress.addEventListener('input', resetAgenticPlan);
+  elements.agenticCopyPrompt.addEventListener('click', () => copyAgenticText(elements.agenticPrompt, 'prompt'));
+  elements.agenticCopy.addEventListener('click', () => copyAgenticText(elements.agenticCommand, 'preview command'));
+  elements.agenticVerifyForm.addEventListener('submit', verifyAgenticReceipt);
   bootstrap();
 })();

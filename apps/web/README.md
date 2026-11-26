@@ -9,7 +9,8 @@ It is local-only until hosting receives separate owner approval.
 .\.venv\Scripts\python.exe -m http.server 4173 --bind 127.0.0.1 --directory apps\web\dist
 ```
 
-Then open `http://127.0.0.1:4173` in a browser containing MetaMask.
+Open `http://127.0.0.1:4173`. Use any browser for the Agentic Wallet prompt or
+a compatible extension for the connected-wallet flow.
 
 The page makes only read-only wallet-provider calls on startup. Connecting,
 switching networks, and recording a receipt each require an explicit user
@@ -23,6 +24,35 @@ any prepared receipt in the current tab. It preserves unresolved transactions.
 To end the wallet's site permission, use the wallet's connected-sites settings.
 If Binance exposes only your regular wallet, the console cannot select an
 Agentic Wallet address that Binance has not exposed.
+
+## Binance Agentic Wallet
+
+1. Open [Binance AI Pro](https://ai.binance.com/) and sign in to your Agentic
+   Wallet there. Binance documents built-in wallet tools for AI Pro accounts.
+   This custom call also needs active Developer Mode in the Binance App.
+   [AI Pro setup](https://web3.binance.com/en/dev-docs/products/agentic-wallet/ai-pro) · [Developer Mode](https://web3.binance.com/en/dev-docs/products/agentic-wallet/use-cases/developer-mode)
+2. In VeriAbstain, select **Use your Agent ID**, enter the public Agentic Wallet
+   address, then select **Prepare agent prompt**. The browser checks the
+   deployed contract, registry and holder eligibility through BNB Chain RPC,
+   and simulates the exact zero-value call. No browser wallet connection is
+   needed.
+3. Select **Copy prompt** and paste it into your signed-in AI Pro chat. You can
+   also use an agent already connected through Binance's official skill or
+   copy the preview command for the official CLI. Keep VeriAbstain open.
+4. Check the preview for the exact sender, contract, calldata, chain and zero
+   BNB, acceptable gas, and no warnings or unexpected balance, allowance or
+   authority changes. Stop if anything differs, expires, or if
+   `requireConfirmation` is anything other than `true`. The prompt requests a
+   preview first and requires separate approval before Binance App confirmation.
+   [Binance external signing reference](https://github.com/binance/binance-skills-hub/blob/main/skills/binance-web3/binance-agentic-wallet/references/external-sign.md)
+5. After approving in the Binance App, paste the public transaction hash into
+   **Verify finalized receipt**. The page checks it against the original
+   prepared call. While a result is unknown, check the same hash or reconcile
+   wallet activity before preparing another receipt.
+
+Only a successful on-chain call from an Agent ID holder can change the
+contract's unique-holder count. AI Pro execution of this specific call still
+needs a first live pilot.
 
 ## Rebuild pinned configuration
 
