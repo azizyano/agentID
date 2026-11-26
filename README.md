@@ -1,102 +1,65 @@
 # VeriAbstain
 
-Local read-only validation of structured allowance and job-status analyses,
-using independently collected, pinned BSC testnet evidence. An owner-approved
-narrower utility following an exploratory refusal-recovery experiment.
+**An on-chain receipt for an AI agent’s evidence review, gated by Binance Agent ID.**
 
-## Working commands
+When one agent hands work to another, a reviewer needs a way to link an assessment to the account that recorded it without publishing the full evidence. VeriAbstain records two fingerprints on BNB Smart Chain: one for the evidence and one for the assessment. The account that records them must hold an Agent ID at the time of the transaction.
+
+[Mainnet contract and source](https://bscscan.com/address/0x8ACF294c769e25dAb44aCbEb83fc401cA0702388#code) · [Deployment transaction](https://bscscan.com/tx/0xdc67e447b95bb7b50aca824074360051795d2524462ed137cd1df77161956c17) · [Hackathon rules](https://www.binance.com/en/support/announcement/detail/95f5dbe0ea674a48a739b59e046648bf)
+
+## Try it without a wallet
+
+From the repository root, serve the static console and open [the local preview](http://127.0.0.1:4173).
+
+```powershell
+py -3.12 -m http.server 4173 --bind 127.0.0.1 --directory apps/web/dist
+```
+
+You can explore the console while disconnected. For a runnable example of the underlying evidence workflow, set up the [Python environment](docs/RUNNING.md#recreate-the-environment) and run:
 
 ```powershell
 .\.venv\Scripts\python.exe tools\veriabstain.py doctor
 .\.venv\Scripts\python.exe tools\veriabstain.py demo
-.\.venv\Scripts\python.exe tools\veriabstain.py receipts
 ```
 
-For a supplied analysis with independent current authorization:
+The CLI demo uses simulated evidence to show how the validator checks a structured allowance or escrow-job status against a pinned observation. It runs offline and needs no API key, wallet, or gas. [CLI guide](docs/LOCAL_HANDOFF.md)
+
+## How the on-chain receipt works
+
+1. **Check.** The web MVP runs a built-in contract integrity check. It compares the deployed bytecode with the reviewed build, checks the registry binding, and reads the connected address’s Agent ID status at a finalized BNB Chain block.
+2. **Review.** The browser hashes the evidence and assessment locally. It shows both digests and simulates the exact transaction before asking the wallet to approve it.
+3. **Record.** The contract checks Agent ID ownership again on-chain and rejects duplicate evidence from the same address. It records the two digests in an event from the holder’s address. A returning address can record fresh evidence while the unique-holder count stays the same.
+4. **Reconcile.** The console matches the transaction against the reviewed request before treating it as finalized. The participant can review the transaction on BscScan.
+
+Agent ID controls who can write a receipt through `recordAssessment(bytes32,bytes32)`. The official registry’s `balanceOf(msg.sender)` must be positive. An address without an Agent ID cannot record a receipt. [Contract source](contracts/VeriAbstainEvidenceRegistry.sol)
+
+## What a receipt establishes
+
+A receipt ties the two digests to the sender and block. Someone who has the original inputs can recompute the digests and compare them. The browser’s chain observations rely on its RPC provider. Whether the underlying assessment is true, or any follow-up action is authorized, must be determined separately.
+
+The contract has no owner, upgrade path, or access to user assets. The recording request sends **0 BNB** and the wallet charges network gas. Users review and confirm it in their own wallet.
+
+## Deployment and participation
+
+| Item | Status |
+| --- | --- |
+| BNB Smart Chain mainnet | Deployment confirmed at `0x8ACF294c769e25dAb44aCbEb83fc401cA0702388` |
+| Hosted console | `agentid-web.vercel.app` is deployed. Wallet testing is on hold pending [MetaMask report #316275](https://github.com/MetaMask/eth-phishing-detect/issues/316275). Use the wallet-free preview above. |
+| Wallet compatibility | The app uses an injected EVM provider. A successful test with the actual Agent ID holder address in Binance Wallet remains pending. |
+| Innovation Award | The rules require a live product and at least 30 distinct Agent ID addresses interacting with the project contract during the submission window. The deadline is December 9, 2026 at 08:00 UTC. |
+
+The first live holder receipt and campaign participation remain to be verified. [Finalized deployment evidence](artifacts/mvp/deployment-confirmed.json) · [Project status](STATUS.md)
+
+## Reproduce the checks
+
+Use the [locked Python environment](docs/RUNNING.md#recreate-the-environment) and the existing Node lockfiles under `verification/` and `verification/wallet-tests/`.
 
 ```powershell
-.\.venv\Scripts\python.exe tools\veriabstain.py check --authorization path/to/current-authorization.json --analysis path/to/analysis.json
+.\.venv\Scripts\python.exe -m pytest -q
+node --test tests/js/mvp_contract_test.cjs tests/js/mvp_deploy_browser_test.cjs tests/js/mvp_deployment_test.cjs tests/js/mvp_ui_test.cjs tests/js/provider_submit_startup_test.cjs
 ```
 
-The demo is offline with simulated chain/worker data. The check command uses
-public read-only RPC for reviewed chain97 deployments, validates scope, pinned
-block and value, and saves a private receipt. No model key, wallet or transaction
-is needed. Acceptance never grants execution permission.
+The suites cover the evidence validator, receipt preparation, browser wallet behavior with simulated providers, and contract behavior against a local chain. The Python integration suite also runs the argument-driven wallet funding harness. [Deployment guide](apps/web/README.md) · [Receipt preparation](docs/MVP_INTERACTION.md)
 
-## Current delivery
+## Research background
 
-The hackathon submission pivot now has a first local MVP contract:
-`contracts/VeriAbstainEvidenceRegistry.sol`. It permits only current Agent ID
-holders to record content-addressed evidence/assessment receipts, counts unique
-holder addresses, and has no owner, asset, approval, custody, transfer or
-withdrawal operation. Seven contract behavior checks plus the existing four
-wallet-startup regressions pass. Deterministic unsigned receipt preparation now
-binds the validated envelope, recomputed assessment and explicit assessment
-time to exact contract calldata; the current full Python suite is **574 passed**.
-The exact approved contract is now deployed on BSC mainnet at
-`0x8ACF294c769e25dAb44aCbEb83fc401cA0702388`; finalized receipt, runtime and
-initial state reconciliation passed. The owner reports BscScan source
-verification completed; the project did not independently recheck it at the
-owner's request. The approved AI-themed static UI is now implemented locally;
-hosting, submission and user collection have not started. See the
-[MVP submission plan](docs/MVP_SUBMISSION_PLAN.md).
-
-An offline deployment package now contains the exact tested creation data,
-compiler Standard JSON, ABI-encoded official Agent ID registry constructor, and
-BscScan verification manifest. Exact creation data was rehearsed on a local
-chain56 and the immutable-linked runtime hash matched. The package has no
-deployer, signature, API key or transaction. A subsequent read-only BSC mainnet
-preflight passed for wallet ending7841 and a guarded MetaMask helper is ready;
-the owner deployed it and the finalized exact deployment was confirmed. Source
-verification was owner-reported complete. A participant preparer now
-checks finalized Agent ID eligibility, exact runtime/configuration, duplicates,
-zero-value simulation and bounded gas before emitting an unsigned intent.
-
-The local interface in `apps/web/dist` adds a responsive proof console: passive
-startup reads, explicit wallet connect/network switch, exact runtime and Agent
-ID checks at a finalized block, local SHA-256 evidence/assessment commitments,
-zero-value simulation, explicit MetaMask confirmation, receipt polling and live
-progress toward30 unique holders. It has no backend, analytics, private upload,
-API key or custody. Local browser QA passed; hosting remains unapproved.
-
-Reuse the frozen evidence cases directly in an existing pytest suite with [the checker contract helper](docs/REUSE_IN_PYTEST.md). Reference integrations are tested locally; no external agent repository is modified.
-
-EvidenceLab G1 adds a separate versioned evidence envelope and explicit legacy compatibility. [G1 report](docs/EVIDENCELAB_G1.md). G2 adds a separately frozen62case mutation corpus; [G2report](docs/EVIDENCELAB_G2.md). G3found baseline and candidate62/62equal with slower candidate assessment; [G3report](docs/EVIDENCELAB_G3.md). No standalone advantage established; recommend bounded reuse/integration. G4notstarted. Existing CLI behavior is unchanged.
-
-SDK verification/callback composition, independent evidence collection, strict
-output validation, durable single-analysis journal, private receipt creation
-and offline receipt inspection are implemented. The earlier reuse handoff had
-539passing tests; the current full local suite has **589passed**, with one
-existing dependency warning.
-Real CLI smoke accepted a matching allowance and rejected an incorrect value.
-
-Earlier testnet job1766 completed its user-signed lifecycle with1testU payout.
-The exploratory16scenario DeepSeek comparison found C/C_RETRY/D each accepted
-one analysis, with no D-only completion. Original G1value gate is **not passed**.
-This utility does not imply production readiness, validated economic benefit,
-UI/API, automated submissions, mainnet deployment or a receipt registry.
-
-## Guides and evidence
-
-- [Local handoff and command reference](docs/LOCAL_HANDOFF.md)
-- [Check an analysis](docs/CHECK_ANALYSIS.md)
-- [Private receipt inspection](docs/RECEIPTS.md)
-- [SDK application callback](docs/APPLICATION_CALLBACK.md)
-- [Independent evidence reader](docs/CHAIN_EVIDENCE.md)
-- [Strict deliverable validation](docs/DELIVERABLE_VALIDATION.md)
-- [Actual exploratory comparison result](docs/G1_EXPLORATORY_RESULT.md)
-- [Current evidence-backed status](STATUS.md)
-- [Agent ID MVP submission plan](docs/MVP_SUBMISSION_PLAN.md)
-- [Ordered plan and gates](PLANS.md)
-- [Source pins](docs/DEPENDENCIES.md)
-- [Threat model](docs/THREAT_MODEL.md)
-- [Upstream findings](docs/UPSTREAM_AUDIT.md)
-- [Environment setup](docs/RUNNING.md)
-- [Worker protocol](docs/WORKER_PROTOCOL.md)
-- [Testnet integration history](docs/TESTNET_JOB.md)
-- [Engineering ownership](docs/TEAM.md)
-
-All files/execution for this task stay local. Fixtures and model observations
-remain separate from live chain evidence. RPC reads require provider trust;
-receipt hashes prove neither truth nor authorship. Preserve private journals,
-never paste API keys, and do not reset ledgers to bypass attempt/spending limits.
+An earlier EvidenceLab comparison tied its deterministic baseline on all 62 frozen cases and ran slower. That result remains separate from the current Agent ID receipt MVP. The project keeps the original evaluation available so reviewers can see how the scope changed. [EvidenceLab G3 report](docs/EVIDENCELAB_G3.md) · [Original comparison](docs/G1_EXPLORATORY_RESULT.md) · [Threat model](docs/THREAT_MODEL.md)

@@ -1,3 +1,24 @@
+# Hackathon README and regression review — 2026-11-26
+
+Rewrote `README.md` for judges and testers. It starts with a local walkthrough, links to the mainnet deployment and contract source, explains where Agent ID gates writes, and lists the evidence needed for the participation threshold. The hosted wallet warning and earlier EvidenceLab results remain visible.
+
+- `.\.venv\Scripts\python.exe -m pytest -q` passed all 589 tests with one existing `websockets.legacy` deprecation warning. The Python integration suite invokes the separate wallet-funding JavaScript harness with fixtures.
+- `node --test tests/js/mvp_contract_test.cjs tests/js/mvp_deploy_browser_test.cjs tests/js/mvp_deployment_test.cjs tests/js/mvp_ui_test.cjs tests/js/provider_submit_startup_test.cjs` passed all 33 tests. Five new mocked UI scenarios cover non-holders, duplicates, revalidation simulation failure, gas above the bound, and explicit user rejection. Ganache used its JavaScript fallback.
+- `.\.venv\Scripts\python.exe tools\veriabstain.py doctor` returned `LOCAL_SETUP_READY`. The `demo` command accepted the scripted analysis at `SIMULATED_READ` assurance, reused its cached result after redelivery, and recorded zero model calls and transactions.
+- The README's `py -3.12 -m http.server 4173 --bind 127.0.0.1 --directory apps/web/dist` served the homepage and four assets with HTTP 200. An initial smoke harness stopped on a PowerShell reserved variable name. The corrected harness passed and stopped its temporary server.
+
+Tests used local fixtures, mocked browser providers, or a local chain. Binance Wallet behavior and the first genuine mainnet receipt remain unverified. Next resolve the hosted warning, run one holder smoke test, and verify genuine distinct on-chain interactions during the submission window.
+
+---
+
+# Production wallet warning — 2026-11-26
+
+The owner deployed `agentid-web.vercel.app` and reported a French MetaMask phishing or wallet-draining warning when attempting to connect. Read-only HTTPS requests with redirects disabled returned HTTP 200 for the homepage and four static assets. SHA-256 comparisons matched the local release byte for byte for all five files. MetaMask's linked “Why Blocked?” utility returned that the exact hostname is absent from the list it checks. The utility result and the owner's wallet warning disagree. The reason for the wallet warning remains unknown.
+
+Prepared a suspected false-positive report. Request review with the exact hostname, warning screenshot, MetaMask version, reproduction step, and public release commit. Keep the hosted wallet flow on hold until the warning is resolved. Prepare the hackathon demo and submission materials locally in the meantime. No wallet use, transaction, public report, or new application test occurred during this check.
+
+---
+
 # Vercel handoff and wallet checks — 2026-11-26
 
 Prepared the static site for the owner's Git push and Vercel deployment. Set the Vercel root to `apps/web`. The new `vercel.json` serves `dist` with the Other framework preset and an empty build command. Parsed the configuration locally and used `git ls-files --others --exclude-standard -- apps/web` to confirm the configuration and all five static assets are eligible for staging. The local repository has no commits and no configured remote at the time of inspection.
