@@ -14,6 +14,7 @@
   const maxSnapshotAge = 300;
   const maxGasEstimate = 300_000n;
   const addressPattern = /^0x[0-9a-f]{40}$/i;
+  const agentIdNamePattern = /^[a-z0-9]{3,15}\.ai$/i;
   const hashPattern = /^0x[0-9a-f]{64}$/i;
   const quantityPattern = /^0x(?:0|[1-9a-f][0-9a-f]*)$/i;
   const $ = id => document.getElementById(id);
@@ -43,6 +44,9 @@
     agenticForm: $('agentic-prepare'),
     agenticAddress: $('agentic-address'),
     agenticPrepare: $('agentic-prepare-button'),
+    agenticNameOutput: $('agentic-name-output'),
+    agenticNamePrompt: $('agentic-name-prompt'),
+    agenticCopyNamePrompt: $('agentic-copy-name-prompt'),
     agenticOutput: $('agentic-output'),
     agenticSummary: $('agentic-summary'),
     agenticPrompt: $('agentic-prompt'),
@@ -481,6 +485,8 @@
 
   function resetAgenticPlan() {
     agenticPlan = null;
+    elements.agenticNameOutput.hidden = true;
+    elements.agenticNamePrompt.value = '';
     elements.agenticOutput.hidden = true;
     elements.agenticPrompt.value = '';
     elements.agenticCommand.value = '';
@@ -507,8 +513,15 @@
     event.preventDefault();
     if (agenticBusy) return;
     resetAgenticPlan();
-    const account = elements.agenticAddress.value.trim().toLowerCase();
-    if (!addressPattern.test(account)) return agenticStatus('Enter the public 0x address of your Agentic Wallet.', 'error');
+    const input = elements.agenticAddress.value.trim();
+    if (agentIdNamePattern.test(input)) {
+      elements.agenticNamePrompt.value =
+        `Read only: use baw wallet agent-id --json to check my signed-in Binance Agentic Wallet. If its claimed Agent ID is exactly ${input.toLowerCase()}, use baw wallet address --json and return only its full public BNB Smart Chain address (chain 56). Stop if the name or chain cannot be verified. Do not look up another wallet or request any signature or transaction.`;
+      elements.agenticNameOutput.hidden = false;
+      return agenticStatus('Address prompt ready. Use it in Binance AI Pro to get your own BSC address.', 'success');
+    }
+    if (!addressPattern.test(input)) return agenticStatus('Enter your Agent ID name, like name.ai, or your full public 0x address.', 'error');
+    const account = input.toLowerCase();
     setAgenticBusy(true);
     agenticStatus('Checking Agent ID eligibility and simulating the unsigned receipt…');
     try {
@@ -534,13 +547,7 @@
   }
 
   async function copyAgenticText(field, label) {
-    if (!agenticPlan || agenticBusy) return;
-    try {
-      checkFreshBlock(agenticPlan.block);
-    } catch {
-      agenticStatus('The snapshot expired. Prepare a fresh preview before continuing.', 'error');
-      return;
-    }
+    if (!field.value || agenticBusy) return;
     try {
       await navigator.clipboard.writeText(field.value);
       agenticStatus(`Copied the ${label}.`, 'success');
@@ -548,6 +555,17 @@
       field.select();
       agenticStatus(`Copy the selected ${label}.`);
     }
+  }
+
+  async function copyAgenticReceiptText(field, label) {
+    if (!agenticPlan || agenticBusy) return;
+    try {
+      checkFreshBlock(agenticPlan.block);
+    } catch {
+      agenticStatus('The snapshot expired. Prepare a fresh preview before continuing.', 'error');
+      return;
+    }
+    await copyAgenticText(field, label);
   }
 
   async function verifyAgenticReceipt(event) {
@@ -669,8 +687,9 @@
   elements.record.addEventListener('click', recordProof);
   elements.agenticForm.addEventListener('submit', prepareAgenticReceipt);
   elements.agenticAddress.addEventListener('input', resetAgenticPlan);
-  elements.agenticCopyPrompt.addEventListener('click', () => copyAgenticText(elements.agenticPrompt, 'prompt'));
-  elements.agenticCopy.addEventListener('click', () => copyAgenticText(elements.agenticCommand, 'preview command'));
+  elements.agenticCopyNamePrompt.addEventListener('click', () => copyAgenticText(elements.agenticNamePrompt, 'address prompt'));
+  elements.agenticCopyPrompt.addEventListener('click', () => copyAgenticReceiptText(elements.agenticPrompt, 'prompt'));
+  elements.agenticCopy.addEventListener('click', () => copyAgenticReceiptText(elements.agenticCommand, 'preview command'));
   elements.agenticVerifyForm.addEventListener('submit', verifyAgenticReceipt);
   bootstrap();
 })();

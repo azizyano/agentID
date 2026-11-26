@@ -31,11 +31,14 @@ Agentic Wallet address that Binance has not exposed.
    Wallet there. Binance documents built-in wallet tools for AI Pro accounts.
    This custom call also needs active Developer Mode in the Binance App.
    [AI Pro setup](https://web3.binance.com/en/dev-docs/products/agentic-wallet/ai-pro) · [Developer Mode](https://web3.binance.com/en/dev-docs/products/agentic-wallet/use-cases/developer-mode)
-2. In VeriAbstain, select **Use your Agent ID**, enter the public Agentic Wallet
-   address, then select **Prepare agent prompt**. The browser checks the
-   deployed contract, registry and holder eligibility through BNB Chain RPC,
-   and simulates the exact zero-value call. No browser wallet connection is
-   needed.
+2. In VeriAbstain, select **Use your Agent ID**. If you know your `.ai` name,
+   enter it and select **Prepare prompt**. **Copy address prompt** asks AI Pro
+   to match the name to your own signed-in wallet and return its BSC address.
+   Paste the public address into the same field and select **Prepare prompt**
+   again. You can also enter the public Agentic Wallet address directly.
+   The browser checks the deployed contract, registry and holder eligibility
+   through BNB Chain RPC, and simulates the exact zero-value call. No browser
+   wallet connection is needed.
 3. Select **Copy prompt** and paste it into your signed-in AI Pro chat. You can
    also use an agent already connected through Binance's official skill or
    copy the preview command for the official CLI. Keep VeriAbstain open.

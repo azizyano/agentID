@@ -25,10 +25,12 @@ The CLI demo uses simulated evidence to show how the validator checks a structur
 
 ## Record with your Agentic Wallet
 
-Select **Use your Agent ID**, enter your public Agentic Wallet address, and copy
-the preview prompt into Binance AI Pro or an agent already connected through
-Binance's official skill. Review the call in Binance and return with the public
-transaction hash. The website verifies the receipt after finality.
+Select **Use your Agent ID** and enter your own `.ai` name or public Agentic
+Wallet address. If you start with a name, the console gives you a prompt to get
+your public BSC address from your signed-in wallet in Binance AI Pro. Use that
+address to prepare the receipt preview prompt. Review the call in Binance and
+return with the public transaction hash. The website verifies the receipt after
+finality.
 [Agentic Wallet walkthrough](apps/web/README.md#binance-agentic-wallet)
 
 ## How the on-chain receipt works

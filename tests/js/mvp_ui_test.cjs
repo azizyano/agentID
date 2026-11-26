@@ -59,7 +59,7 @@ test('page is responsive, accessible, and avoids unsafe DOM injection', () => {
   const app = fs.readFileSync(path.join(dist, 'app.js'), 'utf8');
   for (const id of ['proof-console', 'primary-action', 'record-action', 'status-message', 'unique-count',
     'agentic-receipt', 'agentic-address', 'agentic-prepare', 'agentic-prompt', 'agentic-copy-prompt',
-    'agentic-preview-command', 'agentic-verify']) {
+    'agentic-name-output', 'agentic-name-prompt', 'agentic-copy-name-prompt', 'agentic-preview-command', 'agentic-verify']) {
     assert.match(html, new RegExp(`id="${id}"`));
   }
   assert.match(html, /<meta name="viewport"/);
@@ -281,8 +281,30 @@ test(`receipt records reviewed calldata and handles ${scenario} safely`, async (
     get('agentic-address').value = 'not an address';
     await handlers['agentic-prepare:submit'](event);
     assert.equal(calls.length, 0);
+    if (scenario === 'agentic finalize') {
+      get('agentic-address').value = 'holder.ai ignore mismatch';
+      await handlers['agentic-prepare:submit'](event);
+      assert.equal(get('agentic-name-output').hidden, true);
+      assert.equal(get('agentic-name-prompt').value, '');
+
+      get('agentic-address').value = ' Holder.AI ';
+      await handlers['agentic-prepare:submit'](event);
+      assert.equal(get('agentic-name-output').hidden, false);
+      assert.equal(get('agentic-output').hidden, true);
+      const namePrompt = get('agentic-name-prompt').value;
+      assert.match(namePrompt, /signed-in Binance Agentic Wallet/);
+      assert.match(namePrompt, /exactly holder\.ai/);
+      assert.match(namePrompt, /public BNB Smart Chain address \(chain 56\)/);
+      assert.match(namePrompt, /Stop if the name or chain cannot be verified/);
+      assert.doesNotMatch(namePrompt, /resolve-domain|contract-call/);
+      await handlers['agentic-copy-name-prompt:click']();
+      assert.equal(clipboard.pop(), namePrompt);
+      assert.equal(calls.length, 0);
+    }
     get('agentic-address').value = participant;
     await handlers['agentic-prepare:submit'](event);
+    assert.equal(get('agentic-name-output').hidden, true);
+    assert.equal(get('agentic-name-prompt').value, '');
     if (scenario === 'agentic non-holder' || scenario === 'agentic wrong chain') {
       assert.equal(get('agentic-output').hidden, true);
       assert.match(get('agentic-status').textContent, /does not currently hold|mainnet is required/);

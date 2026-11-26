@@ -1,3 +1,31 @@
+# Agent ID name entry — 2026-11-26
+
+The local console accepts an Agent ID name or a public BSC address. For a name, it generates a read-only prompt that asks AI Pro to check the name on the user's own signed-in Agentic Wallet and return its BSC address. This step issues no network requests from VeriAbstain. The user pastes the address into the same field to run the existing holder checks and prepare the exact receipt. There is no public name-to-wallet lookup. See the [official wallet commands](https://github.com/binance/binance-skills-hub/blob/main/skills/binance-web3/binance-agentic-wallet/SKILL.md) and [hackathon rules](https://www.binance.com/en/support/announcement/detail/95f5dbe0ea674a48a739b59e046648bf).
+
+Ran `node --test --test-reporter=dot tests/js/mvp_contract_test.cjs tests/js/mvp_deploy_browser_test.cjs tests/js/mvp_deployment_test.cjs tests/js/mvp_ui_test.cjs tests/js/provider_submit_startup_test.cjs`. All 39 passed. The UI fixture covered rejection of malformed names, copy of the read-only prompt without RPC activity, and transition to receipt preparation after the address is supplied. `node --check apps/web/dist/app.js` and `git diff --check` passed.
+
+Changes are local. The next check is for the owner to try the read-only prompt in their own AI Pro session after redeploying. The live receipt pilot is still blocked at approval.
+
+---
+
+# First Binance contract-call preview and Agent ID names — 2026-11-26
+
+The owner reported the first successful Binance AI Pro preview for the Agentic Wallet ending `3670`. The chain, sender, target and zero native value matched the request. AI Pro reported successful simulation, no risk findings and no balance, allowance or authority changes. It also reported `requireConfirmation: false`, no estimated fee, and HTTP 403 while retrieving the contract source. It stopped before requesting approval. This is evidence of preview compatibility only. There was no submitted holder transaction.
+
+Binance's [external signing reference](https://github.com/binance/binance-skills-hub/blob/main/skills/binance-web3/binance-agentic-wallet/references/external-sign.md) says a false flag can allow immediate broadcast after execution is requested. The documented [wallet setting](https://github.com/binance/binance-skills-hub/blob/main/skills/binance-web3/binance-agentic-wallet/references/wallet-setting.md) for requiring App confirmation applies to abnormal transactions. No supported option to force App confirmation for this clean custom call was identified. Keep the existing stop condition and treat this pilot as blocked at approval.
+
+Agent ID names are useful as labels for the holder's own wallet. Binance's [Agentic Wallet skill](https://github.com/binance/binance-skills-hub/blob/main/skills/binance-web3/binance-agentic-wallet/SKILL.md) can read the signed-in wallet's Agent ID and BSC address. The [event rules](https://www.binance.com/en/support/announcement/detail/95f5dbe0ea674a48a739b59e046648bf) forbid packaging Agent ID as a way to look up other people's wallets. Do not add a public name-to-wallet search. The receipt still has to bind to the actual holder address. Next, identify an official flow with explicit Binance App confirmation and a reviewable fee before inviting participants. Verified this documentation edit with `git diff --check`.
+
+---
+
+# Binance AI Pro link-only test — 2026-11-26
+
+The owner reported repeated provider errors when asking AI Pro to read the public VeriAbstain homepage, with and without a trailing slash. AI Pro returned no page content and reported no wallet activity. This establishes a retrieval failure in the tested AI Pro session. The cause is unverified.
+
+Use the existing copyable receipt prompt for the pilot. It supplies the call data inline and does not depend on AI Pro fetching the homepage. The next check is a fresh contract-call preview with Developer Mode active, including Binance's risk results and App confirmation requirement. Verified this documentation edit with `git diff --check`.
+
+---
+
 # First Binance AI Pro preflight — 2026-11-26
 
 Owner reported that AI Pro matched the Agentic Wallet ending `3670` and recognized the claimed Agent ID. AI Pro returned `devMode.enabled: false` and stopped before preview. Binance's [Developer Mode guide](https://web3.binance.com/en/dev-docs/products/agentic-wallet/use-cases/developer-mode) confirms that this setting is controlled in the Binance App.
