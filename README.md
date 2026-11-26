@@ -43,7 +43,7 @@ The contract has no owner, upgrade path, or access to user assets. The recording
 | Item | Status |
 | --- | --- |
 | BNB Smart Chain mainnet | Deployment confirmed at `0x8ACF294c769e25dAb44aCbEb83fc401cA0702388` |
-| Hosted console | `agentid-web.vercel.app` is deployed. Wallet testing is on hold pending [MetaMask report #316275](https://github.com/MetaMask/eth-phishing-detect/issues/316275). Use the wallet-free preview above. |
+| Hosted console | [Production console](https://agentid-web.vercel.app/). [MetaMask report #316275](https://github.com/MetaMask/eth-phishing-detect/issues/316275) is resolved. The first live Agent ID receipt test is pending. |
 | Wallet compatibility | The app uses an injected EVM provider. A successful test with the actual Agent ID holder address in Binance Wallet remains pending. |
 | Innovation Award | The rules require a live product and at least 30 distinct Agent ID addresses interacting with the project contract during the submission window. The deadline is December 9, 2026 at 08:00 UTC. |
 

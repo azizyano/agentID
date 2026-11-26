@@ -80,6 +80,11 @@ nav a { color: var(--muted); text-decoration: none; font-size: .86rem; font-weig
 nav a:hover { color: var(--ink); }
 .wallet-chip { justify-self: end; border: 1px solid var(--line-strong); border-radius: 999px; padding: 10px 17px; background: rgba(125, 247, 189, .05); color: var(--ink); cursor: pointer; font-size: .83rem; font-weight: 750; }
 .wallet-chip:hover { background: rgba(125, 247, 189, .11); border-color: rgba(125, 247, 189, .5); }
+.wallet-chip:disabled { cursor: wait; opacity: .65; }
+.wallet-account { display: grid; gap: .35rem; color: var(--muted); font-size: .875rem; }
+.wallet-account code { color: var(--ink); overflow-wrap: anywhere; }
+.wallet-account label { display: grid; gap: .35rem; margin-top: .45rem; }
+.wallet-account select { width: 100%; min-height: 2.75rem; padding: .35rem .65rem; border: 1px solid var(--line-strong); border-radius: 8px; background-color: var(--panel-strong); color: var(--ink); font: inherit; }
 
 main { position: relative; z-index: 2; }
 .hero { max-width: 1240px; min-height: 680px; margin: 0 auto; padding: 100px 28px 90px; display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 70px; }

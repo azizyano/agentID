@@ -5,12 +5,14 @@
   const core = globalThis.VeriAbstainCore;
   const provider = globalThis.ethereum;
   const pendingKey = 'veriabstain.pendingReceipt';
+  const disconnectKey = 'veriabstain.walletDisconnected';
   const maxSnapshotAge = 300;
   const maxGasEstimate = 300_000n;
+  const addressPattern = /^0x[0-9a-f]{40}$/i;
   const hashPattern = /^0x[0-9a-f]{64}$/i;
   const quantityPattern = /^0x(?:0|[1-9a-f][0-9a-f]*)$/i;
   const $ = id => document.getElementById(id);
-  const state = {account: null, chainId: null, plan: null, busy: false};
+  const state = {account: null, accounts: [], chainId: null, plan: null, busy: false, disconnected: false};
 
   const elements = {
     headerWallet: $('header-wallet'),
@@ -19,6 +21,10 @@
     message: $('status-message'),
     dot: $('connection-dot'),
     connection: $('connection-label'),
+    accountDetails: $('wallet-account-details'),
+    accountAddress: $('wallet-account-address'),
+    accountChoices: $('wallet-account-choices'),
+    accountSelect: $('wallet-account-select'),
     session: $('session-id'),
     unique: $('unique-count'),
     receipts: $('receipt-count'),
@@ -48,8 +54,38 @@
     state.plan = null;
   }
 
+  function exposedAddresses(accounts) {
+    if (!Array.isArray(accounts)) return [];
+    return [...new Set(accounts
+      .filter(account => typeof account === 'string' && addressPattern.test(account))
+      .map(account => account.toLowerCase()))];
+  }
+
+  function applyAccounts(accounts) {
+    state.accounts = exposedAddresses(accounts);
+    if (!state.accounts.includes(state.account)) state.account = state.accounts[0] ?? null;
+    const options = state.accounts.map(account => {
+      const option = document.createElement('option');
+      option.value = account;
+      option.textContent = core.shorten(account, 10, 6);
+      return option;
+    });
+    elements.accountSelect.replaceChildren(...options);
+    resetChecks();
+  }
+
+  function rememberDisconnect(disconnected) {
+    state.disconnected = disconnected;
+    try {
+      if (disconnected) globalThis.sessionStorage?.setItem(disconnectKey, '1');
+      else globalThis.sessionStorage?.removeItem(disconnectKey);
+    } catch {
+      // The current page can still disconnect if session storage is unavailable.
+    }
+  }
+
   async function rpc(method, params = []) {
-    if (!provider?.request) throw new Error('MetaMask or another EIP-1193 wallet is required');
+    if (!provider?.request) throw new Error('A compatible browser wallet is required');
     return provider.request({method, params});
   }
 
@@ -83,7 +119,7 @@
 
   async function checkWallet(account) {
     const [accounts, chainId] = await Promise.all([rpc('eth_accounts'), rpc('eth_chainId')]);
-    if (chainId !== cfg.chainIdHex || accounts?.[0]?.toLowerCase() !== account.toLowerCase()) {
+    if (chainId !== cfg.chainIdHex || state.account !== account || !exposedAddresses(accounts).includes(account)) {
       throw new Error('Wallet account or network changed. Run a new integrity check.');
     }
   }
@@ -122,10 +158,15 @@
     elements.connection.textContent = connected
       ? correctChain ? `Connected · ${core.shorten(state.account)}` : 'Wrong network'
       : 'Wallet disconnected';
-    elements.headerWallet.textContent = connected ? core.shorten(state.account) : 'Connect wallet';
+    elements.headerWallet.textContent = connected ? 'Disconnect' : 'Connect wallet';
+    elements.accountDetails.hidden = !connected;
+    elements.accountAddress.textContent = state.account ?? '';
+    elements.accountChoices.hidden = !connected || state.accounts.length < 2;
+    elements.accountSelect.value = state.account ?? '';
+    elements.accountSelect.disabled = state.busy;
     elements.session.textContent = connected ? `SESSION ${state.account.slice(2, 8).toUpperCase()}` : 'SESSION —';
     elements.primary.textContent = !provider
-      ? 'Install MetaMask'
+      ? 'Connect with a wallet browser'
       : !connected
         ? 'Connect wallet'
         : !correctChain
@@ -136,21 +177,23 @@
   }
 
   async function connect() {
+    if (state.busy) return;
     if (!provider?.request) {
-      setMessage('No compatible wallet was detected. Install MetaMask, then reload.', 'error');
+      setMessage('Open this page in your wallet’s dApp browser or use a compatible wallet extension.', 'error');
       return;
     }
     try {
       state.busy = true;
       renderConnection();
       const accounts = await rpc('eth_requestAccounts');
+      if (exposedAddresses(accounts).length === 0) throw new Error('Wallet did not expose an account');
       state.chainId = await rpc('eth_chainId');
-      state.account = accounts?.[0] || null;
-      resetChecks();
+      applyAccounts(accounts);
+      rememberDisconnect(false);
       if (state.chainId !== cfg.chainIdHex) {
         setMessage('Switch to BNB Smart Chain mainnet to continue.');
       } else {
-        setMessage('Wallet connected. Run the finalized integrity check.');
+        setMessage('Confirm this is your Agent ID address, then run the integrity check.');
       }
       await readCounters();
     } catch (error) {
@@ -159,6 +202,24 @@
       state.busy = false;
       renderConnection();
     }
+  }
+
+  function toggleWallet() {
+    if (state.busy) return;
+    if (!state.account) return connect();
+    rememberDisconnect(true);
+    applyAccounts([]);
+    renderConnection();
+    setMessage('Disconnected from VeriAbstain. To switch accounts, select the Agent ID address in your wallet and reconnect.');
+  }
+
+  function selectAccount() {
+    const account = elements.accountSelect.value;
+    if (state.busy || state.disconnected || !state.accounts.includes(account)) return;
+    state.account = account;
+    resetChecks();
+    renderConnection();
+    setMessage('Wallet account selected. Run a new integrity check.');
   }
 
   async function switchNetwork() {
@@ -210,7 +271,7 @@
     const hasParticipated = core.decodeBool(participatedRaw);
     const eligible = balance > 0n && holder;
     setCheck('holder', eligible ? 'pass' : 'fail', eligible ? `${balance} Agent ID` : 'Not eligible');
-    if (!eligible) throw new Error('This wallet does not currently hold an Agent ID');
+    if (!eligible) throw new Error('This wallet address does not currently hold an Agent ID. Select the address that holds it and reconnect if needed.');
 
     const evidencePayload = {
       schema_version: 1,
@@ -392,16 +453,21 @@
   }
 
   async function bootstrap() {
+    try {
+      state.disconnected = globalThis.sessionStorage?.getItem(disconnectKey) === '1';
+    } catch {
+      // Some browsers disallow storage in private contexts.
+    }
     renderConnection();
     if (!provider?.request) {
-      setMessage('Install MetaMask to use the proof console. You can still review the protocol below.');
+      setMessage('To connect, open this page in your wallet’s dApp browser or use a compatible wallet extension.');
       return;
     }
+    state.busy = true;
+    renderConnection();
     try {
       state.chainId = await rpc('eth_chainId');
-      const accounts = await rpc('eth_accounts');
-      state.account = accounts?.[0] || null;
-      renderConnection();
+      if (!state.disconnected) applyAccounts(await rpc('eth_accounts'));
       await readCounters();
       if (state.account && state.chainId === cfg.chainIdHex) {
         setMessage(hasPending() ? 'Check your previous wallet request before recording another receipt.' :
@@ -409,10 +475,13 @@
       }
     } catch {
       setMessage('Wallet state is unavailable. No transaction request was made.', 'error');
+    } finally {
+      state.busy = false;
+      renderConnection();
     }
     provider.on?.('accountsChanged', accounts => {
-      state.account = accounts?.[0] || null;
-      resetChecks();
+      if (state.disconnected) return;
+      applyAccounts(accounts);
       setMessage(state.account ? 'Account changed. Run a new integrity check.' : 'Wallet disconnected.');
       renderConnection();
       readCounters();
@@ -420,13 +489,18 @@
     provider.on?.('chainChanged', chainId => {
       state.chainId = chainId;
       resetChecks();
+      if (state.disconnected) {
+        readCounters();
+        return;
+      }
       setMessage(chainId === cfg.chainIdHex ? 'BNB Chain selected. Run a new integrity check.' : 'Select BNB Smart Chain mainnet to continue.');
       renderConnection();
       readCounters();
     });
   }
 
-  elements.headerWallet.addEventListener('click', connect);
+  elements.headerWallet.addEventListener('click', toggleWallet);
+  elements.accountSelect.addEventListener('change', selectAccount);
   elements.primary.addEventListener('click', auditAction);
   elements.record.addEventListener('click', recordProof);
   bootstrap();

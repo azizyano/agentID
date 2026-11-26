@@ -17,6 +17,13 @@ action. The write request is fixed to BSC mainnet, the deployed contract, exact
 locally generated calldata, and zero native value. MetaMask remains the final
 confirmation boundary.
 
+The console shows the full connected address and offers a selector when the
+wallet exposes multiple accounts. **Disconnect** clears the local selection and
+any prepared receipt in the current tab. It preserves unresolved transactions.
+To end the wallet's site permission, use the wallet's connected-sites settings.
+If Binance exposes only your regular wallet, the console cannot select an
+Agentic Wallet address that Binance has not exposed.
+
 ## Rebuild pinned configuration
 
 ```powershell

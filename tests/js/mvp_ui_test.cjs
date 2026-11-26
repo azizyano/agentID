@@ -80,6 +80,7 @@ test('page bootstrap performs reads only and never prompts or sends', async () =
       className: '',
       classList: {add() {}, remove() {}},
       style: {setProperty() {}},
+      replaceChildren() {},
       addEventListener(name, fn) { handlers[`${id}:${name}`] = fn; },
       querySelector() { return {textContent: ''}; },
     };
@@ -125,12 +126,15 @@ test('page bootstrap performs reads only and never prompts or sends', async () =
 for (const scenario of [
   'confirmed', 'pending', 'uncertain', 'stale', 'changed account',
   'non-holder', 'duplicate', 'simulation rejected', 'gas above bound', 'wallet declined',
+  'select exposed account', 'disconnect before send',
 ]) {
 test(`receipt records reviewed calldata and handles ${scenario} safely`, async () => {
   const config = loadConfig();
   const participant = '0x' + '34'.repeat(20);
+  const otherWallet = '0x' + '56'.repeat(20);
   const calls = [];
   const handlers = {};
+  const walletEvents = {};
   const rows = new Map();
   function element(id) {
     return {
@@ -141,6 +145,7 @@ test(`receipt records reviewed calldata and handles ${scenario} safely`, async (
       className: '',
       classList: {add() {}, remove() {}},
       style: {setProperty() {}},
+      replaceChildren(...children) { this.options = children; },
       addEventListener(name, fn) { handlers[`${id}:${name}`] = fn; },
       querySelector() { return {textContent: ''}; },
     };
@@ -154,6 +159,7 @@ test(`receipt records reviewed calldata and handles ${scenario} safely`, async (
   const mined = {number: '0x65', hash: '0x' + 'ef'.repeat(32), timestamp: block.timestamp};
   const txHash = '0x' + 'cd'.repeat(32);
   const saved = new Map();
+  const tabSession = new Map();
   let account = participant;
   let sent;
   let finalized = false;
@@ -161,7 +167,9 @@ test(`receipt records reviewed calldata and handles ${scenario} safely`, async (
     async request({method, params = []}) {
       calls.push({method, params});
       if (method === 'eth_chainId') return config.chainIdHex;
-      if (method === 'eth_accounts' || method === 'eth_requestAccounts') return [account];
+      if (method === 'eth_accounts' || method === 'eth_requestAccounts') {
+        return scenario === 'select exposed account' ? [otherWallet, account] : [account];
+      }
       if (method === 'eth_getBlockByNumber') return params[0] === mined.number ||
         (params[0] === 'finalized' && finalized) ? mined : block;
       if (method === 'eth_getCode') return config.expectedRuntime;
@@ -171,7 +179,7 @@ test(`receipt records reviewed calldata and handles ${scenario} safely`, async (
         sent = params[0];
         if (scenario === 'uncertain') throw new Error('Connection lost');
         if (scenario === 'wallet declined') throw Object.assign(new Error('Rejected'), {code: 4001});
-        finalized = scenario === 'confirmed';
+        finalized = scenario === 'confirmed' || scenario === 'select exposed account';
         return txHash;
       }
       if (method === 'eth_getTransactionReceipt') {
@@ -188,8 +196,11 @@ test(`receipt records reviewed calldata and handles ${scenario} safely`, async (
         if (data === config.selectors['BSC_MAINNET_CHAIN_ID()'].toLowerCase()) return word(56);
         if (data === config.selectors['receiptCount()'].toLowerCase()) return word(0);
         if (data === config.selectors['uniqueAgentCount()'].toLowerCase()) return word(0);
-        if (data.startsWith(config.selectors['balanceOf(address)'].toLowerCase())) return word(scenario === 'non-holder' ? 0 : 1);
-        if (data.startsWith(config.selectors['isAgentIdHolder(address)'].toLowerCase())) return word(scenario === 'non-holder' ? 0 : 1);
+        if (data.startsWith(config.selectors['balanceOf(address)'].toLowerCase()) ||
+            data.startsWith(config.selectors['isAgentIdHolder(address)'].toLowerCase())) {
+          const wrongAccount = scenario === 'select exposed account' && data.endsWith(otherWallet.slice(2));
+          return word(scenario === 'non-holder' || wrongAccount ? 0 : 1);
+        }
         if (data.startsWith(config.selectors['hasParticipated(address)'].toLowerCase())) return word(0);
         if (data.startsWith(config.selectors['recorded(address,bytes32)'].toLowerCase())) return word(scenario === 'duplicate' ? 1 : 0);
         if (data.startsWith(config.selectors['recordAssessment(bytes32,bytes32)'].toLowerCase())) {
@@ -201,7 +212,7 @@ test(`receipt records reviewed calldata and handles ${scenario} safely`, async (
       }
       throw new Error(`Unexpected method: ${method}`);
     },
-    on() {},
+    on(name, handler) { walletEvents[name] = handler; },
   };
   const context = {
     globalThis: null,
@@ -210,6 +221,7 @@ test(`receipt records reviewed calldata and handles ${scenario} safely`, async (
     VeriAbstainCore: core,
     document: {
       getElementById: get,
+      createElement: tag => element(tag),
       querySelector(selector) {
         if (!rows.has(selector)) rows.set(selector, element(selector));
         return rows.get(selector);
@@ -217,6 +229,11 @@ test(`receipt records reviewed calldata and handles ${scenario} safely`, async (
     },
     Date: {now: () => now},
     navigator: {locks: {request: (_key, _options, handler) => handler({})}},
+    sessionStorage: {
+      getItem: key => tabSession.get(key) ?? null,
+      setItem: (key, value) => tabSession.set(key, value),
+      removeItem: key => tabSession.delete(key),
+    },
     localStorage: {
       getItem: key => saved.get(key) ?? null,
       setItem: (key, value) => saved.set(key, value),
@@ -229,9 +246,25 @@ test(`receipt records reviewed calldata and handles ${scenario} safely`, async (
     BigInt,
   };
   context.globalThis = context;
-  vm.runInNewContext(fs.readFileSync(path.join(dist, 'app.js'), 'utf8'), context);
+  const appSource = fs.readFileSync(path.join(dist, 'app.js'), 'utf8');
+  vm.runInNewContext(appSource, context);
   await new Promise(resolve => setTimeout(resolve, 20));
 
+  assert.equal(get('header-wallet').textContent, 'Disconnect');
+  if (scenario === 'select exposed account') {
+    assert.equal(get('wallet-account-address').textContent, otherWallet);
+    assert.equal(get('wallet-account-choices').hidden, false);
+    assert.deepEqual(Array.from(get('wallet-account-select').options, item => item.value), [otherWallet, participant]);
+    await handlers['primary-action:click']();
+    assert.equal(get('record-action').hidden, true);
+    assert.match(get('status-message').textContent, /does not currently hold/);
+    get('wallet-account-select').value = '0x' + '78'.repeat(20);
+    handlers['wallet-account-select:change']();
+    assert.equal(get('wallet-account-address').textContent, otherWallet);
+    get('wallet-account-select').value = participant;
+    handlers['wallet-account-select:change']();
+    assert.equal(get('wallet-account-address').textContent, participant);
+  }
   await handlers['primary-action:click']();
   if (scenario === 'non-holder' || scenario === 'duplicate') {
     assert.equal(get('record-action').hidden, true);
@@ -246,6 +279,23 @@ test(`receipt records reviewed calldata and handles ${scenario} safely`, async (
   assert.equal(get('digest-panel').hidden, false);
   assert.match(get('status-message').textContent, /Integrity matched/);
   assert.ok(!calls.some(call => call.method === 'eth_sendTransaction'));
+  if (scenario === 'disconnect before send') {
+    handlers['header-wallet:click']();
+    assert.equal(get('header-wallet').textContent, 'Connect wallet');
+    assert.equal(get('wallet-account-details').hidden, true);
+    assert.equal(get('digest-panel').hidden, true);
+    assert.equal(get('record-action').hidden, true);
+    walletEvents.accountsChanged([participant]);
+    await handlers['record-action:click']();
+    vm.runInNewContext(appSource, context);
+    await new Promise(resolve => setTimeout(resolve, 20));
+    assert.equal(get('wallet-account-address').textContent, '');
+    assert.ok(!calls.some(call => call.method === 'eth_sendTransaction'));
+    await handlers['header-wallet:click']();
+    assert.equal(get('wallet-account-address').textContent, participant);
+    assert.equal(get('record-action').hidden, true);
+    return;
+  }
   const expectedCalldata = core.buildRecordCalldata(
     config.selectors['recordAssessment(bytes32,bytes32)'],
     get('evidence-digest').textContent,
@@ -273,10 +323,16 @@ test(`receipt records reviewed calldata and handles ${scenario} safely`, async (
     assert.ok(!calls.some(call => call.method === 'eth_getTransactionReceipt'));
     return;
   }
-  if (scenario !== 'confirmed') {
+  if (scenario === 'pending' || scenario === 'uncertain') {
     assert.equal(saved.size, 1);
     assert.equal(get('record-action').hidden, true);
     assert.equal(get('primary-action').textContent, 'Check previous transaction');
+    if (scenario === 'pending') {
+      handlers['header-wallet:click']();
+      assert.equal(saved.size, 1);
+      await handlers['header-wallet:click']();
+      assert.equal(get('primary-action').textContent, 'Check previous transaction');
+    }
     finalized = true;
     await handlers['primary-action:click']();
     assert.equal(calls.filter(call => call.method === 'eth_sendTransaction').length, 1);

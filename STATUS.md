@@ -1,3 +1,29 @@
+# Wallet account selection and disconnect — 2026-11-26
+
+The owner observed that Binance's dApp connection selected the regular wallet instead of the Agentic Wallet. The local console now shows the full address and offers a choice when the provider exposes several accounts. It rejects accounts outside that list and reruns the Agent ID check for the chosen address. Disconnect clears the selected address and prepared receipt, remembers the choice across reloads in the tab, and preserves any unresolved transaction checkpoint. The wallet manages its own site permissions.
+
+Ran `node --test --test-reporter=dot tests/js/mvp_contract_test.cjs tests/js/mvp_deploy_browser_test.cjs tests/js/mvp_deployment_test.cjs tests/js/mvp_ui_test.cjs tests/js/provider_submit_startup_test.cjs`. All 35 tests passed. The added cases cover choosing an exposed holder after rejecting the regular account and disconnecting a prepared receipt. The pending-receipt test now disconnects and reconnects before reconciling.
+
+The change is local. Next the owner can push the web files and retest in Binance's dApp browser. If Binance exposes only the regular wallet, account selection remains blocked at the provider. The app does not request keys, pairing, or a wallet session.
+
+---
+
+# First Agent ID holder address verified — 2026-11-26
+
+The owner supplied a public address ending in `3670`. A public BNB Chain JSON-RPC read of the official Agent ID registry's `balanceOf(address)` returned 1 at finalized block 135880415. Chain ID 56 and the numbered block hash were checked (`RPC_FINALIZED_READ`). This confirms the address holds an ID at that snapshot. No receipt was recorded.
+
+Binance documents that Agentic Wallet is separate from the regular Binance Wallet. Its dApp browser supports injected EVM connections, but we have yet to confirm it exposes the Agentic Wallet address to this dApp. Next check the address returned by the official Binance Wallet connection. A picker can expose that supported connection once it returns the correct address. Wallet login QR codes, pairing, and credential imports are outside this flow.
+
+---
+
+# MetaMask report resolved — 2026-11-26
+
+The owner reported that the wallet warning cleared. GitHub's issue and comments API confirmed that [MetaMask issue #316275](https://github.com/MetaMask/eth-phishing-detect/issues/316275) was closed as completed and that a collaborator marked it resolved. The collaborator did not specify the underlying change.
+
+Read `receiptCount()` and `uniqueAgentCount()` over public BNB Chain RPC with `eth_chainId`, a shared finalized block, and a block-hash recheck. Both counters were zero at block 135876931 (`RPC_FINALIZED_READ`). Next run one live holder walkthrough and reconcile its public transaction hash before sharing the campaign link. No wallet or write call was used for this check.
+
+---
+
 # Hackathon README and regression review — 2026-11-26
 
 Rewrote `README.md` for judges and testers. It starts with a local walkthrough, links to the mainnet deployment and contract source, explains where Agent ID gates writes, and lists the evidence needed for the participation threshold. The hosted wallet warning and earlier EvidenceLab results remain visible.

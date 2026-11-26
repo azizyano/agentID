@@ -99,6 +99,13 @@
               <p class="card-kicker">CURRENT MISSION</p>
               <h3>Verify the receipt contract</h3>
               <p>Confirm the live runtime, official Agent ID registry, and your current holder status at a finalized block.</p>
+              <div class="wallet-account" id="wallet-account-details" hidden>
+                <span>Connected address</span>
+                <code id="wallet-account-address"></code>
+                <label id="wallet-account-choices" hidden>Choose wallet account
+                  <select id="wallet-account-select"></select>
+                </label>
+              </div>
             </div>
 
             <div class="check-list" id="check-list">
@@ -126,7 +133,7 @@
             </div>
 
             <div class="action-area">
-              <p class="notice" id="status-message" role="status">Connect MetaMask to begin. No request is made automatically.</p>
+              <p class="notice" id="status-message" role="status">Connect the wallet address that holds your Agent ID.</p>
               <button class="button button-primary button-wide" id="primary-action" type="button">Connect wallet</button>
               <button class="button button-secondary button-wide" id="record-action" type="button" hidden>Record integrity receipt</button>
               <p class="microcopy">Recording sends <strong>0 BNB</strong>. You pay network gas only and approve the transaction in your own wallet.</p>
