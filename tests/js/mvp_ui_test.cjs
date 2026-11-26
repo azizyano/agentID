@@ -300,6 +300,11 @@ test(`receipt records reviewed calldata and handles ${scenario} safely`, async (
     assert.ok(data.startsWith(config.selectors['recordAssessment(bytes32,bytes32)']));
     const prompt = get('agentic-prompt').value;
     assert.ok(prompt.split('\n\n').includes(command));
+    assert.ok(prompt.includes(`https://bscscan.com/address/${config.contractAddress}#code`));
+    assert.ok(prompt.includes(`(selector ${data.slice(0, 10)})`));
+    const receiptAbi = new ethers.Interface(['function recordAssessment(bytes32,bytes32)']);
+    const [evidenceDigest, assessmentDigest] = receiptAbi.decodeFunctionData('recordAssessment', data);
+    assert.ok(prompt.includes(`evidenceDigest = ${evidenceDigest} and assessmentDigest = ${assessmentDigest}`));
     assert.match(prompt, /authorizes a preview only/);
     assert.match(prompt, /separate explicit approval/);
     assert.match(prompt, /requireConfirmation is not exactly true/);

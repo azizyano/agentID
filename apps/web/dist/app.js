@@ -490,10 +490,12 @@
 
   function formatAgenticPrompt(plan, command) {
     const expiresAt = BigInt(plan.block.timestamp) + BigInt(maxSnapshotAge);
+    const signature = 'recordAssessment(bytes32,bytes32)';
     return [
       'Preview one VeriAbstain integrity receipt with the official Binance Agentic Wallet tool. This message authorizes a preview only.',
       `First confirm the signed-in BNB Smart Chain Agentic Wallet address is ${plan.account}, it holds Agent ID, and Developer Mode is active. If any check fails or the official tool is unavailable, stop.`,
-      'Use this exact contract-call preview for recordAssessment(bytes32,bytes32). Native value is 0 wei. Network gas is the only expected asset cost.',
+      `Review the deployed contract source and ABI at https://bscscan.com/address/${cfg.contractAddress}#code. The expected call is ${signature} (selector ${cfg.selectors[signature]}). It checks the sender's Agent ID and emits an AssessmentRecorded event with two public digests. Verify this against the source and decoded calldata before any approval.`,
+      `The expected ABI arguments are evidenceDigest = ${plan.evidenceDigest} and assessmentDigest = ${plan.assessmentDigest}. Native value is 0 wei. Network gas is the only expected asset cost. Use this exact preview command.`,
       command,
       `The VeriAbstain snapshot expires at Unix time ${expiresAt} (seconds). Show me the sender, chain, target, calldata, native value, estimated fee, simulation, risk findings, and balance, allowance and authority changes. Stop if data is missing, fields differ, either the snapshot or Binance preview has expired, a warning is present, assets change beyond gas, or requireConfirmation is not exactly true.`,
       'Wait for my separate explicit approval of this exact preview. Only then may you request confirmation in the Binance App for the same fresh preview. Do not sign a message, grant an approval, transfer assets, change settings, substitute another call or retry automatically.',

@@ -1,3 +1,13 @@
+# First Binance AI Pro preflight — 2026-11-26
+
+Owner reported that AI Pro matched the Agentic Wallet ending `3670` and recognized the claimed Agent ID. AI Pro returned `devMode.enabled: false` and stopped before preview. Binance's [Developer Mode guide](https://web3.binance.com/en/dev-docs/products/agentic-wallet/use-cases/developer-mode) confirms that this setting is controlled in the Binance App.
+
+Updated local onboarding to check Developer Mode before generating the five-minute snapshot. The prompt now gives the BscScan source and ABI link, the full `0x5475b0b4` selector, and both expected arguments. Verified the selector against the ABI and the displayed arguments against the encoded calldata. Ran `node --test --test-reporter=dot tests/js/mvp_contract_test.cjs tests/js/mvp_deploy_browser_test.cjs tests/js/mvp_deployment_test.cjs tests/js/mvp_ui_test.cjs tests/js/provider_submit_startup_test.cjs`. All 39 passed. `node --check apps/web/dist/app.js` and `git diff --check` passed.
+
+Next, the owner can check Developer Mode in the Binance App, generate a fresh prompt, and obtain the actual preview. No live preview, signature, or finalized receipt was recorded.
+
+---
+
 # Agentic Wallet prompt and pilot — 2026-11-26
 
 Made **Use your Agent ID** the primary entry point. The console takes a public Agentic Wallet address, checks holder status and the pinned contract on BNB Chain, and prepares one preview-only prompt for the official Binance wallet tools. The prompt includes the exact sender, chain, destination, zero native value, calldata and snapshot expiry. It requests separate approval and requires a clean preview with Binance App confirmation. The installed CLI remains available as a fallback. The browser checks the returned public hash against the original call and updates the on-chain counters only after finality.
