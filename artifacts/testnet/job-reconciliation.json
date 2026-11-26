@@ -1,0 +1,19 @@
+{
+  "status": "CREATE_CONFIRMED",
+  "assurance": "RPC_FINALIZED_READ",
+  "chain_id": 97,
+  "creation_transaction_hash": "0x20876edfa2217bf193f3135fec8ee603643ce08dedecc8f25b096993e83cf0a9",
+  "job_id": 1765,
+  "job_status": "REJECTED",
+  "budget_raw": 0,
+  "client": "0xb16b77C16773DEF8fA279A1228Eba9308eCD7841",
+  "provider": "0x7d5E9Fc2D79ed404fbfDe64f93b199cFCC1bB3c1",
+  "payment_token": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+  "client_u_balance_raw": 10000000000000000000,
+  "commerce_allowance_raw": 0,
+  "quote_expired": true,
+  "quote_expires_at": 1795184868,
+  "block_number": 143860328,
+  "block_hash": "0x65ef2a92326cb19c5f9bb1636375d073aee0f348914d31070ee1ce96df20632f",
+  "transactions_sent": 0
+}

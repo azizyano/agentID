@@ -1,0 +1,57 @@
+{
+  "kind": "veriabstain.evidence_envelope",
+  "envelope_version": 1,
+  "claim": {
+    "predicate": "erc20.allowance",
+    "chain_id": 97,
+    "target": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+    "arguments": {
+      "owner": "0x3434343434343434343434343434343434343434",
+      "spender": "0x5656565656565656565656565656565656565656"
+    },
+    "block_number": 10,
+    "block_hash": "0xabababababababababababababababababababababababababababababababab",
+    "value": 100
+  },
+  "observation": {
+    "observed_at": 1000,
+    "block_timestamp": 990,
+    "max_block_age_seconds": 120,
+    "max_observation_age_seconds": 300,
+    "finalized": true,
+    "canonical": true,
+    "abi_supported": true,
+    "error": "NONE",
+    "conflicting": false,
+    "assurance": "SIMULATED_READ",
+    "source_id": "g1-documentation-example",
+    "historical_state_capability": "AVAILABLE"
+  },
+  "identity": {
+    "chain_id": 97,
+    "target": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+    "target_code_hash": "0xae12b1d61f7ed4febf649ccf319cb49a0e921cca3739dcb01b47d316049d46ff",
+    "review_source_revision": "f6a3c4ff337158a8a66281c565f3f1562e1287b7",
+    "pinset_id": "chain97-reviewed-20261120-v1",
+    "proxy_implementation": null,
+    "implementation_code_hash": null
+  },
+  "decoding": {
+    "function_signature": "allowance(address,address)",
+    "selector": "0xdd62ed3e",
+    "abi_sha256": "d612b794077ac6b7c786c0a6a1aeed20e29031315468592fc904a3c89ffa805b",
+    "codec": "web3-eth-abi-canonical-v1",
+    "sdk_revision": "260e16196931780d0370bd3a9d9b67ece744bb9d",
+    "calldata": "0xdd62ed3e00000000000000000000000034343434343434343434343434343434343434340000000000000000000000005656565656565656565656565656565656565656",
+    "return_data": "0x0000000000000000000000000000000000000000000000000000000000000064"
+  },
+  "reproduction": {
+    "rpc_method": "eth_call",
+    "block_reference": "NUMBER_AND_HASH_PINNED",
+    "chain_id": 97,
+    "target": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+    "block_number": 10,
+    "block_hash": "0xabababababababababababababababababababababababababababababababab",
+    "calldata": "0xdd62ed3e00000000000000000000000034343434343434343434343434343434343434340000000000000000000000005656565656565656565656565656565656565656"
+  }
+}

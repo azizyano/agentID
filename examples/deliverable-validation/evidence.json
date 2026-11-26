@@ -1,0 +1,21 @@
+{
+  "predicate": "erc20.allowance",
+  "chain_id": 97,
+  "target": "0x1212121212121212121212121212121212121212",
+  "arguments": {
+    "owner": "0x3434343434343434343434343434343434343434",
+    "spender": "0x5656565656565656565656565656565656565656"
+  },
+  "schema_version": 1,
+  "block_number": 10,
+  "block_hash": "0xabababababababababababababababababababababababababababababababab",
+  "value": 0,
+  "source": "example-fixture",
+  "assurance": "SIMULATED_READ",
+  "observed_at": 990,
+  "finalized": true,
+  "canonical": true,
+  "abi_supported": true,
+  "error": null,
+  "conflicting": false
+}

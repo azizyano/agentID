@@ -1,0 +1,40 @@
+{
+  "phase": "hackathon-mvp-offline-deployment-step-3",
+  "date": "2026-11-23",
+  "status": "OFFLINE_DEPLOYMENT_PACKAGE_TESTED",
+  "preparer_sha256": "5f29fccd09538deba202ecc5d0b86e6ed20e8e7d4741e9f9012ed41bd6870ff9",
+  "standard_input_sha256": "ff1449c60b39dd62c97d4699f488fa21ec8b6cb671a7b7ca90e84f9bd663240f",
+  "deployment_plan_sha256": "ffee62390d3dee00e31c45101a739eb64fa944cff983b333c942ba092eaa8ca3",
+  "verification_manifest_sha256": "8d9f24cfc9111a7e71e6cff3e6c16b427dc66d59dc8c3f4846a8a0e32674471d",
+  "deployment_data_keccak256": "0x3c1efa9d2436cfa755a8b25597e2155d95a4e9ded6475da1a4b4e6e871f8b89f",
+  "expected_runtime_keccak256": "0x9d92959c3d3facfa24ad21299ecd27f69c001f4576fd540a9a6b93dabfc4eb8c",
+  "constructor_registry": "0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F",
+  "compiler_version": "v0.8.28+commit.7893614a",
+  "evm_version": "paris",
+  "optimizer_runs": 200,
+  "focused_deployment_tests": {
+    "passed": 6,
+    "failed": 0,
+    "exact_creation_data_local_chain_56_rehearsal": true
+  },
+  "combined_node_tests": {
+    "passed": 15,
+    "failed": 0
+  },
+  "last_full_python_suite": {
+    "passed": 550,
+    "failed": 0,
+    "rerun_in_this_step": false
+  },
+  "corrected_before_freeze": {
+    "issue": "Initial rehearsal compared deployed code to the compiler's unlinked immutable template.",
+    "control": "Compiler-reported immutable slots are now linked to the official registry before computing the expected runtime hash.",
+    "transactions_sent": 0
+  },
+  "limits": [
+    "Local simulated chain 56 only; not BSC mainnet.",
+    "No deployer, nonce, predicted address, signature, API key, contract address, transaction, or verification submission.",
+    "BscScan exact verification remains unproven until after an authorized deployment."
+  ],
+  "next": "Owner approval is required before preparing a wallet-specific mainnet deployment action. UI remains unapproved."
+}

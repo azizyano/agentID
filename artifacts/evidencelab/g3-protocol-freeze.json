@@ -1,0 +1,10 @@
+{
+  "phase": "EvidenceLab_G3",
+  "status": "PROTOCOL_FROZEN_BEFORE_BASELINE_IMPLEMENTATION_AND_EXECUTION",
+  "protocol_sha256": "973dfb8f12740fc734bbf49af701562410bc39822d0cd19bcdeb5b494e2c03ec",
+  "frozen_at_utc": "2026-11-21T18:10:53.191500+00:00",
+  "reviewer": "evidencelab_evidence read-only G3QA",
+  "corpus_sha256": "dbf197d8c86274c3d0855db0ffa9c766e448292aea72b4c0763afc44d144f6c3",
+  "baseline_implemented": false,
+  "differential_executed": false
+}

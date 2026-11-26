@@ -1,0 +1,13 @@
+{
+  "phase": "EvidenceLab_G2",
+  "status": "SPEC_FROZEN_BEFORE_GENERATION_AND_EXECUTION",
+  "spec_sha256": "ab65a8334084bed433dad08b2a2dffe5eb1fa0e7ea295cc6b91865c60e9ac549",
+  "frozen_at_utc": "2026-11-21T18:03:09.143961+00:00",
+  "independent_reviewer": "evidencelab_evidence (G2 read-only QA; no G2 implementation)",
+  "case_count": 62,
+  "valid_controls": 14,
+  "mutations": 48,
+  "candidate_executed": false,
+  "corpus_generated": false,
+  "review_note": "Exact recipe/label conformance still independently reviewed after generation; no G3baseline/G4CLI"
+}

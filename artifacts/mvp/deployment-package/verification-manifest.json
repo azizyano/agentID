@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "explorer": "BscScan",
+  "verification_method": "Solidity (Standard-Json-Input)",
+  "chain_id": 56,
+  "contract": "contracts/VeriAbstainEvidenceRegistry.sol:VeriAbstainEvidenceRegistry",
+  "compiler_version": "v0.8.28+commit.7893614a",
+  "license_identifier": "MIT",
+  "constructor_arguments_abi_hex": "00000000000000000000000060b9262456de011f7d15a54cdd8c48baaa8b022f",
+  "source_sha256": "ed35a4a8e5a18f6757e9a275c3ab36eb5f8e2e5a4343c764392deebea122be4d",
+  "tested_build_sha256": "c9fe5b93e4d7e20c227a719439b6b634b2c6f5b786756318eeaa9f6ab5d06df6",
+  "standard_input_sha256": "ff1449c60b39dd62c97d4699f488fa21ec8b6cb671a7b7ca90e84f9bd663240f",
+  "deployment_plan_sha256": "ffee62390d3dee00e31c45101a739eb64fa944cff983b333c942ba092eaa8ca3",
+  "contract_address": null,
+  "verification_submitted": false,
+  "api_key_required_to_submit": true,
+  "credentials_stored": false,
+  "transactions_sent": 0
+}

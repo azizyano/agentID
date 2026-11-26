@@ -1,0 +1,5 @@
+# Direct inputs; requirements-test.lock pins the resolved environment.
+pytest==9.2.0
+pytest-asyncio==1.5.0
+pydantic==2.14.4
+bnbagent @ git+https://github.com/bnb-chain/bnbagent-sdk.git@260e16196931780d0370bd3a9d9b67ece744bb9d#subdirectory=python

@@ -1,0 +1,23 @@
+{
+  "phase": "hackathon-mvp-participant-preparation-step-6",
+  "date": "2026-11-23",
+  "status": "NON_UI_INTERACTION_PREPARATION_COMPLETE",
+  "contract_address": "0x8ACF294c769e25dAb44aCbEb83fc401cA0702388",
+  "source_verification_status": "OWNER_REPORTED_NOT_INDEPENDENTLY_RECHECKED",
+  "interaction_module_sha256": "4f97a676b28351502cb145f36be0ae2020b085c8a92f0caf8c43f8cc63002aec",
+  "interaction_cli_sha256": "d1e22d5a7a2cf94d12d8d8bd77039c8478d32854b3113258110ee8c3ceec1d11",
+  "focused_tests": {"passed": 26, "failed": 0, "warnings": 1},
+  "full_python_suite": {"passed": 589, "failed": 0, "warnings": 1},
+  "focused_test_junit_sha256": "e1fe8d7be1b89fde5db8314e0ad32235fc667a4eb309096eef0af01a0c98ec42",
+  "full_test_junit_sha256": "f7f5b98d1e70192bbcd88017cdafed3e325ac5492503a16a081b8d894e11f691",
+  "transactions_sent": 0,
+  "real_participants_checked": 0,
+  "ui_started": false,
+  "limitations": [
+    "No genuine Agent ID holder address was supplied or checked.",
+    "Unsigned preparation is not a wallet confirmation or completed interaction.",
+    "Provider-trusted finalized reads are not cryptographic state proofs.",
+    "The simulated example receipt is not product-value or adoption evidence."
+  ],
+  "next": "Ask the owner for explicit approval before implementing the minimal holder website."
+}

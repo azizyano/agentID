@@ -1,0 +1,2482 @@
+[
+  {
+    "case_id": "erc20.allowance/abi_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_DECODING",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_DECODING",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/address_case",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "COMPARED_RAW_VALUE",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "SNAPSHOT_MATCHED",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/block_hash_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "CONTEXT_MISMATCH",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "CONTEXT_MISMATCH",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/block_number_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "CONTEXT_MISMATCH",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "CONTEXT_MISMATCH",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/calldata_argument_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "CURRENT"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "CALL_MISMATCH",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "CONTEXT_MISMATCH",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/calldata_hex_case",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "COMPARED_RAW_VALUE",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "SNAPSHOT_MATCHED",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/conflicting_evidence",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "INCOMPLETE_OBSERVATION",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_OBSERVATION",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/freshness_boundary",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "COMPARED_RAW_VALUE",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "SNAPSHOT_MATCHED",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/function_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_DECODING",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_DECODING",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/future_block",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_TIME",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "SNAPSHOT_FRESHNESS_FAILED",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/hash_hex_case",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "COMPARED_RAW_VALUE",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "SNAPSHOT_MATCHED",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/historical_incorrect_assertion",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "INVALID_AT_SNAPSHOT",
+      "temporal_status": "REVALIDATION_REQUIRED"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "INVALID_AT_SNAPSHOT",
+        "temporal_status": "REVALIDATION_REQUIRED",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "COMPARED_RAW_VALUE",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "INVALID_AT_SNAPSHOT",
+        "temporal_status": "REVALIDATION_REQUIRED",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "CLAIM_MISMATCH",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/historical_valid",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "REVALIDATION_REQUIRED"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "REVALIDATION_REQUIRED",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "COMPARED_RAW_VALUE",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "REVALIDATION_REQUIRED",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "SNAPSHOT_MATCHED",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/incorrect_assertion",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "INVALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "INVALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "COMPARED_RAW_VALUE",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "INVALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "CLAIM_MISMATCH",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/invalid_return_bytes",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "CURRENT"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_INPUT_OR_TRANSCRIPT",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "TRANSCRIPT_INVALID",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/json_layout",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "COMPARED_RAW_VALUE",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "SNAPSHOT_MATCHED",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/matched",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "COMPARED_RAW_VALUE",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "SNAPSHOT_MATCHED",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/missing_return_data",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "CURRENT"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "MISSING_TRANSCRIPT",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "TRANSCRIPT_MISSING",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/noncanonical",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "INCOMPLETE_OBSERVATION",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_OBSERVATION",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/numeric_scaling",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "INVALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "INVALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "COMPARED_RAW_VALUE",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "INVALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "CLAIM_MISMATCH",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/numeric_string",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_INPUT",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "MALFORMED_ENVELOPE",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/pruned_state",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "INCOMPLETE_OBSERVATION",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_OBSERVATION",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/rpc_unavailable",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "INCOMPLETE_OBSERVATION",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_OBSERVATION",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/runtime_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNREVIEWED_IDENTITY",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_IDENTITY",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/selector_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_DECODING",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_DECODING",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/stale_at_observation",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_TIME",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "SNAPSHOT_FRESHNESS_FAILED",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/unfinalized",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "INCOMPLETE_OBSERVATION",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_OBSERVATION",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/unreviewed_proxy",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNREVIEWED_PROXY",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_IDENTITY",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/unsupported_threshold",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_INPUT",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "MALFORMED_ENVELOPE",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/wrong_chain",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNREVIEWED_IDENTITY",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_SCOPE",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc20.allowance/wrong_contract",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNREVIEWED_IDENTITY",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_IDENTITY",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/abi_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_DECODING",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_DECODING",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/address_case",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "COMPARED_RAW_VALUE",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "SNAPSHOT_MATCHED",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/block_hash_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "CONTEXT_MISMATCH",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "CONTEXT_MISMATCH",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/block_number_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "CONTEXT_MISMATCH",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "CONTEXT_MISMATCH",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/calldata_argument_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "CURRENT"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "CALL_MISMATCH",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "CONTEXT_MISMATCH",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/calldata_hex_case",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "COMPARED_RAW_VALUE",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "SNAPSHOT_MATCHED",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/conflicting_evidence",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "INCOMPLETE_OBSERVATION",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_OBSERVATION",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/freshness_boundary",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "COMPARED_RAW_VALUE",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "SNAPSHOT_MATCHED",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/function_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_DECODING",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_DECODING",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/future_block",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_TIME",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "SNAPSHOT_FRESHNESS_FAILED",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/hash_hex_case",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "COMPARED_RAW_VALUE",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "SNAPSHOT_MATCHED",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/historical_incorrect_assertion",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "INVALID_AT_SNAPSHOT",
+      "temporal_status": "REVALIDATION_REQUIRED"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "INVALID_AT_SNAPSHOT",
+        "temporal_status": "REVALIDATION_REQUIRED",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "COMPARED_RAW_VALUE",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "INVALID_AT_SNAPSHOT",
+        "temporal_status": "REVALIDATION_REQUIRED",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "CLAIM_MISMATCH",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/historical_valid",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "REVALIDATION_REQUIRED"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "REVALIDATION_REQUIRED",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "COMPARED_RAW_VALUE",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "REVALIDATION_REQUIRED",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "SNAPSHOT_MATCHED",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/incorrect_assertion",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "INVALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "INVALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "COMPARED_RAW_VALUE",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "INVALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "CLAIM_MISMATCH",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/invalid_return_bytes",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "CURRENT"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_INPUT_OR_TRANSCRIPT",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "TRANSCRIPT_INVALID",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/json_layout",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "COMPARED_RAW_VALUE",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "SNAPSHOT_MATCHED",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/matched",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "COMPARED_RAW_VALUE",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "VALID_AT_SNAPSHOT",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "SNAPSHOT_MATCHED",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/missing_return_data",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "CURRENT"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "MISSING_TRANSCRIPT",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "CURRENT",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "TRANSCRIPT_MISSING",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/noncanonical",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "INCOMPLETE_OBSERVATION",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_OBSERVATION",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/numeric_scaling",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_INPUT",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "MALFORMED_ENVELOPE",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/numeric_string",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_INPUT",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "MALFORMED_ENVELOPE",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/pruned_state",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "INCOMPLETE_OBSERVATION",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_OBSERVATION",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/rpc_unavailable",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "INCOMPLETE_OBSERVATION",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_OBSERVATION",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/runtime_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNREVIEWED_IDENTITY",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_IDENTITY",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/selector_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_DECODING",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_DECODING",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/stale_at_observation",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_TIME",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "SNAPSHOT_FRESHNESS_FAILED",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/unfinalized",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "INCOMPLETE_OBSERVATION",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_OBSERVATION",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/unreviewed_proxy",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNREVIEWED_PROXY",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_IDENTITY",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/unsupported_threshold",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_INPUT",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "MALFORMED_ENVELOPE",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/wrong_chain",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNREVIEWED_IDENTITY",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_SCOPE",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  },
+  {
+    "case_id": "erc8183.job_status/wrong_contract",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "assurance": "SIMULATED_READ",
+    "baseline": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNREVIEWED_IDENTITY",
+      "error_type": null,
+      "mismatched_fields": []
+    },
+    "candidate": {
+      "actual": {
+        "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+        "temporal_status": "UNKNOWN",
+        "authorization_status": "NOT_PROVIDED",
+        "current_use_allowed": false,
+        "execution_authorized": false
+      },
+      "correct": true,
+      "input_unchanged": true,
+      "reason": "UNSUPPORTED_IDENTITY",
+      "error_type": null,
+      "mismatched_fields": []
+    }
+  }
+]

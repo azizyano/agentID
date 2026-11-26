@@ -1,0 +1,24 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/VeriAbstainEvidenceRegistry.sol": {
+      "content": "// SPDX-License-Identifier: MIT\npragma solidity 0.8.28;\n\n/// @notice Minimal interface published by the Agent ID hackathon rules.\ninterface IAgentIdRegistry {\n    function balanceOf(address owner) external view returns (uint256);\n}\n\n/// @title VeriAbstain Evidence Registry\n/// @notice Records content-addressed evidence assessments from Agent ID holders.\n/// @dev A receipt proves only that an eligible address recorded two digests. It\n///      does not prove the evidence or assessment is true and grants no authority.\ncontract VeriAbstainEvidenceRegistry {\n    uint256 public constant BSC_MAINNET_CHAIN_ID = 56;\n    address public constant BSC_AGENT_ID_REGISTRY =\n        0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F;\n\n    address public immutable agentIdRegistry;\n    uint256 public receiptCount;\n    uint256 public uniqueAgentCount;\n\n    mapping(address agent => bool participated) public hasParticipated;\n    mapping(address agent => mapping(bytes32 evidenceDigest => bool recorded))\n        public recorded;\n\n    error InvalidAgentIdRegistry();\n    error WrongMainnetAgentIdRegistry();\n    error InvalidDigest();\n    error AgentIdRegistryCheckFailed();\n    error AgentIdRequired();\n    error DuplicateEvidenceReceipt();\n\n    event AssessmentRecorded(\n        address indexed agent,\n        bytes32 indexed evidenceDigest,\n        bytes32 indexed assessmentDigest,\n        uint256 receiptIndex,\n        bool firstInteraction\n    );\n\n    constructor(address agentIdRegistry_) {\n        if (agentIdRegistry_ == address(0) || agentIdRegistry_.code.length == 0) {\n            revert InvalidAgentIdRegistry();\n        }\n        if (\n            block.chainid == BSC_MAINNET_CHAIN_ID &&\n            agentIdRegistry_ != BSC_AGENT_ID_REGISTRY\n        ) {\n            revert WrongMainnetAgentIdRegistry();\n        }\n        agentIdRegistry = agentIdRegistry_;\n    }\n\n    /// @notice Returns false if the registry is unavailable or malformed.\n    function isAgentIdHolder(address account) public view returns (bool) {\n        try IAgentIdRegistry(agentIdRegistry).balanceOf(account) returns (\n            uint256 balance\n        ) {\n            return balance > 0;\n        } catch {\n            return false;\n        }\n    }\n\n    /// @notice Record one assessment for one evidence digest.\n    /// @param evidenceDigest Digest of the exact evidence envelope or package.\n    /// @param assessmentDigest Digest of the exact validator assessment.\n    function recordAssessment(\n        bytes32 evidenceDigest,\n        bytes32 assessmentDigest\n    ) external {\n        if (evidenceDigest == bytes32(0) || assessmentDigest == bytes32(0)) {\n            revert InvalidDigest();\n        }\n\n        uint256 balance;\n        try IAgentIdRegistry(agentIdRegistry).balanceOf(msg.sender) returns (\n            uint256 currentBalance\n        ) {\n            balance = currentBalance;\n        } catch {\n            revert AgentIdRegistryCheckFailed();\n        }\n        if (balance == 0) revert AgentIdRequired();\n        if (recorded[msg.sender][evidenceDigest]) {\n            revert DuplicateEvidenceReceipt();\n        }\n\n        bool firstInteraction = !hasParticipated[msg.sender];\n        recorded[msg.sender][evidenceDigest] = true;\n        receiptCount += 1;\n        if (firstInteraction) {\n            hasParticipated[msg.sender] = true;\n            uniqueAgentCount += 1;\n        }\n\n        emit AssessmentRecorded(\n            msg.sender,\n            evidenceDigest,\n            assessmentDigest,\n            receiptCount,\n            firstInteraction\n        );\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "evmVersion": "paris",
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode"
+        ]
+      }
+    }
+  }
+}

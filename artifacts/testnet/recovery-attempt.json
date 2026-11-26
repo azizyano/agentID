@@ -1,0 +1,12 @@
+{
+  "additional_attempt": 1,
+  "maximum_additional_attempts": 1,
+  "original_job_id": 1765,
+  "closure_evidence": "artifacts/testnet/cancellation-confirmed.json",
+  "quote_directory": "artifacts/testnet/quote-attempt2",
+  "scope": "Same approved read-only job, exactly 1 test U, chain 97; manual wallet confirmations required",
+  "status": "COMPLETED",
+  "funding_script": "artifacts/testnet/quote-attempt2/fund-job-metamask.js",
+  "job_id": 1766,
+  "settlement_hash": "0x05ac55b11137a58fe1614635aacdac1a24fa342e8e8908dd4d22050e3a84deb3"
+}

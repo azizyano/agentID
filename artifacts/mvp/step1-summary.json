@@ -1,0 +1,40 @@
+{
+  "phase": "hackathon-mvp-contract-step-1",
+  "date": "2026-11-22",
+  "status": "LOCAL_CONTRACT_TESTED",
+  "authorization": "Owner directed an eligibility-first Agent ID MVP; local contract implementation and tests only.",
+  "contract": "contracts/VeriAbstainEvidenceRegistry.sol",
+  "contract_sha256": "ed35a4a8e5a18f6757e9a275c3ab36eb5f8e2e5a4343c764392deebea122be4d",
+  "compiler": "0.8.28+commit.7893614a.Emscripten.clang",
+  "evm_version": "paris",
+  "optimizer_runs": 200,
+  "runtime_bytes": 1339,
+  "official_agent_id_registry": "0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F",
+  "local_chain_tests": {
+    "command": "node --test tests\\js\\mvp_contract_test.cjs tests\\js\\provider_submit_startup_test.cjs",
+    "passed": 8,
+    "failed": 0
+  },
+  "python_regression_tests": {
+    "command": ".venv\\Scripts\\python.exe -m pytest -q --junitxml=artifacts\\mvp\\python-regression-tests.xml",
+    "passed": 539,
+    "failed": 0,
+    "warnings": 1
+  },
+  "security_properties_tested": [
+    "mainnet requires the exact official Agent ID registry",
+    "registry address must contain code",
+    "current Agent ID balance is checked on every write",
+    "registry failures and non-holders fail closed",
+    "zero digests and duplicate holder/evidence receipts are rejected",
+    "distinct Agent ID holder addresses are counted once",
+    "ABI exposes no owner, asset, approval, transfer, mint, pause, or withdrawal operation"
+  ],
+  "limitations": [
+    "Local simulated-chain evidence only; no mainnet deployment or BscScan verification.",
+    "No UI, website, hosting, public submission, wallet transaction, or user collection started.",
+    "A receipt is attribution to an eligible caller, not proof that evidence or an assessment is true.",
+    "Ganache is a test-only dependency; npm reported 34 dependency advisories and used its JavaScript fallback on Node 22. It must not be included in a production runtime."
+  ],
+  "next": "Review deterministic digest preparation, then obtain explicit owner approval before deployment or UI work."
+}

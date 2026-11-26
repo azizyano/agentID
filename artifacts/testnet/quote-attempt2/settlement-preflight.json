@@ -1,0 +1,26 @@
+{
+  "status": "SETTLEMENT_SIMULATION_PASSED",
+  "assurance": "RPC_FINALIZED_READ",
+  "chain_id": 97,
+  "creation_transaction_hash": "0x1b66e78e29889946763ba88b5cbdaf35599369b5dbe9af40999a6334c99d10c8",
+  "job_id": 1766,
+  "job_status": "SUBMITTED",
+  "budget_raw": 1000000000000000000,
+  "client": "0xb16b77C16773DEF8fA279A1228Eba9308eCD7841",
+  "provider": "0x7d5E9Fc2D79ed404fbfDe64f93b199cFCC1bB3c1",
+  "payment_token": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+  "client_u_balance_raw": 9000000000000000000,
+  "commerce_allowance_raw": 0,
+  "quote_expired": true,
+  "quote_expires_at": 1795192325,
+  "block_number": 143865386,
+  "block_hash": "0x22da2c89fb8d19b5a6b2f8e6c4a86ddcb0a00fb46b0dc731cac599282b683de0",
+  "transactions_sent": 0,
+  "verdict": 1,
+  "unsigned_transaction": {
+    "from": "0x7d5E9Fc2D79ed404fbfDe64f93b199cFCC1bB3c1",
+    "to": "0xD7d36D66d2F1B608A0F943f722D27e3744f66F25",
+    "value": 0,
+    "data": "0x39c2ebb900000000000000000000000000000000000000000000000000000000000006e600000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000000"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "chain_id": 97,
+  "block_number": 143824641,
+  "block_hash": "0x5ad41956cdd3a2657056913a75e243bc2a8c24a8d05715a2b8c2b82c7a565a75",
+  "assurance": "RPC_FINALIZED_READ",
+  "source_repository": "https://github.com/bnb-chain/apex-contracts",
+  "source_revision": "f6a3c4ff337158a8a66281c565f3f1562e1287b7",
+  "source_sha256": "079b5b243bcfce9bc6acd3c330fea87311811095b5f3cec81eb6fcc39ed8a482",
+  "compiler": "0.8.28+commit.7893614a.Emscripten.clang",
+  "settings": {
+    "evmVersion": "cancun",
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "viaIR": true,
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.deployedBytecode",
+          "metadata"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    }
+  },
+  "compiler_file_sha256": "9ef37cc1d2597ed6d2f706a960f449e33eb9eee920936cea77b11e6f43861970",
+  "package_lock_sha256": "d262a3626b5ccdb7b46daa31b91bbba9fc3e2d06e9b469fc9435c6ee6fdb8616",
+  "implementation": "0x55c3826B39a0F671B2C3E5D0F1372CaD0B911421",
+  "runtime_code_keccak256": "0xb42935ea4e89b470ea5049cf66d7f1003a5c8d452aef72d78c666577e828380b",
+  "full_runtime_match": false,
+  "executable_runtime_match": true,
+  "comparison": "UUPS __self linked to implementation; Solidity CBOR metadata excluded for executable comparison",
+  "sdk_function_count": 37,
+  "sdk_incompatible_functions": [],
+  "sdk_event_count": 19,
+  "sdk_incompatible_events": [],
+  "default_payment_token_supported": true,
+  "transactions_sent": 0
+}

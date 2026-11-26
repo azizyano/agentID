@@ -1,0 +1,27 @@
+{
+  "phase": "hackathon-mvp-mainnet-preflight-step-4",
+  "date": "2026-11-23",
+  "status": "MAINNET_PREFLIGHT_READY_OWNER_CONFIRMATION_REQUIRED",
+  "deployer": "0xb16b77C16773DEF8fA279A1228Eba9308eCD7841",
+  "deployer_holds_agent_id": false,
+  "deployer_balance_wei": "3294368808872796",
+  "maximum_estimated_cost_wei": "21161900000000",
+  "official_registry": "0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F",
+  "registry_code_keccak256": "0xc4006e6e6ffaaf6996116617392beabe4f5f0a0795841322f91c2ceac34d6ace",
+  "deployment_data_keccak256": "0x3c1efa9d2436cfa755a8b25597e2155d95a4e9ded6475da1a4b4e6e871f8b89f",
+  "simulated_runtime_keccak256": "0x9d92959c3d3facfa24ad21299ecd27f69c001f4576fd540a9a6b93dabfc4eb8c",
+  "preflight_report_sha256": "edd7ec9458606f69331efb45554aed2d2a4350adab68ab01835991eedcb28c86",
+  "metamask_helper_sha256": "27658bf0b978dbff037ca9baa46803dd640035a362c77944df70d27c082edd15",
+  "focused_preflight_tests": {"passed": 7, "failed": 0},
+  "browser_helper_tests": {"passed": 3, "failed": 0},
+  "combined_node_tests": {"passed": 18, "failed": 0},
+  "full_python_suite": {"passed": 557, "failed": 0, "warnings": 1},
+  "transactions_sent": 0,
+  "limitations": [
+    "RPC_FINALIZED_READ is provider-trusted, not cryptographic state proof.",
+    "Gas price and balance are dated observations; MetaMask provides a fresh quote.",
+    "The deployer has no Agent ID and does not yet count toward the 30-holder requirement.",
+    "No deployment, contract address, BscScan verification, UI, users, or submission exists yet."
+  ],
+  "next": "Owner manually reviews and confirms the exact MetaMask deployment, then returns only the public transaction hash."
+}

@@ -1,0 +1,19 @@
+{
+  "status": "SUBMISSION_CONFIRMED",
+  "assurance": "RPC_FINALIZED_READ",
+  "job_id": 1766,
+  "transaction_hash": "0x3554cd831a6e90b67b1e083d6a3b284479e844f0fd08aa274cacc4aa2c01398b",
+  "submission_block": 143863182,
+  "submitted_at": 1795192532,
+  "deliverable_hash": "0xbbe8ac97c60a2ee3eed3cf7ff22b616ea519097b4ecc35e9a3fbd3de159c3858",
+  "dispute_window_seconds": 900,
+  "settlement_eligible_at": 1795193432,
+  "settlement_eligible_utc": "2026-11-20T16:50:32+00:00",
+  "current_verdict": [
+    0,
+    "0x0000000000000000000000000000000000000000000000000000000000000000"
+  ],
+  "observed_block": 143863263,
+  "now": 1795192572,
+  "transactions_sent": 0
+}

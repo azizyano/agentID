@@ -1,0 +1,26 @@
+{
+  "phase": "EvidenceLab_G3",
+  "status": "CORRECTNESS_RUNTIME_AND_FUNCTIONAL_REPLAY_RECORDED",
+  "full_suite": {
+    "tests": "526",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "time": "20.506"
+  },
+  "focused_tests": 73,
+  "baseline_correct": 62,
+  "candidate_correct": 62,
+  "candidate_only_correct": 0,
+  "timing_candidate_over_baseline": {
+    "median_us": 11.522392545837091,
+    "p95_us": 18.407875617553035
+  },
+  "integration_review_effort": "NOT_MEASURED",
+  "recommendation": "NO_GO_FOR_STANDALONE_EXPANSION_ON_THIS_EVIDENCE",
+  "G4_started": false,
+  "network_calls": 0,
+  "model_calls": 0,
+  "transactions": 0,
+  "original_scored_run_preserved": true
+}

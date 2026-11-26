@@ -1,0 +1,37 @@
+{
+  "status": "CONFIG_RECORDED_BEFORE_EXECUTION",
+  "protocol_sha256": "973dfb8f12740fc734bbf49af701562410bc39822d0cd19bcdeb5b494e2c03ec",
+  "corpus_sha256": "dbf197d8c86274c3d0855db0ffa9c766e448292aea72b4c0763afc44d144f6c3",
+  "code_sha256": {
+    "evidence_envelope.py": "28b3298271bf91c096c46341f05123157d128fd2d37efa668517207847311eb8",
+    "deterministic_baseline.py": "7e003c3476d1f324dc48e69bf884de26050bb2651b53fd87efc736883e122887",
+    "differential.py": "c9fc1228a13520adb132f534f3180686a0fa8b404ca48c455b66ff27fec4bddd",
+    "chain_evidence.py": "27f2f7978ab45b1167eca1defc86557597598065311c7648dd93c5073d895cab",
+    "testnet_deployment.py": "bc3be342f2ceb779e429ebe6c8dda67dd287d7e1560acb514798962f8c952ec3",
+    "deliverables.py": "e1873100e14a5d4e0cd466c1f37b466b67cf33d9aad7e83854cad9296936f1ca",
+    "workers.py": "a388b93b13c21f24336c6a5a5ac40b37f8435f69640620a7bb1e5f733b1429e7",
+    "dataset.py": "d1711e20036bf34530d8e38068b39e187e6c45351ca1183130e4b53938e1443d",
+    "mutation_manifest.py": "d05ae1c63298ce00ec714cfebd4daaf37b1cd09db754970d774dbcef2c17e569"
+  },
+  "seed": 20261121,
+  "warmup_rounds": 2,
+  "measured_rounds": 20,
+  "timing": "assessment only; deep copies/content digests/return normalization excluded",
+  "baseline_cache": "lru_cache immutable ABI metadata maxsize2; warm before timing",
+  "candidate_cache": "existing G1 implementation unchanged; uses upstream ABI loader",
+  "warmup_note": "One untimed correctness pass per system precedes two complete warm-up rounds",
+  "source_hash_limit": "Listed local sources and package versions; not full transitive source attestation",
+  "python": "3.12.4",
+  "platform": "Windows AMD64",
+  "assurance": "SIMULATED_READ",
+  "package_versions": {
+    "pydantic": "2.14.4",
+    "web3": "7.16.0",
+    "eth-abi": "6.0.0",
+    "bnbagent": "0.5.1"
+  },
+  "effort": "NOT_MEASURED: no matched independent participant/time logs",
+  "network_calls": 0,
+  "model_calls": 0,
+  "transactions": 0
+}

@@ -1,0 +1,41 @@
+{
+  "mode": "UNSIGNED_TESTNET_PREFLIGHT",
+  "sdk_revision": "260e16196931780d0370bd3a9d9b67ece744bb9d",
+  "reviewed_contract_source_revision": "f6a3c4ff337158a8a66281c565f3f1562e1287b7",
+  "chain_id": 97,
+  "block_number": 143862363,
+  "block_hash": "0x0e19bb19fe39139c5454ee8bf314ae3c005ae2e76ac72e29894ec6d29f91ae57",
+  "block_timestamp": 1795192162,
+  "assurance": "RPC_FINALIZED_READ",
+  "transactions_sent": 0,
+  "next_transaction": null,
+  "status": "FUNDED_CONFIRMED",
+  "stage": "FUNDED_CONFIRMED",
+  "blockers": [],
+  "code_hashes": {
+    "commerce": "0x1f1858db4825be798342d4c094630bf5ddc685bd802a083d8d88f15a6cdb2a89",
+    "router": "0x1f1858db4825be798342d4c094630bf5ddc685bd802a083d8d88f15a6cdb2a89",
+    "policy": "0xe06798700c986d4387898a1dfde009d52c75f77c7d8dd1a3e179c02d5138cb9b",
+    "payment_token": "0xae12b1d61f7ed4febf649ccf319cb49a0e921cca3739dcb01b47d316049d46ff",
+    "commerce_implementation": "0xb42935ea4e89b470ea5049cf66d7f1003a5c8d452aef72d78c666577e828380b",
+    "router_implementation": "0xb523939a51d980e6bb482b6362806d06b2d75cee4e230d4ccb25f9acf0e44d18"
+  },
+  "implementations": {
+    "commerce": {
+      "expected": "0x55c3826B39a0F671B2C3E5D0F1372CaD0B911421",
+      "observed": "0x55c3826B39a0F671B2C3E5D0F1372CaD0B911421"
+    },
+    "router": {
+      "expected": "0x40c0254610d92F1EB9c2D7d5D2114Bc4c99d935E",
+      "observed": "0x40c0254610d92F1EB9c2D7d5D2114Bc4c99d935E"
+    }
+  },
+  "native_balance_wei": 277501397000000000,
+  "valid_until": 1795192325,
+  "submit_deadline": 1795194125,
+  "job_id": 1766,
+  "read_only": true,
+  "signatures_created": 0,
+  "transactions_broadcast": 0,
+  "deployments": 0
+}

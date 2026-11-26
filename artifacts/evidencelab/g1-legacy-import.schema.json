@@ -1,0 +1,42 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "const": "veriabstain.legacy_import",
+      "default": "veriabstain.legacy_import",
+      "title": "Kind",
+      "type": "string"
+    },
+    "compatibility_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Compatibility Version",
+      "type": "string"
+    },
+    "source_format": {
+      "enum": [
+        "legacy_evidence_v1",
+        "legacy_file_receipt_v1",
+        "legacy_callback_receipt_v1"
+      ],
+      "title": "Source Format",
+      "type": "string"
+    },
+    "source_payload": {
+      "additionalProperties": true,
+      "title": "Source Payload",
+      "type": "object"
+    },
+    "source_digest": {
+      "title": "Source Digest",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source_format",
+    "source_payload",
+    "source_digest"
+  ],
+  "title": "LegacyImportV1",
+  "type": "object"
+}

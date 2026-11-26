@@ -1,0 +1,13 @@
+{
+  "chain_id": 97,
+  "assurance": "RPC_FINALIZED_READ",
+  "transaction_hash": "0x4df3a5c278996a53a95bf856e4ef0f8589a967c975c32d4dd9abdd47f22067d6",
+  "status": "CLAIM_CONFIRMED",
+  "client": "0xb16b77C16773DEF8fA279A1228Eba9308eCD7841",
+  "token": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+  "received_raw": 10000000000000000000,
+  "received_u": "10",
+  "block_number": 143839342,
+  "block_hash": "0x3ef8b15580010d9fa4cb2dd1d9ccacbce96e28a0ecfbcc880410721edc1053b4",
+  "transactions_sent_by_project": 0
+}

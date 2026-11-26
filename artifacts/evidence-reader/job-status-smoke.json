@@ -1,0 +1,48 @@
+{
+  "kind": "LIVE_RPC_DETERMINISTIC_SMOKE_NOT_MODEL_OUTPUT",
+  "evidence": {
+    "predicate": "erc8183.job_status",
+    "chain_id": 97,
+    "target": "0xa206c0517B6371C6638CD9e4a42Cc9f02A33B0DE",
+    "arguments": {
+      "job_id": 1766
+    },
+    "schema_version": 1,
+    "block_number": 143869802,
+    "block_hash": "0x89b654355f69f3d8f8b63253a051bbc3d25d0d7495cf08696982bc195714fbeb",
+    "value": "COMPLETED",
+    "source": "bsc-testnet-public-rpc-v1",
+    "assurance": "RPC_FINALIZED_READ",
+    "observed_at": 1795195516,
+    "finalized": true,
+    "canonical": true,
+    "abi_supported": true,
+    "error": null,
+    "conflicting": false
+  },
+  "deterministic_output": {
+    "schema_version": 1,
+    "predicate": "erc8183.job_status",
+    "chain_id": 97,
+    "target": "0xa206c0517B6371C6638CD9e4a42Cc9f02A33B0DE",
+    "arguments": {
+      "job_id": 1766
+    },
+    "block_number": 143869802,
+    "block_hash": "0x89b654355f69f3d8f8b63253a051bbc3d25d0d7495cf08696982bc195714fbeb",
+    "value": "COMPLETED"
+  },
+  "validation": {
+    "schema_version": 1,
+    "accepted_analysis": true,
+    "reason": "MATCHED_PINNED_EVIDENCE",
+    "recommendation": "ACCEPT_ANALYSIS",
+    "execution_authorized": false,
+    "assurance": "RPC_FINALIZED_READ",
+    "authorization_digest": "8b9db80e647002a1a5728ab305c4b9b99f7aebb4480815a99a4541cc2696665d",
+    "evidence_digest": "e3a02aa6cb1dc29312bb8f7c57dfa93543e8458c7a1d85952a0d45c9be90bd40",
+    "deliverable_digest": "6ae52fde4ee76c410c1e664ec1177fabfd39b87ac84e1eb9dacf27b201942754",
+    "limitations": "Caller-supplied evidence; hashes establish consistency, not truth or permission"
+  },
+  "transactions": 0
+}

@@ -1,0 +1,103 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "envelope_kind": {
+      "const": "veriabstain.evidence_envelope",
+      "default": "veriabstain.evidence_envelope",
+      "title": "Envelope Kind",
+      "type": "string"
+    },
+    "envelope_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Envelope Version",
+      "type": "integer"
+    },
+    "snapshot_status": {
+      "enum": [
+        "VALID_AT_SNAPSHOT",
+        "INVALID_AT_SNAPSHOT",
+        "UNSUPPORTED_OR_INCONCLUSIVE"
+      ],
+      "title": "Snapshot Status",
+      "type": "string"
+    },
+    "temporal_status": {
+      "enum": [
+        "CURRENT",
+        "REVALIDATION_REQUIRED",
+        "UNKNOWN"
+      ],
+      "title": "Temporal Status",
+      "type": "string"
+    },
+    "reason": {
+      "enum": [
+        "INVALID_EVALUATION_TIME",
+        "MALFORMED_ENVELOPE",
+        "UNSUPPORTED_SCOPE",
+        "UNSUPPORTED_IDENTITY",
+        "UNSUPPORTED_DECODING",
+        "UNSUPPORTED_OBSERVATION",
+        "SNAPSHOT_FRESHNESS_FAILED",
+        "CONTEXT_MISMATCH",
+        "TRANSCRIPT_MISSING",
+        "TRANSCRIPT_INVALID",
+        "CLAIM_MISMATCH",
+        "SNAPSHOT_MATCHED"
+      ],
+      "title": "Reason",
+      "type": "string"
+    },
+    "authorization_status": {
+      "enum": [
+        "CURRENTLY_AUTHORIZED",
+        "BLOCKED",
+        "NOT_PROVIDED"
+      ],
+      "title": "Authorization Status",
+      "type": "string"
+    },
+    "current_use_allowed": {
+      "default": false,
+      "title": "Current Use Allowed",
+      "type": "boolean"
+    },
+    "execution_authorized": {
+      "const": false,
+      "default": false,
+      "title": "Execution Authorized",
+      "type": "boolean"
+    },
+    "assurance": {
+      "anyOf": [
+        {
+          "enum": [
+            "RPC_FINALIZED_READ",
+            "SIMULATED_READ"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Assurance"
+    },
+    "authenticity": {
+      "const": "NOT_ESTABLISHED",
+      "default": "NOT_ESTABLISHED",
+      "title": "Authenticity",
+      "type": "string"
+    }
+  },
+  "required": [
+    "snapshot_status",
+    "temporal_status",
+    "reason",
+    "authorization_status"
+  ],
+  "title": "Assessment",
+  "type": "object"
+}

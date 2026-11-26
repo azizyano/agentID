@@ -1,0 +1,381 @@
+{
+  "$defs": {
+    "ContractIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "chain_id": {
+          "exclusiveMinimum": 0,
+          "title": "Chain Id",
+          "type": "integer"
+        },
+        "target": {
+          "pattern": "^0x[0-9a-fA-F]{40}$",
+          "title": "Target",
+          "type": "string"
+        },
+        "target_code_hash": {
+          "pattern": "^0x[0-9a-fA-F]{64}$",
+          "title": "Target Code Hash",
+          "type": "string"
+        },
+        "review_source_revision": {
+          "pattern": "^[0-9a-f]{40}$",
+          "title": "Review Source Revision",
+          "type": "string"
+        },
+        "pinset_id": {
+          "const": "chain97-reviewed-20261120-v1",
+          "title": "Pinset Id",
+          "type": "string"
+        },
+        "proxy_implementation": {
+          "anyOf": [
+            {
+              "pattern": "^0x[0-9a-fA-F]{40}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Proxy Implementation"
+        },
+        "implementation_code_hash": {
+          "anyOf": [
+            {
+              "pattern": "^0x[0-9a-fA-F]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Implementation Code Hash"
+        }
+      },
+      "required": [
+        "chain_id",
+        "target",
+        "target_code_hash",
+        "review_source_revision",
+        "pinset_id",
+        "proxy_implementation",
+        "implementation_code_hash"
+      ],
+      "title": "ContractIdentity",
+      "type": "object"
+    },
+    "DecodingTranscript": {
+      "additionalProperties": false,
+      "properties": {
+        "function_signature": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Function Signature",
+          "type": "string"
+        },
+        "selector": {
+          "pattern": "^0x[0-9a-fA-F]{8}$",
+          "title": "Selector",
+          "type": "string"
+        },
+        "abi_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Abi Sha256",
+          "type": "string"
+        },
+        "codec": {
+          "const": "web3-eth-abi-canonical-v1",
+          "title": "Codec",
+          "type": "string"
+        },
+        "sdk_revision": {
+          "pattern": "^[0-9a-f]{40}$",
+          "title": "Sdk Revision",
+          "type": "string"
+        },
+        "calldata": {
+          "maxLength": 131074,
+          "pattern": "^0x(?:[0-9a-fA-F]{2})*$",
+          "title": "Calldata",
+          "type": "string"
+        },
+        "return_data": {
+          "maxLength": 131074,
+          "pattern": "^0x(?:[0-9a-fA-F]{2})*$",
+          "title": "Return Data",
+          "type": "string"
+        }
+      },
+      "required": [
+        "function_signature",
+        "selector",
+        "abi_sha256",
+        "codec",
+        "sdk_revision",
+        "calldata",
+        "return_data"
+      ],
+      "title": "DecodingTranscript",
+      "type": "object"
+    },
+    "ObservationContext": {
+      "additionalProperties": false,
+      "properties": {
+        "observed_at": {
+          "exclusiveMaximum": 115792089237316195423570985008687907853269984665640564039457584007913129639936,
+          "minimum": 0,
+          "title": "Observed At",
+          "type": "integer"
+        },
+        "block_timestamp": {
+          "exclusiveMaximum": 115792089237316195423570985008687907853269984665640564039457584007913129639936,
+          "minimum": 0,
+          "title": "Block Timestamp",
+          "type": "integer"
+        },
+        "max_block_age_seconds": {
+          "maximum": 120,
+          "minimum": 0,
+          "title": "Max Block Age Seconds",
+          "type": "integer"
+        },
+        "max_observation_age_seconds": {
+          "maximum": 300,
+          "minimum": 0,
+          "title": "Max Observation Age Seconds",
+          "type": "integer"
+        },
+        "finalized": {
+          "title": "Finalized",
+          "type": "boolean"
+        },
+        "canonical": {
+          "title": "Canonical",
+          "type": "boolean"
+        },
+        "abi_supported": {
+          "title": "Abi Supported",
+          "type": "boolean"
+        },
+        "error": {
+          "enum": [
+            "NONE",
+            "RPC_UNAVAILABLE",
+            "MISSING_STATE",
+            "PRUNED_STATE",
+            "DECODE_FAILED"
+          ],
+          "title": "Error",
+          "type": "string"
+        },
+        "conflicting": {
+          "title": "Conflicting",
+          "type": "boolean"
+        },
+        "assurance": {
+          "enum": [
+            "RPC_FINALIZED_READ",
+            "SIMULATED_READ"
+          ],
+          "title": "Assurance",
+          "type": "string"
+        },
+        "source_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "historical_state_capability": {
+          "enum": [
+            "AVAILABLE",
+            "PRUNED",
+            "MISSING_STATE",
+            "UNSUPPORTED",
+            "UNKNOWN"
+          ],
+          "title": "Historical State Capability",
+          "type": "string"
+        }
+      },
+      "required": [
+        "observed_at",
+        "block_timestamp",
+        "max_block_age_seconds",
+        "max_observation_age_seconds",
+        "finalized",
+        "canonical",
+        "abi_supported",
+        "error",
+        "conflicting",
+        "assurance",
+        "source_id",
+        "historical_state_capability"
+      ],
+      "title": "ObservationContext",
+      "type": "object"
+    },
+    "ReadReproduction": {
+      "additionalProperties": false,
+      "properties": {
+        "rpc_method": {
+          "const": "eth_call",
+          "title": "Rpc Method",
+          "type": "string"
+        },
+        "block_reference": {
+          "const": "NUMBER_AND_HASH_PINNED",
+          "title": "Block Reference",
+          "type": "string"
+        },
+        "chain_id": {
+          "exclusiveMinimum": 0,
+          "title": "Chain Id",
+          "type": "integer"
+        },
+        "target": {
+          "pattern": "^0x[0-9a-fA-F]{40}$",
+          "title": "Target",
+          "type": "string"
+        },
+        "block_number": {
+          "exclusiveMaximum": 115792089237316195423570985008687907853269984665640564039457584007913129639936,
+          "minimum": 0,
+          "title": "Block Number",
+          "type": "integer"
+        },
+        "block_hash": {
+          "pattern": "^0x[0-9a-fA-F]{64}$",
+          "title": "Block Hash",
+          "type": "string"
+        },
+        "calldata": {
+          "maxLength": 131074,
+          "pattern": "^0x(?:[0-9a-fA-F]{2})*$",
+          "title": "Calldata",
+          "type": "string"
+        }
+      },
+      "required": [
+        "rpc_method",
+        "block_reference",
+        "chain_id",
+        "target",
+        "block_number",
+        "block_hash",
+        "calldata"
+      ],
+      "title": "ReadReproduction",
+      "type": "object"
+    },
+    "SnapshotClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "predicate": {
+          "enum": [
+            "erc20.allowance",
+            "erc8183.job_status"
+          ],
+          "title": "Predicate",
+          "type": "string"
+        },
+        "chain_id": {
+          "exclusiveMinimum": 0,
+          "title": "Chain Id",
+          "type": "integer"
+        },
+        "target": {
+          "pattern": "^0x[0-9a-fA-F]{40}$",
+          "title": "Target",
+          "type": "string"
+        },
+        "arguments": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "title": "Arguments",
+          "type": "object"
+        },
+        "block_number": {
+          "exclusiveMaximum": 115792089237316195423570985008687907853269984665640564039457584007913129639936,
+          "minimum": 0,
+          "title": "Block Number",
+          "type": "integer"
+        },
+        "block_hash": {
+          "pattern": "^0x[0-9a-fA-F]{64}$",
+          "title": "Block Hash",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "predicate",
+        "chain_id",
+        "target",
+        "arguments",
+        "block_number",
+        "block_hash",
+        "value"
+      ],
+      "title": "SnapshotClaim",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "const": "veriabstain.evidence_envelope",
+      "title": "Kind",
+      "type": "string"
+    },
+    "envelope_version": {
+      "const": 1,
+      "title": "Envelope Version",
+      "type": "integer"
+    },
+    "claim": {
+      "$ref": "#/$defs/SnapshotClaim"
+    },
+    "observation": {
+      "$ref": "#/$defs/ObservationContext"
+    },
+    "identity": {
+      "$ref": "#/$defs/ContractIdentity"
+    },
+    "decoding": {
+      "$ref": "#/$defs/DecodingTranscript"
+    },
+    "reproduction": {
+      "$ref": "#/$defs/ReadReproduction"
+    }
+  },
+  "required": [
+    "kind",
+    "envelope_version",
+    "claim",
+    "observation",
+    "identity",
+    "decoding",
+    "reproduction"
+  ],
+  "title": "EvidenceEnvelopeV1",
+  "type": "object"
+}

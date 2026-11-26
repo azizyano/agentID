@@ -1,0 +1,32 @@
+{
+  "delivery": "BOUNDED_REUSE_IN_EXISTING_PYTEST_SUITES",
+  "status": "IMPLEMENTED_TESTED_REVIEWED",
+  "module_sha256": "cc119ce5619fde1705b60a9cddfccf581e9689ff42a728f3849877bf28a96574",
+  "focused_tests": 13,
+  "full_suite": {
+    "tests": "539",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "time": "18.939"
+  },
+  "reference_integrations": [
+    "existing deterministic_baseline.assess_baseline",
+    "existing evidence_envelope.assess_envelope"
+  ],
+  "corpus_cases": 62,
+  "assurance": "SIMULATED_READ",
+  "independent_QA": "GO final source review; earlier8checks executed byQA; final13rootchecks, no independent13run claimed",
+  "UI_started": false,
+  "ask_before_UI": true,
+  "new_model_calls": 0,
+  "new_network_calls": 0,
+  "transactions": 0,
+  "limits": [
+    "Trusted synchronous pure checkers only",
+    "Global socketTLS instrumentation not a sandbox",
+    "No timeout/filesystem/subprocess isolation",
+    "No external agent repository or upstream SDK modified",
+    "Original G3no-go unchanged"
+  ]
+}

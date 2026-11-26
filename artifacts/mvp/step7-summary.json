@@ -1,0 +1,47 @@
+{
+  "phase": "hackathon-mvp-local-ui-step-7",
+  "date": "2026-11-23",
+  "status": "LOCAL_UI_COMPLETE_HOSTING_NOT_APPROVED",
+  "contract_address": "0x8ACF294c769e25dAb44aCbEb83fc401cA0702388",
+  "implementation": "dependency-free static HTML/CSS/JavaScript",
+  "capabilities": [
+    "read-only startup wallet detection and live counters",
+    "explicit wallet connection and BNB mainnet switch",
+    "finalized exact-runtime, official-registry and current Agent ID checks",
+    "local canonical SHA-256 evidence and assessment commitments",
+    "duplicate check and zero-value eth_call simulation",
+    "explicit MetaMask recordAssessment request and receipt polling",
+    "live progress toward 30 unique Agent ID holders"
+  ],
+  "file_sha256": {
+    "index_html": "64d2d6d4f086636f099b8cd577ad694c7b1d90d7f55ba956510dd0e8a2e6bdd0",
+    "styles_css": "287dfafb2d43598eaa96eef825e601674daf3f9ed064a0789ee7199a4f41db8a",
+    "app_js": "2c6d7a301b4f32c5ddc8068dd2437d285a84a0bfd7fb26b4b5390fd12cc82d89",
+    "core_js": "d85d61475dcbd76f095813280847181f34536deb1e964716a33ef0ddfcefcac4",
+    "config_js": "ece73ab9484a9f607249be4fdb20dbd04411d070f747ffaea7083fe8e2df939d",
+    "config_builder": "e60d57c9ca3fb70d8caf76503725762a41a98b7227cd59a2ffaa6b626531735f",
+    "ui_tests": "4b4843fe5db3ea111d76933916ec17f685df4c459cece9bb70df6ee5e8a85766"
+  },
+  "tests": {
+    "ui_focused": {"passed": 6, "failed": 0},
+    "scoped_node_runner": {"passed": 21, "failed": 0},
+    "previous_full_python_retained": {"passed": 589, "failed": 0, "warnings": 1}
+  },
+  "browser_qa": {
+    "local_http_status": 200,
+    "mobile_viewport_css_width": 414,
+    "horizontal_overflow": false,
+    "console_errors": 0,
+    "issue_fixed": "record button hidden state was overridden by author CSS"
+  },
+  "transactions_sent": 0,
+  "real_participants": 0,
+  "hosted": false,
+  "limitations": [
+    "No real MetaMask browser end-to-end transaction was performed.",
+    "Source verification is owner-reported and was not independently rechecked at the owner's request.",
+    "Local UI tests and visual QA do not establish eligibility, adoption or product value.",
+    "A broad Node wildcard run was not a valid all-suite command because wallet_funding_test.cjs requires harness-provided artifact paths; the relevant scoped suites passed."
+  ],
+  "next": "Owner reviews the local UI; hosting/publication requires separate explicit approval."
+}

@@ -1,0 +1,40 @@
+{
+  "reviewer": "evidencelab_evidence, read-only G3QA, no G3implementation",
+  "source_audit": "PASS",
+  "artifact_audit": "PASS",
+  "protocol_sha256": "973dfb8f12740fc734bbf49af701562410bc39822d0cd19bcdeb5b494e2c03ec",
+  "corpus_sha256": "dbf197d8c86274c3d0855db0ffa9c766e448292aea72b4c0763afc44d144f6c3",
+  "case_rows": 62,
+  "timing_samples": 2480,
+  "seeded_schedule_recomputed": "MATCH",
+  "timing_statistics_recomputed": "MATCH",
+  "functional_replay": {
+    "interpreter": "Python3.12.4 isolated-mode new process, same existing venv",
+    "command_form": ".venv/Scripts/python.exe -I - (PowerShell here-string)",
+    "expected_labels_passed_to_assessors": false,
+    "network_disabled": true,
+    "both_systems_match": {
+      "erc8183.job_status/matched": [
+        "VALID_AT_SNAPSHOT",
+        "CURRENT"
+      ],
+      "erc8183.job_status/pruned_state": [
+        "UNSUPPORTED_OR_INCONCLUSIVE",
+        "UNKNOWN"
+      ],
+      "erc20.allowance/calldata_argument_mismatch": [
+        "UNSUPPORTED_OR_INCONCLUSIVE",
+        "CURRENT"
+      ]
+    },
+    "authorization": "NOT_PROVIDED",
+    "current_use_allowed": false,
+    "execution_authorized": false
+  },
+  "limitations": [
+    "Reviewer authored G1candidate, not G3baseline/harness",
+    "Not a clean dependency rebuild or matched effort study",
+    "Functional replay succeeds for both; no candidate advantage"
+  ],
+  "recommendation": "NO_GO_FOR_STANDALONE_EXPANSION_ON_THIS_EVIDENCE"
+}

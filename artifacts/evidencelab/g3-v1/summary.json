@@ -1,0 +1,92 @@
+{
+  "phase": "EvidenceLab_G3",
+  "cases": 62,
+  "known_set_not_blind": true,
+  "systems": {
+    "baseline": {
+      "correct_cases": 62,
+      "valid_control_rejections": 0,
+      "control_outcome_errors": 0,
+      "false_acceptances": 0,
+      "temporal_errors": 0,
+      "authorization_errors": 0,
+      "execution_grants": 0,
+      "unauthorized_current_use": 0,
+      "snapshot_confusion": {
+        "UNSUPPORTED_OR_INCONCLUSIVE -> UNSUPPORTED_OR_INCONCLUSIVE": 43,
+        "VALID_AT_SNAPSHOT -> VALID_AT_SNAPSHOT": 14,
+        "INVALID_AT_SNAPSHOT -> INVALID_AT_SNAPSHOT": 5
+      },
+      "timing": {
+        "samples": 1240,
+        "median_us": 166.35,
+        "p95_us": 688.2
+      },
+      "timing_by_predicate": {
+        "erc20.allowance": {
+          "samples": 620,
+          "median_us": 155.4,
+          "p95_us": 353.7
+        },
+        "erc8183.job_status": {
+          "samples": 620,
+          "median_us": 172.85,
+          "p95_us": 751.6
+        }
+      }
+    },
+    "candidate": {
+      "correct_cases": 62,
+      "valid_control_rejections": 0,
+      "control_outcome_errors": 0,
+      "false_acceptances": 0,
+      "temporal_errors": 0,
+      "authorization_errors": 0,
+      "execution_grants": 0,
+      "unauthorized_current_use": 0,
+      "snapshot_confusion": {
+        "UNSUPPORTED_OR_INCONCLUSIVE -> UNSUPPORTED_OR_INCONCLUSIVE": 43,
+        "VALID_AT_SNAPSHOT -> VALID_AT_SNAPSHOT": 14,
+        "INVALID_AT_SNAPSHOT -> INVALID_AT_SNAPSHOT": 5
+      },
+      "timing": {
+        "samples": 1240,
+        "median_us": 1916.75,
+        "p95_us": 12668.3
+      },
+      "timing_by_predicate": {
+        "erc20.allowance": {
+          "samples": 620,
+          "median_us": 1650.5,
+          "p95_us": 6536.0
+        },
+        "erc8183.job_status": {
+          "samples": 620,
+          "median_us": 2049.9,
+          "p95_us": 13499.6
+        }
+      }
+    }
+  },
+  "assurance": "SIMULATED_READ",
+  "candidate_only_correct": [],
+  "baseline_only_correct": [],
+  "timing_candidate_over_baseline": {
+    "median_us": 11.522392545837091,
+    "p95_us": 18.407875617553035
+  },
+  "correctness_advantage": false,
+  "runtime_advantage": false,
+  "integration_effort_advantage": "NOT_MEASURED",
+  "reviewer_effort_advantage": "NOT_MEASURED",
+  "recommendation": "NO_GO_FOR_STANDALONE_EXPANSION_ON_THIS_EVIDENCE",
+  "network_calls": 0,
+  "model_calls": 0,
+  "transactions": 0,
+  "limitations": [
+    "Known synthetic corpus; no population generalization",
+    "No matched independent effort measurements",
+    "Provider transcripts not authenticated",
+    "No live RPC acquisition or G4workflow tested"
+  ]
+}

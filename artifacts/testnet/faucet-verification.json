@@ -1,0 +1,28 @@
+{
+  "chain_id": 97,
+  "block_number": 143824641,
+  "block_hash": "0x5ad41956cdd3a2657056913a75e243bc2a8c24a8d05715a2b8c2b82c7a565a75",
+  "assurance": "RPC_FINALIZED_READ",
+  "source_revision": "618c47d388c1d21f23ce65e0a186a1f1f9d05e57",
+  "source_repository": "https://github.com/united-coin-u/u-faucet",
+  "sdk_linked_url": "https://united-coin-u.github.io/u-faucet/",
+  "faucet": "0x86e9197CC0F76E4e4aaa7082180945196bBAb5D3",
+  "faucet_code_keccak256": "0x9a701478ea605aa4a353c63b4401aadaa5c5725c2e82d741c0b75864b93d77cd",
+  "token": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+  "token_matches_job": true,
+  "amount_raw": 10000000000000000000,
+  "token_decimals": 18,
+  "faucet_balance_raw": 9999988620000000000000000000,
+  "client": "0xb16b77C16773DEF8fA279A1228Eba9308eCD7841",
+  "client_eligible": true,
+  "wait_seconds": 1800,
+  "transactions_sent": 0,
+  "claim_simulated": true,
+  "unsigned_claim": {
+    "chainId": 97,
+    "from": "0xb16b77C16773DEF8fA279A1228Eba9308eCD7841",
+    "to": "0x86e9197CC0F76E4e4aaa7082180945196bBAb5D3",
+    "value": 0,
+    "data": "0x359cf2b7"
+  }
+}

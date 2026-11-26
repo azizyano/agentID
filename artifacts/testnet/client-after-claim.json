@@ -1,0 +1,66 @@
+{
+  "mode": "READ_ONLY_TESTNET_INSPECTION",
+  "chain_id": 97,
+  "block_number": 143839685,
+  "block_hash": "0x88da2f74947fc27d8ee028d750730551f6b7b98e2ee9b12c5ac9bb3fc7e76a07",
+  "block_timestamp": 1795181929,
+  "assurance": "RPC_FINALIZED_READ",
+  "sdk_revision": "260e16196931780d0370bd3a9d9b67ece744bb9d",
+  "reviewed_contract_source_revision": "f6a3c4ff337158a8a66281c565f3f1562e1287b7",
+  "contracts": {
+    "commerce_proxy": {
+      "address": "0xa206c0517B6371C6638CD9e4a42Cc9f02A33B0DE",
+      "code_bytes": 130,
+      "code_keccak256": "0x1f1858db4825be798342d4c094630bf5ddc685bd802a083d8d88f15a6cdb2a89"
+    },
+    "router_proxy": {
+      "address": "0xD7d36D66d2F1B608A0F943f722D27e3744f66F25",
+      "code_bytes": 130,
+      "code_keccak256": "0x1f1858db4825be798342d4c094630bf5ddc685bd802a083d8d88f15a6cdb2a89"
+    },
+    "policy": {
+      "address": "0xd6a4217588F6B1F5657a92A3e94E6422aD771cEA",
+      "code_bytes": 4413,
+      "code_keccak256": "0xe06798700c986d4387898a1dfde009d52c75f77c7d8dd1a3e179c02d5138cb9b"
+    },
+    "payment_token": {
+      "address": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+      "code_bytes": 2007,
+      "code_keccak256": "0xae12b1d61f7ed4febf649ccf319cb49a0e921cca3739dcb01b47d316049d46ff"
+    },
+    "commerce_impl": {
+      "address": "0x55c3826B39a0F671B2C3E5D0F1372CaD0B911421",
+      "code_bytes": 12733,
+      "code_keccak256": "0xb42935ea4e89b470ea5049cf66d7f1003a5c8d452aef72d78c666577e828380b"
+    },
+    "router_impl": {
+      "address": "0x40c0254610d92F1EB9c2D7d5D2114Bc4c99d935E",
+      "code_bytes": 6685,
+      "code_keccak256": "0xb523939a51d980e6bb482b6362806d06b2d75cee4e230d4ccb25f9acf0e44d18"
+    }
+  },
+  "checks": {
+    "commerce_payment_token": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+    "router_commerce": "0xa206c0517B6371C6638CD9e4a42Cc9f02A33B0DE",
+    "policy_whitelisted": true,
+    "router_paused": false,
+    "commerce_paused": false,
+    "policy_commerce": "0xa206c0517B6371C6638CD9e4a42Cc9f02A33B0DE",
+    "policy_router": "0xD7d36D66d2F1B608A0F943f722D27e3744f66F25",
+    "dispute_window_seconds": 900,
+    "commerce_implementation": "0x55c3826B39a0F671B2C3E5D0F1372CaD0B911421",
+    "commerce_implementation_code_keccak256": "0xb42935ea4e89b470ea5049cf66d7f1003a5c8d452aef72d78c666577e828380b",
+    "router_implementation": "0x40c0254610d92F1EB9c2D7d5D2114Bc4c99d935E",
+    "router_implementation_code_keccak256": "0xb523939a51d980e6bb482b6362806d06b2d75cee4e230d4ccb25f9acf0e44d18"
+  },
+  "transactions": 0,
+  "funded_job_created": false,
+  "client": {
+    "address": "0xb16b77C16773DEF8fA279A1228Eba9308eCD7841",
+    "native_balance_wei": 279885993000000000,
+    "payment_token_balance_raw": 10000000000000000000,
+    "payment_token_decimals": 18,
+    "payment_token_symbol": "U"
+  },
+  "compatible_read_surface": true
+}

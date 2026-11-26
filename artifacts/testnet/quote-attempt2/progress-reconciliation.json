@@ -1,0 +1,30 @@
+{
+  "assurance": "RPC_FINALIZED_READ",
+  "job_id": 1766,
+  "job_status": "OPEN",
+  "budget_raw": 1000000000000000000,
+  "client_u_balance_raw": 10000000000000000000,
+  "allowance_raw": 1000000000000000000,
+  "block_number": 143861403,
+  "block_timestamp": 1795191729,
+  "quote_expires_at": 1795192325,
+  "now": 1795191734,
+  "steps": [
+    {
+      "step": "REGISTER_JOB",
+      "hash": "0xc4acfa819dca8d7377258351fa21ad08ba523e44a3dd6c0147affa64b9b6398f",
+      "block": 143861114
+    },
+    {
+      "step": "SET_BUDGET",
+      "hash": "0xb499855477dcc832079388987f0101aab9dc269122a870ea6a0c7e256c344359",
+      "block": 143861211
+    },
+    {
+      "step": "APPROVE_EXACT",
+      "hash": "0x36a272a525d7db8b6e5a4d1007c90b7b4095f26b12093a241869a40c9c847713",
+      "block": 143861256
+    }
+  ],
+  "transactions_sent": 0
+}

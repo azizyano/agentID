@@ -1,0 +1,10 @@
+{
+  "status": "ERROR",
+  "chain_id": 97,
+  "read_only": true,
+  "signatures_created": 0,
+  "transactions_broadcast": 0,
+  "deployments": 0,
+  "error_type": "ValueError",
+  "message": "Testnet preparation failed. Check public inputs, authenticated quote, deployment context, and RPC availability; no transaction was signed or broadcast."
+}

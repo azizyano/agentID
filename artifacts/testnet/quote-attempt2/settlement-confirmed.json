@@ -1,0 +1,21 @@
+{
+  "status": "SETTLEMENT_CONFIRMED",
+  "assurance": "RPC_FINALIZED_READ",
+  "job_id": 1766,
+  "job_status": "COMPLETED",
+  "settlement_hash": "0x05ac55b11137a58fe1614635aacdac1a24fa342e8e8908dd4d22050e3a84deb3",
+  "settlement_block": 143865561,
+  "settlement_block_hash": "0xe1573e29e1afce1ab3781d9f518f03c91439c179b0d19d7e890341164b7a73a4",
+  "observation_block": 143865651,
+  "provider_payout_raw": 1000000000000000000,
+  "transfers": [
+    {
+      "from": "0xa206c0517B6371C6638CD9e4a42Cc9f02A33B0DE",
+      "to": "0x7d5E9Fc2D79ed404fbfDe64f93b199cFCC1bB3c1",
+      "amount_raw": 1000000000000000000
+    }
+  ],
+  "client_u_balance_raw": 9000000000000000000,
+  "allowance_raw": 0,
+  "transactions_sent": 0
+}

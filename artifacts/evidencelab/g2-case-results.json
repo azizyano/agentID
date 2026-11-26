@@ -1,0 +1,1304 @@
+[
+  {
+    "case_id": "erc20.allowance/abi_mismatch",
+    "category": "abi_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_DECODING",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/address_case",
+    "category": "address_case",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "reason": "SNAPSHOT_MATCHED",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/block_hash_mismatch",
+    "category": "block_hash_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "CONTEXT_MISMATCH",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/block_number_mismatch",
+    "category": "block_number_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "CONTEXT_MISMATCH",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/calldata_argument_mismatch",
+    "category": "calldata_argument_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "CURRENT"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "CURRENT"
+    },
+    "reason": "CONTEXT_MISMATCH",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/calldata_hex_case",
+    "category": "calldata_hex_case",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "reason": "SNAPSHOT_MATCHED",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/conflicting_evidence",
+    "category": "conflicting_evidence",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_OBSERVATION",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/freshness_boundary",
+    "category": "freshness_boundary",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "reason": "SNAPSHOT_MATCHED",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/function_mismatch",
+    "category": "function_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_DECODING",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/future_block",
+    "category": "future_block",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "SNAPSHOT_FRESHNESS_FAILED",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/hash_hex_case",
+    "category": "hash_hex_case",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "reason": "SNAPSHOT_MATCHED",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/historical_incorrect_assertion",
+    "category": "historical_incorrect_assertion",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "INVALID_AT_SNAPSHOT",
+      "temporal_status": "REVALIDATION_REQUIRED"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "INVALID_AT_SNAPSHOT",
+      "temporal_status": "REVALIDATION_REQUIRED"
+    },
+    "reason": "CLAIM_MISMATCH",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/historical_valid",
+    "category": "historical_valid",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "REVALIDATION_REQUIRED"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "REVALIDATION_REQUIRED"
+    },
+    "reason": "SNAPSHOT_MATCHED",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/incorrect_assertion",
+    "category": "incorrect_assertion",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "INVALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "INVALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "reason": "CLAIM_MISMATCH",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/invalid_return_bytes",
+    "category": "invalid_return_bytes",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "CURRENT"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "CURRENT"
+    },
+    "reason": "TRANSCRIPT_INVALID",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/json_layout",
+    "category": "json_layout",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "reason": "SNAPSHOT_MATCHED",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/matched",
+    "category": "matched",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "reason": "SNAPSHOT_MATCHED",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/missing_return_data",
+    "category": "missing_return_data",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "CURRENT"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "CURRENT"
+    },
+    "reason": "TRANSCRIPT_MISSING",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/noncanonical",
+    "category": "noncanonical",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_OBSERVATION",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/numeric_scaling",
+    "category": "numeric_scaling",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "INVALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "INVALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "reason": "CLAIM_MISMATCH",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/numeric_string",
+    "category": "numeric_string",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "MALFORMED_ENVELOPE",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/pruned_state",
+    "category": "pruned_state",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_OBSERVATION",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/rpc_unavailable",
+    "category": "rpc_unavailable",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_OBSERVATION",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/runtime_mismatch",
+    "category": "runtime_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_IDENTITY",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/selector_mismatch",
+    "category": "selector_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_DECODING",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/stale_at_observation",
+    "category": "stale_at_observation",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "SNAPSHOT_FRESHNESS_FAILED",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/unfinalized",
+    "category": "unfinalized",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_OBSERVATION",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/unreviewed_proxy",
+    "category": "unreviewed_proxy",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_IDENTITY",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/unsupported_threshold",
+    "category": "unsupported_threshold",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "MALFORMED_ENVELOPE",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/wrong_chain",
+    "category": "wrong_chain",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_SCOPE",
+    "matched": true
+  },
+  {
+    "case_id": "erc20.allowance/wrong_contract",
+    "category": "wrong_contract",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_IDENTITY",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/abi_mismatch",
+    "category": "abi_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_DECODING",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/address_case",
+    "category": "address_case",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "reason": "SNAPSHOT_MATCHED",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/block_hash_mismatch",
+    "category": "block_hash_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "CONTEXT_MISMATCH",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/block_number_mismatch",
+    "category": "block_number_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "CONTEXT_MISMATCH",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/calldata_argument_mismatch",
+    "category": "calldata_argument_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "CURRENT"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "CURRENT"
+    },
+    "reason": "CONTEXT_MISMATCH",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/calldata_hex_case",
+    "category": "calldata_hex_case",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "reason": "SNAPSHOT_MATCHED",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/conflicting_evidence",
+    "category": "conflicting_evidence",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_OBSERVATION",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/freshness_boundary",
+    "category": "freshness_boundary",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "reason": "SNAPSHOT_MATCHED",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/function_mismatch",
+    "category": "function_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_DECODING",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/future_block",
+    "category": "future_block",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "SNAPSHOT_FRESHNESS_FAILED",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/hash_hex_case",
+    "category": "hash_hex_case",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "reason": "SNAPSHOT_MATCHED",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/historical_incorrect_assertion",
+    "category": "historical_incorrect_assertion",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "INVALID_AT_SNAPSHOT",
+      "temporal_status": "REVALIDATION_REQUIRED"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "INVALID_AT_SNAPSHOT",
+      "temporal_status": "REVALIDATION_REQUIRED"
+    },
+    "reason": "CLAIM_MISMATCH",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/historical_valid",
+    "category": "historical_valid",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "REVALIDATION_REQUIRED"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "REVALIDATION_REQUIRED"
+    },
+    "reason": "SNAPSHOT_MATCHED",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/incorrect_assertion",
+    "category": "incorrect_assertion",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "INVALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "INVALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "reason": "CLAIM_MISMATCH",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/invalid_return_bytes",
+    "category": "invalid_return_bytes",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "CURRENT"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "CURRENT"
+    },
+    "reason": "TRANSCRIPT_INVALID",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/json_layout",
+    "category": "json_layout",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "reason": "SNAPSHOT_MATCHED",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/matched",
+    "category": "matched",
+    "control": true,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "reason": "SNAPSHOT_MATCHED",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/missing_return_data",
+    "category": "missing_return_data",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "CURRENT"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "CURRENT"
+    },
+    "reason": "TRANSCRIPT_MISSING",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/noncanonical",
+    "category": "noncanonical",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_OBSERVATION",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/numeric_scaling",
+    "category": "numeric_scaling",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "MALFORMED_ENVELOPE",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/numeric_string",
+    "category": "numeric_string",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "MALFORMED_ENVELOPE",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/pruned_state",
+    "category": "pruned_state",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_OBSERVATION",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/rpc_unavailable",
+    "category": "rpc_unavailable",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_OBSERVATION",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/runtime_mismatch",
+    "category": "runtime_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_IDENTITY",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/selector_mismatch",
+    "category": "selector_mismatch",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_DECODING",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/stale_at_observation",
+    "category": "stale_at_observation",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "SNAPSHOT_FRESHNESS_FAILED",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/unfinalized",
+    "category": "unfinalized",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_OBSERVATION",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/unreviewed_proxy",
+    "category": "unreviewed_proxy",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_IDENTITY",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/unsupported_threshold",
+    "category": "unsupported_threshold",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "MALFORMED_ENVELOPE",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/wrong_chain",
+    "category": "wrong_chain",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_SCOPE",
+    "matched": true
+  },
+  {
+    "case_id": "erc8183.job_status/wrong_contract",
+    "category": "wrong_contract",
+    "control": false,
+    "expected": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "actual": {
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "execution_authorized": false,
+      "snapshot_status": "UNSUPPORTED_OR_INCONCLUSIVE",
+      "temporal_status": "UNKNOWN"
+    },
+    "reason": "UNSUPPORTED_IDENTITY",
+    "matched": true
+  }
+]

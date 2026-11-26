@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "hash_algorithm": "sha256-canonical-json-v1",
+  "evidence_digest": "0xabc86cfbf1ea2ed7063ceeb408ff80b047a0b9969125133391cdeb1143261e24",
+  "assessment_digest": "0x04019683052b8659f10249e7a1884dc960335c38bc4a964dc52cb08c8459dfd8",
+  "assessed_at": 1000,
+  "assessment": {
+    "envelope_kind": "veriabstain.evidence_envelope",
+    "envelope_version": 1,
+    "snapshot_status": "VALID_AT_SNAPSHOT",
+    "temporal_status": "CURRENT",
+    "reason": "SNAPSHOT_MATCHED",
+    "authorization_status": "NOT_PROVIDED",
+    "current_use_allowed": false,
+    "execution_authorized": false,
+    "assurance": "SIMULATED_READ",
+    "authenticity": "NOT_ESTABLISHED"
+  },
+  "function_signature": "recordAssessment(bytes32,bytes32)",
+  "calldata": "0x5475b0b4abc86cfbf1ea2ed7063ceeb408ff80b047a0b9969125133391cdeb1143261e2404019683052b8659f10249e7a1884dc960335c38bc4a964dc52cb08c8459dfd8",
+  "chain_id": 56,
+  "native_value_wei": 0,
+  "contract_address": null,
+  "transactions_sent": 0,
+  "evidence_payload": {
+    "domain": "veriabstain.mvp.evidence.v1",
+    "envelope": {
+      "claim": {
+        "arguments": {
+          "owner": "0x3434343434343434343434343434343434343434",
+          "spender": "0x5656565656565656565656565656565656565656"
+        },
+        "block_hash": "0xabababababababababababababababababababababababababababababababab",
+        "block_number": 10,
+        "chain_id": 97,
+        "predicate": "erc20.allowance",
+        "target": "0xc70b8741b8b07a6d61e54fd4b20f22fa648e5565",
+        "value": 100
+      },
+      "decoding": {
+        "abi_sha256": "d612b794077ac6b7c786c0a6a1aeed20e29031315468592fc904a3c89ffa805b",
+        "calldata": "0xdd62ed3e00000000000000000000000034343434343434343434343434343434343434340000000000000000000000005656565656565656565656565656565656565656",
+        "codec": "web3-eth-abi-canonical-v1",
+        "function_signature": "allowance(address,address)",
+        "return_data": "0x0000000000000000000000000000000000000000000000000000000000000064",
+        "sdk_revision": "260e16196931780d0370bd3a9d9b67ece744bb9d",
+        "selector": "0xdd62ed3e"
+      },
+      "envelope_version": 1,
+      "identity": {
+        "chain_id": 97,
+        "implementation_code_hash": null,
+        "pinset_id": "chain97-reviewed-20261120-v1",
+        "proxy_implementation": null,
+        "review_source_revision": "f6a3c4ff337158a8a66281c565f3f1562e1287b7",
+        "target": "0xc70b8741b8b07a6d61e54fd4b20f22fa648e5565",
+        "target_code_hash": "0xae12b1d61f7ed4febf649ccf319cb49a0e921cca3739dcb01b47d316049d46ff"
+      },
+      "kind": "veriabstain.evidence_envelope",
+      "observation": {
+        "abi_supported": true,
+        "assurance": "SIMULATED_READ",
+        "block_timestamp": 990,
+        "canonical": true,
+        "conflicting": false,
+        "error": "NONE",
+        "finalized": true,
+        "historical_state_capability": "AVAILABLE",
+        "max_block_age_seconds": 120,
+        "max_observation_age_seconds": 300,
+        "observed_at": 1000,
+        "source_id": "g1-documentation-example"
+      },
+      "reproduction": {
+        "block_hash": "0xabababababababababababababababababababababababababababababababab",
+        "block_number": 10,
+        "block_reference": "NUMBER_AND_HASH_PINNED",
+        "calldata": "0xdd62ed3e00000000000000000000000034343434343434343434343434343434343434340000000000000000000000005656565656565656565656565656565656565656",
+        "chain_id": 97,
+        "rpc_method": "eth_call",
+        "target": "0xc70b8741b8b07a6d61e54fd4b20f22fa648e5565"
+      }
+    }
+  },
+  "assessment_payload": {
+    "assessed_at": 1000,
+    "assessment": {
+      "assurance": "SIMULATED_READ",
+      "authenticity": "NOT_ESTABLISHED",
+      "authorization_status": "NOT_PROVIDED",
+      "current_use_allowed": false,
+      "envelope_kind": "veriabstain.evidence_envelope",
+      "envelope_version": 1,
+      "execution_authorized": false,
+      "reason": "SNAPSHOT_MATCHED",
+      "snapshot_status": "VALID_AT_SNAPSHOT",
+      "temporal_status": "CURRENT"
+    },
+    "domain": "veriabstain.mvp.assessment.v1",
+    "evidence_digest": "0xabc86cfbf1ea2ed7063ceeb408ff80b047a0b9969125133391cdeb1143261e24"
+  },
+  "integrity": "CONTENT_DIGESTS_NOT_TRUTH_OR_PERMISSION"
+}

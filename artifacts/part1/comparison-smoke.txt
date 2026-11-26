@@ -1,0 +1,49 @@
+Command: .\.venv\Scripts\python.exe tools\run_comparison.py; exit $LASTEXITCODE
+Exit code: 2
+{
+  "protocol_version": 1,
+  "mode": "FIXTURE_REPLAY_UNATTESTED",
+  "run_id": "g1b-v1",
+  "seed": 20261119,
+  "manifest_sha256": "263a482d06e2eef62fbdbc33b7a91d5c4c3df29f71a9201a1f987d8f0a7cb389",
+  "scenarios": 40,
+  "arm_cases": 200,
+  "awaiting_response": 200,
+  "accepted_analyses": 0,
+  "invalid_outputs": 0,
+  "model_calls": 0,
+  "transactions": 0,
+  "model_cost": null,
+  "behavioral_proof": "BLOCKED",
+  "incremental_value_over_C": "UNPROVEN",
+  "arms": {
+    "A": {
+      "cases": 40,
+      "accepted": 0
+    },
+    "B": {
+      "cases": 40,
+      "accepted": 0
+    },
+    "C": {
+      "cases": 40,
+      "accepted": 0
+    },
+    "C_RETRY": {
+      "cases": 40,
+      "accepted": 0
+    },
+    "D": {
+      "cases": 40,
+      "accepted": 0
+    }
+  },
+  "run_status": "AWAITING_RESPONSES",
+  "artifacts_complete": true,
+  "pending_requests": 200,
+  "response_import": {
+    "provided": 0,
+    "matched": 0,
+    "unmatched": 0
+  }
+}

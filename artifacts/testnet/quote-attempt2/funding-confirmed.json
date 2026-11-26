@@ -1,0 +1,13 @@
+{
+  "status": "FUNDED_RECEIPT_CONFIRMED",
+  "assurance": "RPC_FINALIZED_READ",
+  "job_id": 1766,
+  "budget_raw": 1000000000000000000,
+  "funding_hash": "0xffe1017775c2769198e0854dc73571824a27c649e3c965c8578da0893b2e3190",
+  "funding_block": 143862188,
+  "funding_timestamp": 1795192084,
+  "quote_expires_at": 1795192325,
+  "client_u_balance_raw": 9000000000000000000,
+  "allowance_raw": 0,
+  "transactions_sent": 0
+}

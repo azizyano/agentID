@@ -1,0 +1,42 @@
+{
+  "chain_id": 97,
+  "client": "0xb16b77C16773DEF8fA279A1228Eba9308eCD7841",
+  "provider": "0x7d5E9Fc2D79ed404fbfDe64f93b199cFCC1bB3c1",
+  "commerce": "0xa206c0517B6371C6638CD9e4a42Cc9f02A33B0DE",
+  "router": "0xD7d36D66d2F1B608A0F943f722D27e3744f66F25",
+  "policy": "0xd6a4217588F6B1F5657a92A3e94E6422aD771cEA",
+  "payment_token": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+  "budget": 1000000000000000000,
+  "expired_at": 1795187568,
+  "quote": {
+    "request": {
+      "task_description": "Read-only analysis of the client's test U allowance to the commerce proxy at a finalized BSC testnet block. Token=0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565; owner=0xb16b77C16773DEF8fA279A1228Eba9308eCD7841; spender=0xa206c0517B6371C6638CD9e4a42Cc9f02A33B0DE. Analysis only; no worker asset actions.",
+      "terms": {
+        "deliverables": "JSON: chain_id, block_number, block_hash, token, owner, spender, allowance_raw",
+        "quality_standards": "Exact read-only allowance at one finalized BSC testnet block; include its hash.",
+        "evaluation_required": true,
+        "evaluator_type": "uma_oov3"
+      }
+    },
+    "request_hash": "0x2a43f852d026b01090b05f7b80b4e4503095c109d1c14f9f6d2e3aefefe8d6a4",
+    "response": {
+      "accepted": true,
+      "terms": {
+        "deliverables": "JSON: chain_id, block_number, block_hash, token, owner, spender, allowance_raw",
+        "quality_standards": "Exact read-only allowance at one finalized BSC testnet block; include its hash.",
+        "evaluation_required": true,
+        "evaluator_type": "uma_oov3",
+        "price": "1000000000000000000",
+        "currency": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565"
+      },
+      "estimated_completion_seconds": 120,
+      "quote_expires_at": 1795184868,
+      "negotiated_at": 1795183968
+    },
+    "response_hash": "0xcf985557fb89bdec1a35c0d83d53cd12c945c65e9f2f4e744b7c44f2fcdbc3ce",
+    "chain_id": 97,
+    "verifying_contract": "0xa206c0517B6371C6638CD9e4a42Cc9f02A33B0DE",
+    "negotiation_hash": "0x9fecbd6701eefb939de01cca4948a93e8ca35c8bc2e43839a2d9b638abbd75ac",
+    "provider_sig": "0x8c3fd4d7e19bc2a65894c6f1cab95714dd66c2a76f424ecd6ee5b2fe926c3ade29d13ebae6fd028a8dc834d847161e373a0f75e450a8156dd6278382ff92f39c1b"
+  }
+}

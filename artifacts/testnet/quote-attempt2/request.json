@@ -1,0 +1,71 @@
+{
+  "status": "AWAITING_PROVIDER_SIGNATURE",
+  "created_at": 1795191425,
+  "expires_at": 1795192325,
+  "job_expires_at": 1795195025,
+  "approved_proposal_sha256": "4e498cd843692cc34ec0a552419615a5436ddf9f1e3f9aa19bbd4f015969fd80",
+  "spec": {
+    "chain_id": 97,
+    "client": "0xb16b77C16773DEF8fA279A1228Eba9308eCD7841",
+    "provider": "0x7d5E9Fc2D79ed404fbfDe64f93b199cFCC1bB3c1",
+    "commerce": "0xa206c0517B6371C6638CD9e4a42Cc9f02A33B0DE",
+    "router": "0xD7d36D66d2F1B608A0F943f722D27e3744f66F25",
+    "policy": "0xd6a4217588F6B1F5657a92A3e94E6422aD771cEA",
+    "payment_token": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+    "budget": 1000000000000000000,
+    "expired_at": 1795195025
+  },
+  "quote": {
+    "request": {
+      "task_description": "Read-only analysis of the client's test U allowance to the commerce proxy at a finalized BSC testnet block. Token=0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565; owner=0xb16b77C16773DEF8fA279A1228Eba9308eCD7841; spender=0xa206c0517B6371C6638CD9e4a42Cc9f02A33B0DE. Analysis only; no worker asset actions.",
+      "terms": {
+        "deliverables": "JSON: chain_id, block_number, block_hash, token, owner, spender, allowance_raw",
+        "quality_standards": "Exact read-only allowance at one finalized BSC testnet block; include its hash.",
+        "evaluation_required": true,
+        "evaluator_type": "uma_oov3"
+      }
+    },
+    "request_hash": "0x2a43f852d026b01090b05f7b80b4e4503095c109d1c14f9f6d2e3aefefe8d6a4",
+    "response": {
+      "accepted": true,
+      "terms": {
+        "deliverables": "JSON: chain_id, block_number, block_hash, token, owner, spender, allowance_raw",
+        "quality_standards": "Exact read-only allowance at one finalized BSC testnet block; include its hash.",
+        "evaluation_required": true,
+        "evaluator_type": "uma_oov3",
+        "price": "1000000000000000000",
+        "currency": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565"
+      },
+      "estimated_completion_seconds": 120,
+      "quote_expires_at": 1795192325,
+      "negotiated_at": 1795191425
+    },
+    "response_hash": "0xdaa9a4d057a2e71a47b40eaa0c81f91ff6e938563e2e28ba25deda6c585f6692",
+    "chain_id": 97,
+    "verifying_contract": "0xa206c0517B6371C6638CD9e4a42Cc9f02A33B0DE",
+    "negotiation_hash": "0xbc28a7536b463b2bb53b7992935a4a7660ab2dde36a1b5387b1962d12d7f684b"
+  },
+  "review_content": {
+    "version": 1,
+    "negotiated_at": 1795191425,
+    "task": "Read-only analysis of the client's test U allowance to the commerce proxy at a finalized BSC testnet block. Token=0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565; owner=0xb16b77C16773DEF8fA279A1228Eba9308eCD7841; spender=0xa206c0517B6371C6638CD9e4a42Cc9f02A33B0DE. Analysis only; no worker asset actions.",
+    "terms": {
+      "deliverables": "JSON: chain_id, block_number, block_hash, token, owner, spender, allowance_raw",
+      "quality_standards": "Exact read-only allowance at one finalized BSC testnet block; include its hash."
+    },
+    "price": "1000000000000000000",
+    "currency": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+    "quote_expires_at": 1795192325,
+    "chain_id": 97,
+    "verifying_contract": "0xa206c0517B6371C6638CD9e4a42Cc9f02A33B0DE"
+  },
+  "message_to_sign": "0xbc28a7536b463b2bb53b7992935a4a7660ab2dde36a1b5387b1962d12d7f684b",
+  "wallet_request": {
+    "method": "personal_sign",
+    "params": [
+      "0x307862633238613735333662343633623262623533623739393239333561346137363630616232646465333661316235333837623139363264313264376636383462",
+      "0x7d5E9Fc2D79ed404fbfDe64f93b199cFCC1bB3c1"
+    ]
+  },
+  "transactions_sent": 0
+}

@@ -1,0 +1,50 @@
+{
+  "phase": "EvidenceLab_G1",
+  "status": "IMPLEMENTED_TESTED_REVIEWED",
+  "product_differentiation": "INCONCLUSIVE",
+  "full_suite": {
+    "tests": "376",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "time": "13.277"
+  },
+  "focused_tests": 63,
+  "sample_snapshot": {
+    "envelope_kind": "veriabstain.evidence_envelope",
+    "envelope_version": 1,
+    "snapshot_status": "VALID_AT_SNAPSHOT",
+    "temporal_status": "CURRENT",
+    "reason": "SNAPSHOT_MATCHED",
+    "authorization_status": "NOT_PROVIDED",
+    "current_use_allowed": false,
+    "execution_authorized": false,
+    "assurance": "SIMULATED_READ",
+    "authenticity": "NOT_ESTABLISHED"
+  },
+  "sample_historical": {
+    "envelope_kind": "veriabstain.evidence_envelope",
+    "envelope_version": 1,
+    "snapshot_status": "VALID_AT_SNAPSHOT",
+    "temporal_status": "REVALIDATION_REQUIRED",
+    "reason": "SNAPSHOT_MATCHED",
+    "authorization_status": "NOT_PROVIDED",
+    "current_use_allowed": false,
+    "execution_authorized": false,
+    "assurance": "SIMULATED_READ",
+    "authenticity": "NOT_ESTABLISHED"
+  },
+  "sha256": {
+    "fixtures/g1a.json": "263a482d06e2eef62fbdbc33b7a91d5c4c3df29f71a9201a1f987d8f0a7cb389",
+    "artifacts/private/deepseek/paired-final-summary.json": "825289b5222274a03f4ff75e5fc7f6c94822979e1b6a8fd0224489c6a355ac69",
+    "packages/evaluation/veriabstain_eval/evidence_envelope.py": "28b3298271bf91c096c46341f05123157d128fd2d37efa668517207847311eb8",
+    "packages/evaluation/veriabstain_eval/envelope_compat.py": "abf4e85d77afe28820daedcc62e5b8413bef2ef7636ca6677eb2cf79bc281375",
+    "tests/integration/test_evidence_envelope.py": "fa729d2fe08c6468795f2acceef4e6420b6854de635fbd49ae7f2050d32ecd72",
+    "tests/integration/test_envelope_compat.py": "fb187819be8788a9d4c29a17dc365737de34024a56bae6144161257ed733f433"
+  },
+  "model_calls": 0,
+  "network_calls": 0,
+  "transactions": 0,
+  "historical_formats_modified": false,
+  "next_phase": "G2_REQUIRES_OWNER_APPROVAL"
+}

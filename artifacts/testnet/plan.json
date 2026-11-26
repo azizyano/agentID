@@ -1,0 +1,15 @@
+{
+  "status": "NEEDS_INPUT",
+  "chain_id": 97,
+  "read_only": true,
+  "signatures_created": 0,
+  "transactions_broadcast": 0,
+  "deployments": 0,
+  "missing": [
+    "budget",
+    "expired_at",
+    "provider",
+    "quote"
+  ],
+  "message": "The public job specification is incomplete. Client and provider must be explicitly supplied; no roles are inferred."
+}
