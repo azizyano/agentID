@@ -10,10 +10,10 @@ wallet and show what matched, differed, or remains unknown.
 ## First workflow
 
 Our own receipt dApp is the first compatibility case. Its dApp browser
-session exposed the regular wallet. Binance AI Pro subsequently simulated the
-exact call from the correct Agentic Wallet, and its preview showed no fee and
-did not require a separate App confirmation. Each observation answers a
-different question about readiness. [Pilot evidence](STATUS.md)
+session exposed the regular wallet. The tester subsequently reported a
+successful Binance AI Pro simulation with the expected wallet. The preview
+showed no fee and returned `requireConfirmation: false`. The full calldata
+comparison remains incomplete. [Pilot evidence](STATUS.md)
 
 **Try the local compatibility checker** with the fixture modeled on the
 limited AI Pro preview. Set up the [Python environment](docs/RUNNING.md#recreate-the-environment)
@@ -29,6 +29,51 @@ from the preview. The checker runs offline. Use the
 [matched and wrong-wallet examples](docs/PROJECT_SPEC.md#run-the-local-checker)
 to compare all three outcomes. The [builder pilot guide](docs/COMPATIBILITY_PILOT.md)
 is ready to use with an existing workflow.
+
+### Export a shareable report
+
+```powershell
+.\.venv\Scripts\python.exe tools\veriabstain.py compat --case examples\wallet-compatibility\receipt-owner-preview.json --now 1795724572 --format markdown
+```
+
+This replays the owner's redacted historical preview at its recorded expiry.
+The report records both review mismatches and leaves the overall result
+`INCONCLUSIVE`. Markdown includes the public contract and expected selector.
+The sender, call arguments and wallet identifiers are excluded. See the
+[input and export guide](docs/PROJECT_SPEC.md#export-a-compatibility-report).
+
+### Compare two attempts
+
+```powershell
+.\.venv\Scripts\python.exe tools\veriabstain.py compat `
+  --baseline examples\wallet-compatibility\receipt-owner-developer-mode-off.json `
+  --case examples\wallet-compatibility\receipt-owner-preview.json `
+  --now 1795724572 --format markdown
+```
+
+The [owner's replay](docs/veriabstain-preview-assessment.md#before-and-after)
+shows what changed after Developer Mode was enabled and which review
+requirements remained unmet. Each result keeps its evidence label.
+
+### Test in the browser
+
+From the repository root, start the local workspace:
+
+```powershell
+.\.venv\Scripts\python.exe tools\veriabstain.py compat-ui
+```
+
+Open [http://127.0.0.1:8765/](http://127.0.0.1:8765/). The saved owner
+comparison opens automatically. Choose **Download Markdown** to keep a
+copy. For your own cases, select a **Latest attempt** JSON file and,
+optionally, an **Earlier attempt** JSON file. For a historical replay,
+enter the evaluation times in UTC, then select **Run assessment**.
+Files are processed in memory by the same local checker as the CLI.
+Press Ctrl+C in the terminal when finished.
+
+The public build includes a fixed, wallet-free demo under
+`apps/web/dist/compatibility`. The [submission packet](docs/HACKATHON_SUBMISSION.md)
+has the deployment check, form copy and demo walkthrough.
 
 [Product specification](docs/PROJECT_SPEC.md) · [Build order](PLANS.md) · [AI handoff](AGENTS.md)
 

@@ -5,7 +5,12 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
-from veriabstain_eval.wallet_compatibility import CompatibilityCase, check_compatibility
+from veriabstain_eval.wallet_compatibility import (
+    CompatibilityCase,
+    PreviewReportCase,
+    check_compatibility,
+    compare_compatibility,
+)
 
 ROOT = Path(__file__).resolve().parents[2]
 ENTRY = runpy.run_path(str(ROOT / "tools/veriabstain.py"))
@@ -103,6 +108,63 @@ def test_optional_requirements_and_explicit_zero_fee():
     assert report["checks"]["wallet_fee"] == report["checks"]["app_confirmation"] == "NOT_REQUIRED"
 
 
+def test_partial_owner_preview_preserves_blockers_and_unknowns():
+    payload = json.loads((EXAMPLES / "receipt-owner-preview.json").read_text(encoding="utf-8"))
+    report = check_compatibility(PreviewReportCase.model_validate(payload), 1795724572)
+
+    assert report["status"] == "INCONCLUSIVE"
+    assert report["evidence"] == "USER_REPORTED"
+    assert report["checks"]["wallet_fee"] == report["checks"]["app_confirmation"] == "MISMATCH"
+    assert report["checks"]["observation_age"] == report["checks"]["calldata"] == "UNKNOWN"
+    assert report["checks"]["sender"] == "UNKNOWN"
+    assert report["checks"]["simulation"] == "PASSED"
+    assert report["checks"]["preview_expiry"] == "EXPIRED"
+    assert report["execution_authorized"] is report["submission_verified"] is False
+
+
+@pytest.mark.parametrize(("displayed", "amount", "expected"), [
+    (False, None, "MISMATCH"),
+    (True, None, "UNKNOWN"),
+    (None, None, "UNKNOWN"),
+    (True, 0, "MATCH"),
+])
+def test_report_fee_distinguishes_display_from_known_amount(displayed, amount, expected):
+    payload = json.loads((EXAMPLES / "receipt-preview-matched.json").read_text(encoding="utf-8"))
+    payload["schema_version"] = 2
+    payload["observation"].update(wallet_fee_displayed=displayed, wallet_fee_wei=amount)
+    report = check_compatibility(PreviewReportCase.model_validate(payload), NOW)
+
+    assert report["checks"]["wallet_fee"] == expected
+    assert report["status"] == {
+        "MISMATCH": "INCOMPATIBLE",
+        "UNKNOWN": "INCONCLUSIVE",
+        "MATCH": "PREVIEW_MATCHED",
+    }[expected]
+
+
+def test_report_rejects_conflicting_fee_evidence():
+    payload = json.loads((EXAMPLES / "receipt-preview-matched.json").read_text(encoding="utf-8"))
+    payload["schema_version"] = 2
+    payload["observation"].update(wallet_fee_displayed=False, wallet_fee_wei=0)
+    with pytest.raises(ValidationError):
+        PreviewReportCase.model_validate(payload)
+
+
+def test_v1_still_requires_exact_expected_calldata():
+    payload = json.loads((EXAMPLES / "receipt-preview-matched.json").read_text(encoding="utf-8"))
+    del payload["expected"]["calldata"]
+    with pytest.raises(ValidationError):
+        CompatibilityCase.model_validate(payload)
+
+
+def test_report_rejects_an_expected_selector_that_conflicts_with_calldata():
+    payload = json.loads((EXAMPLES / "receipt-preview-matched.json").read_text(encoding="utf-8"))
+    payload["schema_version"] = 2
+    payload["expected"]["function_selector"] = "0x00000000"
+    with pytest.raises(ValidationError):
+        PreviewReportCase.model_validate(payload)
+
+
 @pytest.mark.parametrize("fields", [
     {"order_id": "sensitive"},
     {"stage": "finalized"},
@@ -138,3 +200,102 @@ def test_cli_rejects_duplicate_fields_without_echoing_input(tmp_path, capsys):
     captured = capsys.readouterr()
     assert captured.out == ""
     assert json.loads(captured.err) == {"status": "INVALID_CASE"}
+
+
+def test_markdown_export_omits_sender_and_calldata(capsys):
+    path = EXAMPLES / "receipt-preview-matched.json"
+    expected = json.loads(path.read_text(encoding="utf-8"))["expected"]
+    assert ENTRY["main"](["compat", "--case", str(path), "--now", str(NOW), "--format", "markdown"]) == 0
+    output = capsys.readouterr().out
+
+    assert "# VeriAbstain compatibility report" in output
+    assert expected["target"] in output
+    assert expected["sender"] not in output
+    assert expected["calldata"] not in output
+    assert "Execution authorized: false. Submission verified: false." in output
+
+
+def test_cli_exports_the_partial_owner_report(capsys):
+    path = EXAMPLES / "receipt-owner-preview.json"
+    assert ENTRY["main"](["compat", "--case", str(path), "--now", "1795724572", "--format", "markdown"]) == 1
+    output = capsys.readouterr().out
+
+    assert "`INCONCLUSIVE`" in output
+    assert "`USER_REPORTED`" in output
+    assert "selector `0x5475b0b4`" in output
+    assert "| Exact calldata | `UNKNOWN` |" in output
+    assert "2026-11-26T20:22:52+00:00" in output
+    assert "The fee amount is unknown." in output
+    assert "`requireConfirmation: false`" in output
+
+
+def test_cli_compares_the_owner_attempts_without_claiming_a_complete_fix(capsys):
+    assert ENTRY["main"]([
+        "compat", "--baseline", str(EXAMPLES / "receipt-owner-developer-mode-off.json"),
+        "--case", str(EXAMPLES / "receipt-owner-preview.json"),
+        "--now", "1795724572", "--format", "markdown",
+    ]) == 1
+    output = capsys.readouterr().out
+    assert "`USER_REPORTED`" in output
+    assert "| Assessment | `INCONCLUSIVE` | `INCONCLUSIVE` |" in output
+    assert "| Developer Mode | `DISABLED` | `ENABLED` |" in output
+    assert "| Simulation | `UNKNOWN` | `PASSED` |" in output
+    assert "| Wallet-displayed fee | `UNKNOWN` | `MISMATCH` |" in output
+    assert "| Separate Binance App approval | `UNKNOWN` | `MISMATCH` |" in output
+    assert "| Full calldata | `UNKNOWN` |" in output
+    assert "Attempt order comes from the supplied cases." in output
+    assert "Execution authorized: false. Submission verified: false." in output
+
+
+def test_comparison_cli_reuses_exact_assessments_and_keeps_fixtures_labeled(capsys):
+    baseline_path = EXAMPLES / "receipt-preview-limited.json"
+    expected = json.loads(baseline_path.read_text(encoding="utf-8"))["expected"]
+    assert ENTRY["main"]([
+        "compat", "--baseline", str(baseline_path), "--baseline-now", str(NOW - 1),
+        "--case", str(EXAMPLES / "receipt-preview-matched.json"), "--now", str(NOW),
+    ]) == 0
+    output = capsys.readouterr().out
+    comparison = json.loads(output)
+    assert comparison["before"]["status"] == "INCOMPATIBLE"
+    assert comparison["after"]["status"] == "PREVIEW_MATCHED"
+    assert comparison["before"]["evidence"] == comparison["after"]["evidence"] == "FIXTURE"
+    assert comparison["before"]["evaluated_at"] == NOW - 1
+    assert comparison["expected_input_checks"]["calldata"] == "MATCH"
+    assert expected["sender"] not in output
+    assert expected["calldata"] not in output
+
+
+@pytest.mark.parametrize("expected_changes", [
+    {"requires_app_confirmation": False},
+    {"target": "0x" + "22" * 20},
+    {"calldata": "0x5475b0b4" + "ab" * 64},
+    {"sender": "0x" + "22" * 20},
+])
+def test_comparison_rejects_changes_to_the_known_action_or_policy(expected_changes):
+    payload = json.loads((EXAMPLES / "receipt-preview-matched.json").read_text(encoding="utf-8"))
+    baseline = CompatibilityCase.model_validate(payload)
+    payload["expected"].update(expected_changes)
+    current = CompatibilityCase.model_validate(payload)
+    with pytest.raises(ValueError):
+        compare_compatibility(baseline, current, baseline_now=NOW, current_now=NOW)
+
+
+def test_comparison_rejects_mixed_evidence_classes(tmp_path, capsys):
+    filename = EXAMPLES / "receipt-preview-matched.json"
+    payload = json.loads(filename.read_text(encoding="utf-8"))
+    payload["observation"]["evidence"] = "USER_REPORTED"
+    baseline = tmp_path / "baseline.json"
+    baseline.write_text(json.dumps(payload), encoding="utf-8")
+    assert ENTRY["main"](["compat", "--baseline", str(baseline), "--case", str(filename), "--now", str(NOW)]) == 2
+    captured = capsys.readouterr()
+    assert captured.out == ""
+    assert json.loads(captured.err) == {"status": "INVALID_COMPARISON"}
+
+
+def test_comparison_rejects_reversed_reported_observation_times():
+    payload = json.loads((EXAMPLES / "receipt-preview-matched.json").read_text(encoding="utf-8"))
+    baseline = CompatibilityCase.model_validate(payload)
+    payload["observation"]["observed_at"] -= 1
+    current = CompatibilityCase.model_validate(payload)
+    with pytest.raises(ValueError):
+        compare_compatibility(baseline, current, baseline_now=NOW, current_now=NOW)

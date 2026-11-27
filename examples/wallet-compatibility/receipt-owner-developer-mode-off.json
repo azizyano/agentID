@@ -1,0 +1,19 @@
+{
+  "schema_version": 2,
+  "expected": {
+    "chain_id": 56,
+    "surface": "binance_ai_pro",
+    "target": "0x8ACF294c769e25dAb44aCbEb83fc401cA0702388",
+    "function_selector": "0x5475b0b4",
+    "native_value_wei": 0,
+    "requires_wallet_fee": true,
+    "requires_app_confirmation": true
+  },
+  "observation": {
+    "evidence": "USER_REPORTED",
+    "surface": "binance_ai_pro",
+    "stage": "wallet_selected",
+    "chain_id": 56,
+    "developer_mode_enabled": false
+  }
+}

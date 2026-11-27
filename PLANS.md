@@ -11,11 +11,22 @@ checks in [STATUS.md](STATUS.md).
    and the successful AI Pro preview with missing fee and no App confirmation
    as distinct observations. Added a labeled positive fixture and controls
    for mismatched action fields, stale data and incomplete evidence.
-3. **Next — validate with a builder.** Use the [pilot guide](docs/COMPATIBILITY_PILOT.md)
+3. **Completed — redacted report export.** Render Markdown from strict cases
+   and partial observations with known review blockers. Reproduce the
+   owner's historical AI Pro report from saved evidence.
+4. **Completed — before-and-after replay.** Compare two saved attempts under
+   the same expected workflow. Reproduce the owner's progress from blocked
+   precheck to successful simulation with remaining review blockers.
+5. **Completed — local compatibility UI.** Open the saved replay, import
+   case files and download a report using the same checker as the CLI.
+6. **Prepared — hackathon demo and submission.** The static demo is in the
+   Vercel output directory. The [submission packet](docs/HACKATHON_SUBMISSION.md)
+   documents the project entry, community post and remaining owner actions.
+7. **Next — validate with a builder.** Use the [pilot guide](docs/COMPATIBILITY_PILOT.md)
    to compare the result with one willing external
    builder's existing workflow. Record whether the checker catches a mismatch
    or saves time. Obtain approval for outreach and any new live-test work.
-4. **Review before expanding.** Add more actions, a UI, chat integration or
+8. **Review before expanding.** Add more actions, chat integration or
    Agent ID report attribution after there is evidence that users need them.
    UI, hosting, on-chain actions and release each remain separately gated.
 

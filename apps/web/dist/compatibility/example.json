@@ -1,0 +1,70 @@
+{
+  "action": {
+    "chain_id": 56,
+    "wallet_surface": "binance_ai_pro",
+    "target": "0x8ACF294c769e25dAb44aCbEb83fc401cA0702388",
+    "function_selector": "0x5475b0b4",
+    "native_value_wei": 0
+  },
+  "before": {
+    "schema_version": 1,
+    "status": "INCONCLUSIVE",
+    "evidence": "USER_REPORTED",
+    "expected_wallet_surface": "binance_ai_pro",
+    "wallet_surface": "binance_ai_pro",
+    "reported_stage": "wallet_selected",
+    "observed_at": null,
+    "evaluated_at": 1795724572,
+    "checks": {
+      "chain_id": "MATCH",
+      "sender": "UNKNOWN",
+      "target": "UNKNOWN",
+      "calldata": "UNKNOWN",
+      "native_value_wei": "UNKNOWN",
+      "wallet_surface": "MATCH",
+      "developer_mode": "DISABLED",
+      "simulation": "UNKNOWN",
+      "observation_age": "UNKNOWN",
+      "preview_expiry": "UNKNOWN",
+      "wallet_fee": "UNKNOWN",
+      "app_confirmation": "UNKNOWN",
+      "risk_review": "UNKNOWN"
+    },
+    "execution_authorized": false,
+    "submission_verified": false
+  },
+  "after": {
+    "schema_version": 1,
+    "status": "INCONCLUSIVE",
+    "evidence": "USER_REPORTED",
+    "expected_wallet_surface": "binance_ai_pro",
+    "wallet_surface": "binance_ai_pro",
+    "reported_stage": "preview_passed",
+    "observed_at": null,
+    "evaluated_at": 1795724572,
+    "checks": {
+      "chain_id": "MATCH",
+      "sender": "UNKNOWN",
+      "target": "MATCH",
+      "calldata": "UNKNOWN",
+      "native_value_wei": "MATCH",
+      "wallet_surface": "MATCH",
+      "developer_mode": "ENABLED",
+      "simulation": "PASSED",
+      "observation_age": "UNKNOWN",
+      "preview_expiry": "EXPIRED",
+      "wallet_fee": "MISMATCH",
+      "app_confirmation": "MISMATCH",
+      "risk_review": "CLEAR"
+    },
+    "execution_authorized": false,
+    "submission_verified": false
+  },
+  "expected_input_checks": {
+    "sender": "UNKNOWN",
+    "calldata": "UNKNOWN",
+    "max_observation_age_seconds": "UNKNOWN"
+  },
+  "observation_order": "SUPPLIED",
+  "markdown": "# VeriAbstain before-and-after report\n\n- Expected action: BNB Smart Chain (56), contract `0x8ACF294c769e25dAb44aCbEb83fc401cA0702388`, selector `0x5475b0b4`, 0 wei\n- Expected wallet surface: `binance_ai_pro`\n- Evidence: `USER_REPORTED`\n\n| Check | Before | After |\n| --- | --- | --- |\n| Assessment | `INCONCLUSIVE` | `INCONCLUSIVE` |\n| Reported stage | `wallet_selected` | `preview_passed` |\n| Observed at | Unknown | Unknown |\n| Evaluated at | 2026-11-26T20:22:52+00:00 | 2026-11-26T20:22:52+00:00 |\n| Chain | `MATCH` | `MATCH` |\n| Selected sender | `UNKNOWN` | `UNKNOWN` |\n| Target contract | `UNKNOWN` | `MATCH` |\n| Exact calldata | `UNKNOWN` | `UNKNOWN` |\n| Native value | `UNKNOWN` | `MATCH` |\n| Wallet surface | `MATCH` | `MATCH` |\n| Developer Mode | `DISABLED` | `ENABLED` |\n| Simulation | `UNKNOWN` | `PASSED` |\n| Observation age | `UNKNOWN` | `UNKNOWN` |\n| Preview expiry | `UNKNOWN` | `EXPIRED` |\n| Wallet-displayed fee | `UNKNOWN` | `MISMATCH` |\n| Separate Binance App approval | `UNKNOWN` | `MISMATCH` |\n| Wallet risk findings | `UNKNOWN` | `CLEAR` |\n\n| Expected input across both attempts | Comparison |\n| --- | --- |\n| Sender | `UNKNOWN` |\n| Full calldata | `UNKNOWN` |\n| Age limit | `UNKNOWN` |\n\nAttempt order comes from the supplied cases. Observation timestamps do not establish it.\n\nExecution authorized: false. Submission verified: false."
+}

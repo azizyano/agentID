@@ -43,6 +43,21 @@ Keep keys, pairing and session data, request and order IDs, private arguments,
 and full logs out of the case. If the exact input is confidential, the builder
 can compare it on their own machine and share only the generated report.
 
+If the original chat or preview is unavailable, record the fields the builder
+already saved. Use the [partial-input example](../examples/wallet-compatibility/receipt-owner-preview.json)
+for a known zero-value BSC action and export it with `compat --format markdown`.
+Omit unknown optional fields or set them to null. Use
+`diagnose --report PATH` if the preview cannot be
+bound to a known expected action. Record any explicit mismatch and leave the
+exact comparison incomplete when either set of calldata is missing.
+
+For a reported fix, save both attempts and use
+`compat --baseline BEFORE.json --case AFTER.json --format markdown`.
+Keep the same expected action and review requirements for both. Preserve
+the original evaluation times when known. Use
+`developer_mode_enabled` in version 2 only when the tester saw that setting.
+Report which check changed and which requirements still need evidence.
+
 ## Compare both workflows
 
 1. Ask the builder to walk through their usual Binance, dApp, or explorer

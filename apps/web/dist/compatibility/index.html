@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Compare saved Agentic Wallet previews in the local VeriAbstain workspace.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>Wallet Compatibility | VeriAbstain</title>
+  <link rel="stylesheet" href="/compatibility/styles.css">
+  <script src="/compatibility/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to workspace</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <div class="brand"><span class="brand-mark" aria-hidden="true"></span><span>Veri<span>Abstain</span></span></div>
+      <span class="local-label"><span aria-hidden="true"></span><strong id="mode-label">Compatibility demo</strong></span>
+    </div>
+  </header>
+  <main class="shell" id="main">
+    <div class="intro">
+      <h1>Wallet compatibility</h1>
+      <p>Compare saved Binance Agentic Wallet attempts and see what changed.</p>
+      <a class="jump-to-report" href="#report-title">View latest report</a>
+    </div>
+    <div class="workspace">
+      <section class="panel input-panel" aria-labelledby="input-title" id="local-panel" hidden>
+        <div class="panel-body">
+          <h2 id="input-title">Evidence files</h2>
+          <p class="muted">Use the saved example or load your own redacted case files.</p>
+          <button class="button secondary" type="button" id="load-example">Load saved example</button>
+          <form id="evidence-form">
+            <label class="file-control">
+              <span class="field-title">Latest attempt</span>
+              <input class="file-input" id="case-input" type="file" accept=".json,application/json" required>
+              <span class="file-box">
+                <span class="file-action">Choose JSON</span>
+                <span class="file-name" id="case-name">No file selected</span>
+              </span>
+            </label>
+            <label class="file-control">
+              <span class="field-title">Earlier attempt <small>Optional</small></span>
+              <input class="file-input" id="baseline-input" type="file" accept=".json,application/json">
+              <span class="file-box">
+                <span class="file-action">Choose JSON</span>
+                <span class="file-name" id="baseline-name">No file selected</span>
+              </span>
+            </label>
+            <button class="text-button" type="button" id="clear-baseline" hidden>Remove earlier attempt</button>
+            <details class="time-controls">
+              <summary>Evaluation times</summary>
+              <p class="muted">Use UTC for historical cases. Blank uses the current time for the latest attempt. The earlier attempt defaults to the same time.</p>
+              <label for="case-time">Latest evaluation (UTC)</label>
+              <input id="case-time" type="datetime-local" min="1970-01-01T00:00" step="1">
+              <label for="baseline-time">Earlier evaluation (UTC)</label>
+              <input id="baseline-time" type="datetime-local" min="1970-01-01T00:00" step="1" disabled>
+            </details>
+            <button class="button primary" type="submit" id="run-report">Run assessment</button>
+          </form>
+          <p class="notice" id="notice" role="status" aria-live="polite"></p>
+        </div>
+        <div class="privacy"><span class="lock-icon" aria-hidden="true"></span><span>Files stay on this device. No wallet connection.</span></div>
+      </section>
+      <section class="panel input-panel demo-panel" aria-labelledby="demo-title" id="demo-panel">
+        <div class="panel-body">
+          <h2 id="demo-title">Saved preview demo</h2>
+          <p class="muted">Review a reported BNB Chain attempt from precheck to simulation. The comparison shows what the wallet exposed and which checks remain open.</p>
+          <a class="button secondary demo-link" href="/#agentic-receipt">Explore the Agent ID receipt</a>
+          <a class="text-button" href="https://github.com/azizyano/agentID">Run with your own case files</a>
+        </div>
+        <div class="privacy"><span class="lock-icon" aria-hidden="true"></span><span>This demo reads a saved report. No wallet connection.</span></div>
+      </section>
+      <section class="panel report-panel" aria-labelledby="report-title" aria-busy="true" id="report-panel">
+        <div class="report-header">
+          <div>
+            <h2 id="report-title">Attempt comparison</h2>
+            <p class="report-source" id="report-source">Saved owner example</p>
+          </div>
+          <button class="button secondary export-button" type="button" id="download" disabled>Download Markdown</button>
+        </div>
+        <div class="empty" id="empty-state" role="status">Loading the saved example…</div>
+        <div id="report-content" hidden>
+          <div class="scope" id="scope"></div>
+          <div class="attempts" id="attempts"></div>
+          <div class="matrix">
+            <h3>Review checks</h3>
+            <table>
+              <thead><tr><th scope="col">Check</th><th scope="col" id="before-head">Before</th><th scope="col" id="after-head">After</th></tr></thead>
+              <tbody id="primary-checks"></tbody>
+            </table>
+            <p class="report-note" id="report-note"></p>
+          </div>
+          <details class="details">
+            <summary>All checks and timestamps</summary>
+            <p class="detail-scope"><span>Expected target</span><code id="contract-target"></code></p>
+            <table aria-label="Additional checks and timestamps">
+              <thead><tr><th scope="col">Check</th><th scope="col" id="before-detail">Before</th><th scope="col" id="after-detail">After</th></tr></thead>
+              <tbody id="other-checks"></tbody>
+            </table>
+            <p class="report-note" id="comparison-note"></p>
+          </details>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

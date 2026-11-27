@@ -37,6 +37,58 @@ The CLI returns JSON. Exit code 0 is `PREVIEW_MATCHED`. Exit code 1 returns
 invalid input without echoing it. The report retains the evidence label and
 per-check results and never grants permission or verifies submission.
 
+### Export a compatibility report
+
+Pass `--format markdown` to print a report that can be shared without the
+input file. It includes the public target, expected selector when known,
+wallet surface, timestamps and check results. It omits sender addresses,
+call arguments and private identifiers. To save it in PowerShell, pipe the
+command output to `Set-Content -Encoding UTF8 preview-report.md`. A valid
+report with a blocking or inconclusive result still has exit code 1.
+
+Use `schema_version: 1` for the original exact-action input. To export from
+partial evidence, use `schema_version: 2`. The expected `sender`,
+`calldata` and `max_observation_age_seconds` may be omitted or null. Any
+checks that depend on those fields remain unknown until they can be compared.
+The optional `expected.function_selector` identifies the intended function.
+The exact calldata check still requires both full values.
+
+Version 2 also accepts `observation.wallet_fee_displayed`. Set it to
+`false` when a successful preview explicitly showed no fee, or null if
+display is unobserved. When the workflow requires a displayed fee, an
+explicit false is a mismatch. A displayed amount of 0 wei is a valid amount.
+Leave the amount unknown if you only know that some fee was displayed.
+The [owner's redacted example](../examples/wallet-compatibility/receipt-owner-preview.json)
+demonstrates the historical case without supplying synthetic replacements
+for missing facts.
+
+### Compare two attempts
+
+Add `--baseline FILE` to compare an earlier saved attempt with `--case`.
+The attempts must use the same expected chain, target, function selector,
+native value, wallet surface, review requirements and evidence class.
+Known expected sender, full calldata and age limits must match across both
+cases. If either side lacks one of those fields, its comparison stays
+`UNKNOWN`. Version 2 also accepts an explicitly observed
+`developer_mode_enabled` boolean to record the precheck state.
+
+Set `--now` for the later assessment and `--baseline-now` if the earlier
+assessment needs a different evaluation time. Both default to the same
+evaluation time. Observation timestamps remain distinct. The Markdown
+report shows the supplied order when timestamps cannot establish it.
+Results describe each attempt. Exit code 0 means the later preview matched.
+Exit code 1 means the later assessment found a blocker or remained
+inconclusive. Exit code 2 indicates invalid input or incomparable cases.
+
+### Use the local browser workspace
+
+Run `veriabstain.py compat-ui` and open the loopback URL printed by the
+command. The workspace opens the redacted owner example and can evaluate
+one or two imported case files through the same checker as the CLI.
+Markdown is generated from the evaluated report for local download.
+Case input stays in memory. The server listens on loopback and the browser
+uses only same-origin requests.
+
 ### First implementation
 
 - Support one zero-value custom contract call on BNB Smart Chain mainnet

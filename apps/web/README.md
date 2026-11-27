@@ -1,8 +1,9 @@
 # Existing VeriAbstain receipt console
 
-This static interface supports the deployed BSC receipt MVP and supplies
-the first compatibility case. The compatibility tester is a separate local
-build. See the [active specification](../../docs/PROJECT_SPEC.md).
+This static interface supports the deployed BSC receipt MVP. The
+[compatibility demo](dist/compatibility/index.html) displays a fixed saved
+comparison and exports Markdown. The full checker for private case imports
+runs locally. See the [active specification](../../docs/PROJECT_SPEC.md).
 The owner hosts the existing preview on Vercel. Updates require separate
 hosting approval.
 
@@ -14,6 +15,12 @@ hosting approval.
 
 Open `http://127.0.0.1:4173`. Use any browser for the Agentic Wallet prompt or
 a compatible extension for the connected-wallet flow.
+
+Open `http://127.0.0.1:4173/compatibility/index.html` to try the public demo
+without a wallet. After changing a shared sample, regenerate its static
+report from the repository root with
+`..venv\Scripts\python.exe tools\veriabstain.py compat-ui --export-demo`.
+The report test checks that it matches the local checker.
 
 The page makes only read-only wallet-provider calls on startup. Connecting,
 switching networks, and recording a receipt each require an explicit user
@@ -81,7 +88,9 @@ Follow these steps only with approval to update the hosted receipt console.
 2. Import your repository in Vercel and set **Root Directory** to `apps/web`.
    The included configuration selects **Other**, an empty build command, and
    `dist` as the output directory. Leave environment variables empty.
-3. Deploy and open the production URL in a browser with the wallet that holds
+3. Deploy and check the production compatibility demo at
+   `/compatibility/index.html`. Then open the receipt console in a browser
+   with the wallet that holds
    the Agent ID. Check that the runtime and holder checks pass and that the
    reviewed digests match the receipt request. Review the contract destination,
    0 BNB value, and network gas in the wallet.

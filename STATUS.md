@@ -1,3 +1,184 @@
+# Hackathon release candidate — 2026-11-27
+
+Prepared the [submission packet](docs/HACKATHON_SUBMISSION.md) with the
+fourteen project form fields, a timed walkthrough and a draft community
+post. Read the linked [Binance Wallet post](https://x.com/BinanceWallet/status/2126283464416866553)
+in the browser and confirmed that it is for the community promotion award.
+The project entry and promotion entry use different forms. Both close at
+08:00 UTC on 9 December. Confirmed that the existing Vercel console and
+the public GitHub source repository are accessible.
+
+Added the wallet-free hosted demo to the existing static Vercel output at
+`apps/web/dist/compatibility/index.html` and linked it from the receipt
+console. The browser opened the packaged demo on loopback and displayed the
+owner comparison. The follow-up browser download verification was interrupted
+by the browser connection. The loopback HTTP smoke test verified that the
+packaged report and Markdown match the local API and that a synthetic
+positive import returns `PREVIEW_MATCHED`. The local import path continues to
+use the same checker and never sends case input to the hosted demo.
+
+Ran `veriabstain.py compat-ui --export-demo`, `python -m pytest -q`
+(656 passed with one existing deprecation warning), the five receipt and
+startup Node test files (40 passed, Ganache used its JavaScript fallback),
+`node --check apps/web/dist/compatibility/app.js`, and `git diff --check`.
+
+Read chain ID and the public receipt counters at finalized BNB Chain block
+`136057025` (2026-11-27 14:46:33 UTC), then rechecked the pinned block hash.
+`RPC_FINALIZED_READ` returned 0 receipts and 0 unique holders. The demo adds
+no qualifying interaction. The Innovation Award's 30-address threshold
+remains unmet. The owner-reported BscScan source verification was retained.
+
+The new demo is prepared locally. Production redeployment, the recorded
+video and project X URL, the submitted form, and a first finalized holder
+interaction are pending.
+
+---
+
+# Local compatibility browser workspace — 2026-11-27
+
+With owner approval, added `veriabstain.py compat-ui` and the local
+workspace in `apps/compatibility/dist`. It opens the reported owner replay,
+accepts one or two redacted case files, supports UTC evaluation times and
+downloads Markdown from the existing Python checker. Inputs stay in memory.
+The service binds to loopback and validates the request host and origin.
+
+Ran `node --check apps/compatibility/dist/app.js` and
+`python -m pytest tests/integration/test_wallet_compatibility.py
+tests/integration/test_wallet_compatibility_ui.py
+tests/integration/test_wallet_diagnosis.py -q`. All 64 tests passed.
+`git diff --check` passed. In the local browser, loaded the owner comparison,
+imported an exact synthetic case at its historical evaluation time and saw
+`Preview matched`, downloaded the owner comparison as Markdown, and checked
+desktop and narrow layouts with no horizontal overflow or console errors.
+The default sandbox blocked the loopback HTTP client, so browser QA used a
+permitted loopback-only server session. Both test servers were stopped.
+
+The UI is ready for local testing. The next evidence milestone is a
+willing external builder's comparison and a supported live Agent ID
+attestation. The receipt MVP, deployment and submission state are unchanged.
+
+---
+
+# Local before-and-after replay — 2026-11-27
+
+Added `compat --baseline FILE --case FILE` for a pair of saved attempts
+under the same expected workflow. It rejects mixed evidence classes,
+conflicting known inputs and reversed observation times. Version 2 can
+record an explicitly observed Developer Mode state. Reports keep the
+sender addresses, full calldata and private wallet identifiers out of the
+output.
+
+Ran `python -m pytest tests/integration/test_wallet_compatibility.py
+tests/integration/test_wallet_diagnosis.py -q`. All 60 tests passed.
+Ran `compat --baseline examples/wallet-compatibility/receipt-owner-developer-mode-off.json
+--case examples/wallet-compatibility/receipt-owner-preview.json
+--now 1795724572 --format markdown`. The owner's saved reports show
+Developer Mode disabled before preview and enabled when the simulation
+passed. Fee display and App approval remained unmet. Both overall results
+were `INCONCLUSIVE / USER_REPORTED`, with exact observation times and
+calldata unknown. The command returned exit 1. Tests also covered a
+separate synthetic transition from `INCOMPATIBLE` to `PREVIEW_MATCHED`.
+
+The owner replay establishes a reported change in precheck outcome.
+Independent builder validation, measured usefulness and a live holder
+attestation remain pending. Next use the replay with an external builder
+under the existing outreach and wallet approval gates.
+
+---
+
+# Local compatibility report export — 2026-11-27
+
+Implemented `compat --format markdown` for exact and partial saved cases.
+Version 1 retains its exact expected fields and JSON output. Version 2 accepts
+missing expected sender, calldata and age limit. An explicit absent fee
+display is a mismatch when the workflow requires a displayed fee. Missing
+evidence remains unknown. The Markdown includes the public expected target,
+selector when available, timestamps and result statuses. It omits the sender,
+call arguments and private wallet identifiers.
+
+Ran `python -m pytest tests/integration/test_wallet_compatibility.py
+tests/integration/test_wallet_diagnosis.py -q` in the local project venv.
+All 52 tests passed. Ran `compat --case
+examples/wallet-compatibility/receipt-owner-preview.json --now 1795724572
+--format markdown`. The saved owner case returned exit 1 and
+`INCONCLUSIVE / USER_REPORTED`. Simulation passed as reported. Both review
+requirements showed a mismatch, the exact calldata stayed unknown and the
+preview was expired at the evaluation time. `git diff --check` passed.
+
+Next step is a real before-and-after case with a willing builder using the
+pilot guide. The local report confirms no live wallet behavior or on-chain
+interaction.
+
+---
+
+# Local owner preview report — 2026-11-27
+
+Saved a [redacted Markdown assessment](docs/veriabstain-preview-assessment.md)
+from the owner’s earlier detailed Binance AI Pro summary and the later
+temporary assessment. The earlier summary supplies the chain, public target,
+native value, preview expiry, simulation and risk fields. It explicitly
+reports `requireConfirmation: false`. The displayed fee was absent, so the
+amount remains unknown. The exact observation time and full expected and
+observed calldata are still missing. The report applies only to the
+historical attempt and retains the `USER_REPORTED` label.
+
+Searched the repository for an existing assessment with `rg --files` and
+checked both Unix expiry values with JavaScript date conversion. Next step
+is to use this report as the reference for a local redacted export.
+
+---
+
+# Agent ID hackathon project review — 2026-11-27
+
+- [AgentDrop](https://github.com/Dadangbachtiar/agentdrop) gives a holder one
+  clear action. Its live page checks the typed Agent ID against the connected
+  address before offering a claim. The published source uses an injected EVM
+  provider. That source does not establish Agentic Wallet account selection in
+  our flow. BscScan returned HTTP 403 for the linked sample claim, so the
+  reported claim count and the sample receipt were not independently verified.
+- [AgentMandate's submission pack](https://github.com/aprtama929-sudo/agentmandate/blob/master/SUBMISSION_PACK.md)
+  makes Agent ID part of ongoing payment authorization. The pack documents
+  its deployment and is marked prepared. Submission was not confirmed.
+- [SkillShield](https://github.com/Velidia/skillshield) documents a wallet-free
+  read path and attributes publishing and review to Agent ID holders. Its
+  repository describes deployment as planned.
+
+Proposed next increment: give a builder a dated compatibility report for one
+specific action and wallet surface. Consume an existing preview locally,
+retain the reported blockers and unknowns, and export a redacted summary
+that a user can read before connecting. Reuse the strict checker when exact
+inputs exist. Start with the owner's partial case. The official
+[preview reference](https://github.com/binance/binance-skills-hub/blob/main/skills/binance-web3/binance-agentic-wallet/references/external-sign.md)
+documents JSON output and the meaning of the App confirmation flag. Its
+example omits raw calldata and a displayed fee, so those fields remain
+unknown when absent from real evidence.
+
+Consider Agent ID attribution of a published report once there is a tested
+approval flow. Attribution identifies the reporter. The report still has
+its own evidence label. The [official rules](https://www.binance.com/en/support/announcement/detail/95f5dbe0ea674a48a739b59e046648bf)
+require 30 distinct interacting Agent ID addresses for Innovation Award
+eligibility. Wallet-free report reads do not meet that requirement. This
+review used public documentation and source only.
+
+---
+
+# Owner pilot partial evidence — 2026-11-27
+
+The owner tried to retrieve the earlier Binance AI Pro preview in a new chat.
+That chat had neither the original prompt nor the preview. The owner’s saved
+summary reports that the zero-value BSC call simulated successfully, the fee
+was absent, and `requireConfirmation` was false. This falls short of the
+workflow’s fee-display and App-confirmation requirements. Evidence is
+`USER_REPORTED`.
+
+A scoped `rg -l` search for reported dates and digest fragments found only
+synthetic fixtures. Full expected calldata, independently captured returned
+calldata, and the exact observation time are unavailable for this attempt.
+The strict compatibility replay and timing comparison remain incomplete.
+The pilot guide now covers missing chat history and partial observations.
+
+---
+
 # Builder pilot prepared — 2026-11-27
 
 Added the [pilot guide](docs/COMPATIBILITY_PILOT.md) with a builder invitation,
