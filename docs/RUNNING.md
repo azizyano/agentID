@@ -1,5 +1,14 @@
 # Run locally
 
+Use the [active build plan](../PLANS.md) and [product specification](PROJECT_SPEC.md)
+for the compatibility tester. Run its focused checks from the repository root:
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest -q tests/integration/test_local_entry.py tests/integration/test_wallet_diagnosis.py tests/integration/test_wallet_compatibility.py
+```
+
+## Historical fixture suite
+
 The local `.venv` is installed. From the repository root in PowerShell:
 
 ```powershell
@@ -7,7 +16,7 @@ The local `.venv` is installed. From the repository root in PowerShell:
 .\.venv\Scripts\python.exe -m pytest -q
 ```
 
-Expected: 40/40 fixture scenarios and 217 current project tests. Latest test evidence is under `artifacts/testnet/funding-session-tests.xml`; first-part reports remain under `artifacts/part1/`. The fixture runner exits nonzero on unexpected outcomes or observed simulated unauthorized/duplicate effects.
+The recorded checkpoint had 40/40 fixture scenarios and 217 project tests. Historical evidence is under `artifacts/testnet/funding-session-tests.xml`; first-part reports remain under `artifacts/part1/`. The fixture runner exits nonzero on unexpected outcomes or observed simulated unauthorized/duplicate effects.
 
 The manifest and SHA-256 sidecar are frozen under `fixtures/`. The runner verifies the checksum before execution. Do not regenerate it to hide failures. `tools/freeze_g1a.py` refuses to replace the existing manifest.
 

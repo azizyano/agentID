@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "expected": {
+    "chain_id": 56,
+    "surface": "binance_dapp_browser",
+    "sender": "0x1111111111111111111111111111111111111111",
+    "target": "0x8ACF294c769e25dAb44aCbEb83fc401cA0702388",
+    "calldata": "0x5475b0b4aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "native_value_wei": 0,
+    "requires_wallet_fee": true,
+    "requires_app_confirmation": true,
+    "max_observation_age_seconds": 300
+  },
+  "observation": {
+    "evidence": "FIXTURE",
+    "surface": "binance_dapp_browser",
+    "stage": "wallet_selected",
+    "observed_at": 1795724480,
+    "chain_id": 56,
+    "sender": "0x2222222222222222222222222222222222222222"
+  }
+}

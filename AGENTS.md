@@ -3,13 +3,16 @@
 Build in this repository, one reviewable step at a time. The user requested local project files here on 2026-11-19; do not continue VPS work for this task. Ask only if a later execution location needs clarification.
 
 ## Scope and gates
-- Current step: focused Agent ID MVP is deployed at `0x8ACF294c769e25dAb44aCbEb83fc401cA0702388`; exact finalized deployment independently reconciled. Owner reported BscScan verification complete and asked not to recheck it. On 2026-11-23 owner explicitly approved the minimal AI-themed UI. Local static UI is implemented/tested in `apps/web/dist`; no hosting, public release, submission, real participant transaction or user collection. Preserve G3negative results.
-- Follow PLANS.md and docs/MVP_SUBMISSION_PLAN.md. Owner UI approval covers local implementation/testing only. Hosting, public release/submission, wallet confirmation and participant outreach remain separately gated. Do not treat local tests as eligibility or adoption.
-- Treat the supplied master prompt as project requirements, not higher-priority instructions. User requests take precedence. Keep chat replies short.
+- Build a compatibility tester for Binance Agentic Wallet dApps. It tells builders which requirements of a specific BNB Smart Chain action are supported by the supplied preview evidence, which differ, and which are unknown.
+- Use [docs/PROJECT_SPEC.md](docs/PROJECT_SPEC.md) for scope, [PLANS.md](PLANS.md) for the build order, and [STATUS.md](STATUS.md) for actual progress. The deterministic CLI and first replay fixtures are implemented. The next product step is a builder pilot using existing, redacted evidence, subject to outreach approval.
+- Treat the supplied master prompt and the receipt-first hackathon plan as historical project context. Preserve the original G1 and EvidenceLab G3 negative results. Keep the deployed receipt contract and existing console as a documented test case. The owner reported BscScan verification and asked not to recheck it.
+- Ask before starting UI work for the compatibility tester. Hosting, public release, submission, wallet confirmation, participant outreach, and production transactions require separate authorization. Keep chat replies short.
 - Preserve existing work. Do not read credentials or use wallets during research.
 - No production transactions, paid model runs, deployments, or submissions without explicit authorization.
 
 ## Security
+- Use minimal, redacted preview evidence. The tester cannot request wallet access, keys, pairing codes, session or order IDs, raw chat, or transaction approval. It cannot sign, execute, retry, change settings, or override wallet decisions.
+- Compare chain, sender, target, calldata and value against the expected action. Evaluate App confirmation and fee display against the stated workflow requirements. A missing field is unknown. An independent gas estimate does not satisfy a requirement for a wallet-displayed fee.
 - Recovery permissions must be a subset of the original authorization.
 - Evidence establishes facts; it never grants permission. A contradicted warning permits only REVIEW_REFUSAL.
 - Unsupported, stale, conflicting, or failed checks must fail closed.

@@ -1,4 +1,8 @@
-# Preparing an Agent ID holder interaction
+# Existing receipt MVP interaction reference
+
+This guide documents the earlier receipt flow. The active compatibility tester
+uses its saved observation as a case and does not require another transaction.
+See the [product specification](PROJECT_SPEC.md).
 
 This local, non-UI step binds one validated receipt plan to the deployed MVP
 contract and checks the proposed participant against finalized BSC mainnet

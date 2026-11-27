@@ -13,7 +13,11 @@ def test_help_has_no_side_effects(capsys):
     assert 'doctor' in capsys.readouterr().out
 
 
-@pytest.mark.parametrize('command,script',[('demo','run_analysis_demo.py'),('check','check_analysis.py'),('receipts','receipts.py')])
+@pytest.mark.parametrize('command,script',[
+    ('demo','run_analysis_demo.py'), ('check','check_analysis.py'),
+    ('receipts','receipts.py'), ('diagnose','diagnose_wallet.py'),
+    ('compat','check_wallet_compatibility.py'),
+])
 def test_dispatch_forwards_without_shell_and_restores_argv(command,script):
     before=sys.argv
     calls=[]

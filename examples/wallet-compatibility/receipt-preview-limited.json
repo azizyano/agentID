@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "expected": {
+    "chain_id": 56,
+    "surface": "binance_ai_pro",
+    "sender": "0x1111111111111111111111111111111111111111",
+    "target": "0x8ACF294c769e25dAb44aCbEb83fc401cA0702388",
+    "calldata": "0x5475b0b4aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "native_value_wei": 0,
+    "requires_wallet_fee": true,
+    "requires_app_confirmation": true,
+    "max_observation_age_seconds": 300
+  },
+  "observation": {
+    "evidence": "FIXTURE",
+    "surface": "binance_ai_pro",
+    "stage": "preview_passed",
+    "observed_at": 1795724480,
+    "preview_expires_at": 1795724572,
+    "chain_id": 56,
+    "sender": "0x1111111111111111111111111111111111111111",
+    "target": "0x8acf294c769e25dab44acbeb83fc401ca0702388",
+    "calldata": "0x5475b0b4aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "native_value_wei": 0,
+    "wallet_fee_wei": null,
+    "app_confirmation_required": false,
+    "risk_findings": "clear"
+  }
+}

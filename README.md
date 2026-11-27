@@ -1,65 +1,68 @@
 # VeriAbstain
 
-**An on-chain receipt for an AI agent’s evidence review, gated by Binance Agent ID.**
+**A compatibility tester for Binance Agentic Wallet dApps on BNB Smart Chain.**
 
-When one agent hands work to another, a reviewer needs a way to link an assessment to the account that recorded it without publishing the full evidence. VeriAbstain records two fingerprints on BNB Smart Chain: one for the evidence and one for the assessment. The account that records them must hold an Agent ID at the time of the transaction.
+Before inviting users, a dApp builder should be able to answer: *Will this
+exact action reach the review screen with the right wallet, call and fee?*
+VeriAbstain will compare what a dApp expects with redacted evidence from the
+wallet and show what matched, differed, or remains unknown.
 
-[Mainnet contract and source](https://bscscan.com/address/0x8ACF294c769e25dAb44aCbEb83fc401cA0702388#code) · [Deployment transaction](https://bscscan.com/tx/0xdc67e447b95bb7b50aca824074360051795d2524462ed137cd1df77161956c17) · [Hackathon rules](https://www.binance.com/en/support/announcement/detail/95f5dbe0ea674a48a739b59e046648bf)
+## First workflow
 
-## Try it without a wallet
+Our own receipt dApp is the first compatibility case. Its dApp browser
+session exposed the regular wallet. Binance AI Pro subsequently simulated the
+exact call from the correct Agentic Wallet, and its preview showed no fee and
+did not require a separate App confirmation. Each observation answers a
+different question about readiness. [Pilot evidence](STATUS.md)
 
-From the repository root, serve the static console and open [the local preview](http://127.0.0.1:4173).
+**Try the local compatibility checker** with the fixture modeled on the
+limited AI Pro preview. Set up the [Python environment](docs/RUNNING.md#recreate-the-environment)
+if needed.
 
 ```powershell
-py -3.12 -m http.server 4173 --bind 127.0.0.1 --directory apps/web/dist
+.\.venv\Scripts\python.exe tools\veriabstain.py compat --case examples\wallet-compatibility\receipt-preview-limited.json --now 1795724500
 ```
 
-You can explore the console while disconnected. For a runnable example of the underlying evidence workflow, set up the [Python environment](docs/RUNNING.md#recreate-the-environment) and run:
+This fixture returns `INCOMPATIBLE`: the call matches and simulation passed.
+The wallet fee is unknown, and the stated App confirmation requirement differs
+from the preview. The checker runs offline. Use the
+[matched and wrong-wallet examples](docs/PROJECT_SPEC.md#run-the-local-checker)
+to compare all three outcomes. The [builder pilot guide](docs/COMPATIBILITY_PILOT.md)
+is ready to use with an existing workflow.
+
+[Product specification](docs/PROJECT_SPEC.md) · [Build order](PLANS.md) · [AI handoff](AGENTS.md)
+
+## Try the existing diagnostic
+
+When an Agentic Wallet action gets stuck, generate a short report prompt for
+`veriabstin.ai` and paste it into the AI chat where the action happened.
+Review the result and save the JSON as a local file. Set up the
+[Python environment](docs/RUNNING.md#recreate-the-environment) if needed.
 
 ```powershell
-.\.venv\Scripts\python.exe tools\veriabstain.py doctor
-.\.venv\Scripts\python.exe tools\veriabstain.py demo
+.\.venv\Scripts\python.exe tools\veriabstain.py diagnose --prompt
+.\.venv\Scripts\python.exe tools\veriabstain.py diagnose --report wallet-issue.json
 ```
 
-The CLI demo uses simulated evidence to show how the validator checks a structured allowance or escrow-job status against a pinned observation. It runs offline and needs no API key, wallet, or gas. [CLI guide](docs/LOCAL_HANDOFF.md)
+The diagnostic validates a limited set of fields and prints a shareable
+summary labeled `USER_REPORTED`. Sharing is manual. The Agent ID is a
+project label for the report. This is the evidence handoff for the proposed
+compatibility tester.
 
-## Record with your Agentic Wallet
+## Existing receipt MVP
 
-Select **Use your Agent ID** and enter your own `.ai` name or public Agentic
-Wallet address. If you start with a name, the console gives you a prompt to get
-your public BSC address from your signed-in wallet in Binance AI Pro. Use that
-address to prepare the receipt preview prompt. Review the call in Binance and
-return with the public transaction hash. The website verifies the receipt after
-finality.
-[Agentic Wallet walkthrough](apps/web/README.md#binance-agentic-wallet)
+The published console prepares and simulates an Agent ID–gated receipt call.
+The contract checks the sender's Agent ID and records two digests to attribute
+an evidence review. The first live holder receipt is pending. This workflow
+supplies the first compatibility case. Any future reviewer attribution is
+optional for people running the compatibility check.
 
-## How the on-chain receipt works
+[Existing web console](https://agentid-web.vercel.app/) · [Web console guide](apps/web/README.md) · [Contract source on BscScan](https://bscscan.com/address/0x8ACF294c769e25dAb44aCbEb83fc401cA0702388#code) · [Finalized deployment evidence](artifacts/mvp/deployment-confirmed.json)
 
-1. **Check.** The web MVP runs a built-in contract integrity check. It compares the deployed bytecode with the reviewed build, checks the registry binding, and reads the connected address’s Agent ID status at a finalized BNB Chain block.
-2. **Review.** The browser hashes the evidence and assessment locally. It shows both digests and simulates the exact transaction before asking the wallet to approve it.
-3. **Record.** The contract checks Agent ID ownership again on-chain and rejects duplicate evidence from the same address. It records the two digests in an event from the holder’s address. A returning address can record fresh evidence while the unique-holder count stays the same.
-4. **Reconcile.** The console matches the transaction against the reviewed request before treating it as finalized. The participant can review the transaction on BscScan.
+The Innovation Award has a separate on-chain participation threshold. Local
+diagnostics and fixtures produce no qualifying interaction. [Hackathon rules](https://www.binance.com/en/support/announcement/detail/95f5dbe0ea674a48a739b59e046648bf)
 
-Agent ID controls who can write a receipt through `recordAssessment(bytes32,bytes32)`. The official registry’s `balanceOf(msg.sender)` must be positive. An address without an Agent ID cannot record a receipt. [Contract source](contracts/VeriAbstainEvidenceRegistry.sol)
-
-## What a receipt establishes
-
-A receipt ties the two digests to the sender and block. Someone who has the original inputs can recompute the digests and compare them. The browser’s chain observations rely on its RPC provider. Whether the underlying assessment is true, or any follow-up action is authorized, must be determined separately.
-
-The contract has no owner, upgrade path, or access to user assets. The recording request sends **0 BNB** and the wallet charges network gas. Users review and confirm it in their own wallet.
-
-## Deployment and participation
-
-| Item | Status |
-| --- | --- |
-| BNB Smart Chain mainnet | Deployment confirmed at `0x8ACF294c769e25dAb44aCbEb83fc401cA0702388` |
-| Hosted console | [Production console](https://agentid-web.vercel.app/). [MetaMask report #316275](https://github.com/MetaMask/eth-phishing-detect/issues/316275) is resolved. The first live Agent ID receipt test is pending. |
-| Wallet compatibility | The local console prepares a Binance AI Pro preview prompt from a public Agentic Wallet address. The first live preview and App confirmation for this call are pending. |
-| Innovation Award | The rules require a live product and at least 30 distinct Agent ID addresses interacting with the project contract during the submission window. The deadline is December 9, 2026 at 08:00 UTC. |
-
-The first live holder receipt and campaign participation remain to be verified. [Finalized deployment evidence](artifacts/mvp/deployment-confirmed.json) · [Project status](STATUS.md)
-
-## Reproduce the checks
+## Test the existing components
 
 Use the [locked Python environment](docs/RUNNING.md#recreate-the-environment) and the existing Node lockfiles under `verification/` and `verification/wallet-tests/`.
 
@@ -68,8 +71,13 @@ Use the [locked Python environment](docs/RUNNING.md#recreate-the-environment) an
 node --test tests/js/mvp_contract_test.cjs tests/js/mvp_deploy_browser_test.cjs tests/js/mvp_deployment_test.cjs tests/js/mvp_ui_test.cjs tests/js/provider_submit_startup_test.cjs
 ```
 
-The suites cover the evidence validator, receipt preparation, browser wallet behavior with simulated providers, and contract behavior against a local chain. The Python integration suite also runs the argument-driven wallet funding harness. [Deployment guide](apps/web/README.md) · [Receipt preparation](docs/MVP_INTERACTION.md)
+The suites cover diagnostics, evidence validation, receipt preparation and
+browser wallet fixtures, plus the receipt contract on a local chain. The
+original offline SDK demo is documented in the [local handoff](docs/LOCAL_HANDOFF.md).
 
 ## Research background
 
-An earlier EvidenceLab comparison tied its deterministic baseline on all 62 frozen cases and ran slower. That result remains separate from the current Agent ID receipt MVP. The project keeps the original evaluation available so reviewers can see how the scope changed. [EvidenceLab G3 report](docs/EVIDENCELAB_G3.md) · [Original comparison](docs/G1_EXPLORATORY_RESULT.md) · [Threat model](docs/THREAT_MODEL.md)
+The original refusal-recovery comparison showed no incremental completion
+benefit. EvidenceLab tied its deterministic baseline on all 62 frozen cases
+and ran slower. These results inform what we reuse and still need to validate.
+[EvidenceLab G3 report](docs/EVIDENCELAB_G3.md) · [Original comparison](docs/G1_EXPLORATORY_RESULT.md) · [Threat model](docs/THREAT_MODEL.md)

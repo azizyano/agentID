@@ -9,7 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'packages/evaluation'))
 
-COMMANDS = {'demo':'run_analysis_demo.py','check':'check_analysis.py','receipts':'receipts.py'}
+COMMANDS = {'demo':'run_analysis_demo.py','check':'check_analysis.py','receipts':'receipts.py',
+            'diagnose':'diagnose_wallet.py','compat':'check_wallet_compatibility.py'}
 
 
 def doctor():
@@ -42,7 +43,8 @@ def main(argv=None, *, runner=runpy.run_path):
     parser = argparse.ArgumentParser(description=__doc__, epilog=(
         'Commands: doctor (offline setup), demo (offline SDK composition), '
         'check --authorization FILE --analysis FILE (public read-only RPC), '
-        'receipts [--id ID] (offline receipt inspection).'))
+        'receipts [--id ID] (offline receipt inspection), diagnose --prompt or --report FILE (wallet issue handoff), '
+        'compat --case FILE (offline wallet compatibility).'))
     parser.add_argument('command',nargs='?',choices=['doctor',*COMMANDS])
     # Remaining arguments belong to the chosen existing CLI, including --help.
     if not argv or argv[0] in ('-h','--help'):

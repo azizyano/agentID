@@ -1,5 +1,9 @@
 # Local utility handoff
 
+This guide documents the existing evidence validation CLI. For the active
+compatibility tester, start with the [product specification](PROJECT_SPEC.md)
+and [build plan](../PLANS.md).
+
 The owner-approved narrower read-only validation utility is implemented and
 locally runnable. No user test run, wallet action or API key is needed to finish
 this handoff. This is not a production release or the original G1 value gate.

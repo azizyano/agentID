@@ -1,4 +1,8 @@
-# MVP mainnet deployment — owner confirmation step
+# Historical MVP mainnet deployment
+
+This is a record of the earlier receipt deployment. The
+[active compatibility tester](PROJECT_SPEC.md) uses the deployed contract as
+its first test case.
 
 ## Confirmed result
 
@@ -6,8 +10,8 @@ The owner completed the deployment on 2026-11-23. Finalized read-only
 reconciliation confirmed transaction
 `0xdc67e447b95bb7b50aca824074360051795d2524462ed137cd1df77161956c17`
 and contract `0x8ACF294c769e25dAb44aCbEb83fc401cA0702388` as the exact reviewed build.
-Do not run the helper again. BscScan source verification remains a separate
-public action; UI work remains unapproved.
+The deployment helper is retained for the record. The owner later reported
+BscScan source verification complete and asked that it not be rechecked.
 
 The read-only preflight for public wallet
 `0xb16b77C16773DEF8fA279A1228Eba9308eCD7841` passed on 2026-11-23.

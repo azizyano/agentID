@@ -1,3 +1,133 @@
+# Builder pilot prepared — 2026-11-27
+
+Added the [pilot guide](docs/COMPATIBILITY_PILOT.md) with a builder invitation,
+redacted input instructions, and a timed comparison against the builder's
+usual review workflow. Input preparation time is part of the comparison.
+Reviewed three public cases. [Issue #404](https://github.com/binance/binance-skills-hub/issues/404)
+withholds the sender and evidence needed to match an exact action.
+[Issue #381](https://github.com/binance/binance-skills-hub/issues/381) shows
+abbreviated examples and no complete bound sender/action pair.
+[Issue #394](https://github.com/binance/binance-skills-hub/issues/394) concerns
+message signing outside the checker’s first scope.
+
+Ran all three `compat --case` examples with `--now 1795724500`. They returned
+the expected one `PREVIEW_MATCHED` and two `INCOMPATIBLE` fixture outcomes.
+Ran `diagnose --report` on redacted fields from the owner preview and public
+issue #404. Both returned `REVIEW_READY` as `USER_REPORTED`. The latter left
+the cause of the risk block unknown. Neither report binds a complete
+external compatibility case. `git diff --check` passed.
+
+The pilot is ready for one willing builder with an existing redacted
+zero-value BSC preview and its expected action. No builder was contacted or
+signed up, and no timing or usability result has been measured.
+
+---
+
+# Local compatibility checker implemented — 2026-11-27
+
+Added `veriabstain.py compat --case FILE [--now UNIX_SECONDS]` for one
+zero-value BSC custom call. The offline CLI compares the expected wallet
+surface, chain, sender, target, calldata and value with a redacted observation.
+It reports simulation, freshness, wallet fee, App confirmation and risk
+findings separately. It distinguishes fixtures from user-reported evidence.
+The report contains no raw calldata and confers no permission or proof of
+submission. Invalid or oversized files return a generic error.
+
+- Ran all three cases in `examples/wallet-compatibility` with
+  `--now 1795724500`. The matching fixture returned `PREVIEW_MATCHED` (exit 0).
+  Wrong-wallet and limited AI Pro previews returned `INCOMPATIBLE` (exit 1).
+  The latter reports successful simulation, unknown wallet fee, and an App
+  confirmation mismatch. These fixtures use synthetic senders and calldata.
+- Ran `.\.venv\Scripts\python.exe -m pytest -q` with local loopback access.
+  All 633 tests passed with one dependency deprecation warning. This includes
+  stale and missing observations, wallet-surface and action mismatches,
+  policy blocks, and invalid input. `git diff --check` passed.
+- The first local build and replay fixtures are complete. Next, obtain approval
+  to compare the report with one willing builder's existing redacted workflow.
+  No network calls are made by the checker. No UI, wallet operation, external
+  outreach, or release was part of this build.
+
+---
+
+# Active build handed off — 2026-11-27
+
+The owner selected Agentic Wallet compatibility testing and asked that the
+direction be carried into the README and AI instructions. Updated
+[README.md](README.md), [AGENTS.md](AGENTS.md), the
+[project specification](docs/PROJECT_SPEC.md), [PLANS.md](PLANS.md), and the
+related run, team, and receipt guides. The receipt deployment is the first
+compatibility case. The original G1 and EvidenceLab G3 results remain available.
+
+Next build step: implement the local deterministic CLI for one zero-value BSC
+custom call. Compare the exact expected action and redacted wallet
+observations, report fee and confirmation requirements separately, and
+reproduce the regular-wallet mismatch and incomplete AI Pro preview alongside
+positive and fail-closed controls. Compare results with a builder's existing
+workflow before expanding. Ask before starting any new UI or outreach.
+
+Verified the existing diagnostic entry point with
+`.\.venv\Scripts\python.exe -m pytest -q tests/integration/test_local_entry.py tests/integration/test_wallet_diagnosis.py`
+(15 passed). `git diff --check` passed. This step updated documentation. The
+compatibility CLI, external pilot, and any release are still pending.
+
+---
+
+# Stronger product directions — 2026-11-27
+
+Compared three possible extensions. The best fit for a first prototype is an Agentic Wallet compatibility test for dApp builders. Start with one declared action and compare its required sender, signing method, and approval screen with observed wallet preview evidence. Return a versioned per-action result with evidence, unsupported conditions, and unknowns. Our own Agentic Wallet path is a real example: regular wallet address exposed in the dApp browser, supported custom call simulated in AI Pro, no App confirmation required by that preview, and no wallet fee shown. Those are distinct checks. A fixture result must not be sold as a live certification.
+
+[Binance's dApp self-testing manual](https://developers.binance.com/en/docs/products/web3-dapp/self-testing) already covers ordinary wallet connection and transaction checks. [Agentic Wallet Developer Mode](https://web3.binance.com/en/dev-docs/products/agentic-wallet/use-cases/developer-mode) documents stricter signature support and the preview boundary. The proposed focus is compatibility evidence for the exact Agentic Wallet action. [SkillShield](https://github.com/Velidia/skillshield) already targets skill package integrity and community reviews. Avoid claiming novelty for generic hashes or reviewer badges.
+
+Other directions: compare two wallet previews to surface changed spender, value, fee or confirmation across retries, and reproduce why a submitted ERC-8183 deliverable did or did not match a job's acceptance criteria. The existing receipt comparison and job validator offer building blocks. The job idea needs a real customer using the [BNB Agent SDK](https://docs.bnbchain.org/developer-kit/bnbagent-sdk/). Agent ID could identify the publisher of an eventual reviewed report when users need attribution. It should not gate running the check.
+
+No prototype or deployment changes in this research step. The first compatibility experiment should replay the documented own dApp case and one willing external builder's existing flow, with no wallet action required to compare evidence. Verified this documentation edit with `git diff --check`.
+
+---
+
+# Independent data replies for AI chat — 2026-11-27
+
+Compared the proposed chat-to-site workflow with the [official wallet history reference](https://github.com/binance/binance-skills-hub/blob/main/skills/binance-web3/binance-agentic-wallet/references/wallet-view.md) and [Binance Web3 transaction detail API](https://web3.binance.com/en/dev-docs/catalog/web3-wallet/api/rest-api/wallet-api). Binance already returns transaction details and status. VeriAbstain can add an independent comparison against the specific operation a user expected, using the application context and canonical finalized BSC evidence. A public transaction hash identifies one action. A public wallet address alone does not say which action to check.
+
+The owner's Binance AI Pro session could not retrieve the deployed site. The [Binance Agent OS connector](https://developers.binance.com/en/docs/agent-native/mcp-server/agentic) documents giving an external AI client access to Binance tools. It does not establish that the Binance-hosted chat can call a new VeriAbstain endpoint. A copyable public-evidence summary is the feasible first handoff. Test whether it answers a real question that is cumbersome to answer in native history before adding a new endpoint or UI.
+
+Ran `node --test --test-name-pattern='agentic finalize|agentic wrong transaction|generated UI config' tests/js/mvp_ui_test.cjs`. All three passed. The current receipt checker can validate a matching finalized receipt and reject a mismatched sender in fixtures. Support is specific to our receipt contract and prepared calldata. No general transaction verifier or direct chat integration was built in this review. Verified the status edit with `git diff --check`.
+
+---
+
+# Local issue report prompt for veriabstin.ai — 2026-11-27
+
+Reviewed the [Binance AI Pro guide](https://web3.binance.com/en/dev-docs/products/agentic-wallet/ai-pro), [official wallet skill](https://www.binance.com/en/skills/detail/binance-web3/binance-agentic-wallet), and [AI Pro skill FAQ](https://www.binance.com/en/support/faq/detail/fde55d8ee5c14dc08341d671933d4577). The docs describe Agent ID as a wallet name and document its use for token recipients. No official inbox or text-routing mechanism for Agent ID names was found. An arbitrary request to send something to a name is therefore unsuitable for issue reporting.
+
+Added `veriabstain.py diagnose --prompt` and `diagnose --report FILE`. The first prints a prompt that asks the user's chat to draft a structured report using existing observations. The second validates those fields locally, explains known preview-stage outcomes and leaves the report marked `USER_REPORTED`. Extra fields are rejected with a generic error. Shareable output omits a supplied hash and does not infer submission or finality. In particular, a reported risk block with no details remains a block with unknown cause. The project name is a label and the user controls whether to share the report.
+
+Ran `.\.venv\Scripts\python.exe -m pytest -q tests/integration/test_local_entry.py tests/integration/test_wallet_diagnosis.py`. All 15 passed, covering dispatch, redacted output, malformed input and risk-block interpretation. Ran the normal `diagnose --prompt` entry point and `git diff --check` successfully. The prototype is local. No message routing, support outreach, wallet operation, public UI change or deployment occurred. Next, test the draft on a real issue with a user and compare the report against the existing support workflow.
+
+---
+
+# Agentic Wallet user and support research — 2026-11-27
+
+Reviewed firsthand public reports alongside the owner's pilot. [Issue #404](https://github.com/binance/binance-skills-hub/issues/404) reports a risk rejection with no documented reason returned and separately reports conflicting source-verification results. Neither observation establishes why the wallet blocked the operation. [Issue #381](https://github.com/binance/binance-skills-hub/issues/381) reports confusing calldata and revert errors. A reply distinguishes malformed input from an on-chain revert and notes that empty revert details cannot establish a cause. [Issue #394](https://github.com/binance/binance-skills-hub/issues/394) includes a maintainer reply confirming an intentional signature limitation that blocks some dApp login flows. [Issue #383](https://github.com/binance/binance-skills-hub/issues/383) is a version-specific pairing issue whose reporter confirmed resolution after upgrading. Treat historical issues as examples of friction, not assurances that they still occur.
+
+[Binance wallet history](https://github.com/binance/binance-skills-hub/blob/main/skills/binance-web3/binance-agentic-wallet/references/wallet-view.md) already shows wallet status, transaction history and fees. [BscScan](https://info.bscscan.com/understanding-a-transaction/) already shows the public transaction lifecycle. [Tenderly](https://tenderly.co/products/simulator) already offers generic decoding, simulation and gas analysis. The proposed utility is specific to an Agentic Wallet operation with an ambiguous outcome. Combine what the user saw in Binance with independently checked public chain evidence where available, explain the furthest verified stage, and prepare a redacted support summary. In the owner's pilot, the defensible result is preview simulated successfully, fee absent from the wallet response, no App approval required by that preview, and no submission evidence. A missing hash alone does not prove a transaction was never broadcast.
+
+Target BNB Chain dApp builders onboarding their first Agentic Wallet holders. Reuse pinned reads and strict receipt reconciliation from the console where the evidence fits. Treat pasted wallet text as reported evidence. Accept only a minimal set of fields for a first prototype (feature, chain, stage, error code, optional public transaction hash). Keep credentials, full logs, wallet session, pairing and order identifiers out of reports. Preserve Binance policy blocks and report uncertainty when evidence is incomplete.
+
+Validate this as a product hypothesis with a few recent cases from different builders. Compare time and correctness against their actual Binance/explorer/support workflow, especially whether the report distinguishes preview only, waiting on approval, and a broadcast transaction. The [Skills Hub issue tracker](https://github.com/binance/binance-skills-hub/issues) is a technical feedback channel with public maintainer replies. [Binance Support](https://www.binance.com/en/support/faq/detail/4ec71332039d4b45ab30e660895423c3) documents escalation to a human for cases requiring first-party account or wallet records. No outreach was sent, and no adoption or new award eligibility is established. Verified this documentation edit with `git diff --check`.
+
+---
+
+# Product fit review — 2026-11-27
+
+Re-read the supplied master brief, the original G1 result, EvidenceLab G3, the local CLI handoff, the hackathon plan, and the website receipt preparation implementation. Original goal: independently check a concrete claim from real agent work against pinned evidence, retain the owner's authorization boundaries, and optionally attribute the result. The current browser MVP generates its own claim about the deployment, official registry and participant eligibility. It does not take a claim or deliverable from a user's agent and verify it. A successful recording would establish attribution for two digests, with no demonstrated user benefit beyond that.
+
+- Reviewed the [Binance AI Pro guide](https://web3.binance.com/en/dev-docs/products/agentic-wallet/ai-pro), [Agentic Wallet use cases](https://web3.binance.com/en/dev-docs/products/agentic-wallet/use-cases/overview), [official skill](https://github.com/binance/binance-skills-hub/blob/main/skills/binance-web3/binance-agentic-wallet/SKILL.md), [Developer Mode](https://web3.binance.com/en/dev-docs/products/agentic-wallet/use-cases/developer-mode), [Agent ID launchpad integration](https://github.com/binance/binance-skills-hub/blob/main/skills/binance-web3/binance-agentic-wallet/references/agent-id-exclusive-token-launches.md) and [event rules](https://www.binance.com/en/support/announcement/detail/95f5dbe0ea674a48a739b59e046648bf). Agent ID holder recognition and `.ai` recipients are documented. Wallet operations, risk checks, trading, payments and Developer Mode signing already have first-party tools. The broader skill catalog does not establish availability in every AI Pro account. The event forbids third-party web pairing/session capture, confirmation bypass and public wallet lookup by name. Read-only checks do not produce qualifying interactions with our contract.
+- [BAS's November 11 on-chain snapshot](https://www.bas.io/blog/binance-agent-id-three-weeks-in) found only two ERC-8183 participants among 182,040 Agent ID holders in its index. This weakens an assumption of broad current overlap between paid-agent-job developers and holders. It does not quantify present demand for independent review.
+- Ran `.\.venv\Scripts\python.exe tools\veriabstain.py demo`. The restricted shell stalled at Windows asyncio loopback setup. An approved rerun started the offline demo, accepted the fixture analysis, and reused the result on redelivery. Zero model calls and transactions. The existing CLI also has a documented read-only BSC testnet smoke. G1 still found no candidate-only accepted analysis in the 16-case exploratory comparison. EvidenceLab G3 tied the strong baseline on 62 synthetic cases and ran slower.
+
+Recommendation: stop optimizing holder acquisition and custom receipt signing as the primary product. Before considering a pivot, compare one real, supported agent claim against the native wallet/explorer and the existing read-only validation approach. Measure whether the user catches a material mismatch or verifies the answer faster. Candidate first case: independently check a specific ERC-20 allowance against the user's stated limit at a finalized block. Scope needs review for any new mainnet targets or UI. Add Agent ID attribution only if users need a third party to verify who issued a review. No product, deployment, or submission changes in this review. Verified the status edit with `git diff --check`.
+
+---
+
 # Binance Wallet Web route check — 2026-11-26
 
 The owner relayed a response pointing to Binance Wallet Web for an explicit fee and approval preview for Developer Mode calls. The [official BSC Portfolio](https://web3.binance.com/en/portfolio/bsc/) and [Wallet Web FAQ](https://www.binance.com/en-IA/support/faq/detail/a0d5e977e0064c32a4a3cb6e587fb0c4) document the desktop trading product and its fees. The [Agentic Wallet FAQ](https://www.binance.com/en-IA/support/faq/detail/3ff00e2d488a41c4aaa4aabb6fc36763) describes the Agentic Wallet as separate from the regular wallet. The public docs reviewed did not confirm that Wallet Web can select the Agentic Wallet as the sender for an arbitrary Developer Mode call.

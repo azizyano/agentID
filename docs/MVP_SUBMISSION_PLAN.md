@@ -1,4 +1,8 @@
-# Agent ID hackathon MVP
+# Historical Agent ID hackathon receipt MVP
+
+The receipt deployment and pilot are the first compatibility case for the
+current [project specification](PROJECT_SPEC.md). The sequence below records
+the November 21 plan. The [active build order](../PLANS.md) supersedes it.
 
 Owner direction on 2026-11-21: prioritize a submission-eligible MVP, then obtain
 30 genuine Agent ID holder interactions, then improve the product before the
@@ -92,5 +96,5 @@ must be supplied as ABI-encoded hex. References:
 
 The current public-wallet preflight and one-time owner confirmation instructions
 and confirmed result are in [MVP_MAINNET_DEPLOY.md](MVP_MAINNET_DEPLOY.md).
-The exact deployment is finalized; BscScan source verification remains the next
-separately gated public action.
+The exact deployment is finalized. The owner later reported completing BscScan
+source verification and asked that it not be independently rechecked.

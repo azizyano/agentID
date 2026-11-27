@@ -1,7 +1,10 @@
-# VeriAbstain MVP web interface
+# Existing VeriAbstain receipt console
 
-This is a dependency-free static interface for the deployed BSC mainnet MVP.
-It is local-only until hosting receives separate owner approval.
+This static interface supports the deployed BSC receipt MVP and supplies
+the first compatibility case. The compatibility tester is a separate local
+build. See the [active specification](../../docs/PROJECT_SPEC.md).
+The owner hosts the existing preview on Vercel. Updates require separate
+hosting approval.
 
 ## Preview locally
 
@@ -69,7 +72,9 @@ The generator recompiles the reviewed Solidity source and links the official
 Agent ID registry immutable before emitting the exact expected runtime. It
 refuses bytecode or compiler-setting drift.
 
-## Deploy on Vercel
+## Existing Vercel deployment reference
+
+Follow these steps only with approval to update the hosted receipt console.
 
 1. Push `apps/web` to your Git repository, including `dist/config.js` and the other
    files in `dist`.
@@ -84,7 +89,7 @@ refuses bytecode or compiler-setting drift.
    receipt before sharing the campaign link. If the app shows **Check previous
    transaction**, use it to reconcile the existing request.
 
-## Current scope
+## Receipt console scope
 
 - Connect an injected EIP-1193 wallet.
 - Require BNB Smart Chain mainnet.
@@ -95,6 +100,5 @@ refuses bytecode or compiler-setting drift.
 - Simulate and request one zero-value `recordAssessment(bytes32,bytes32)` call.
 - Reconcile the exact transaction against finalized state and refresh progress.
 
-The receipt is attribution, not proof that an underlying claim is true or that
-any action is authorized. No backend, API key, custody, account system, private
-upload, analytics, or hosting is included.
+The receipt attributes two digests to the recording wallet. The console
+includes no backend, account system, credential handling or private uploads.

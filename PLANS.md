@@ -1,4 +1,28 @@
-# Ordered delivery
+# Active build plan — Agentic Wallet compatibility tester
+
+The owner selected this direction on 2026-11-27. Use the
+[product specification](docs/PROJECT_SPEC.md) for scope and record completed
+checks in [STATUS.md](STATUS.md).
+
+1. **Completed — local checker.** Versioned the expected action and
+   redacted observation inputs for a chain-56 zero-value contract call.
+   The CLI reports each check, the evidence level and the reported stage.
+2. **Completed — first workflow fixtures.** Modeled the regular-wallet sender mismatch
+   and the successful AI Pro preview with missing fee and no App confirmation
+   as distinct observations. Added a labeled positive fixture and controls
+   for mismatched action fields, stale data and incomplete evidence.
+3. **Next — validate with a builder.** Use the [pilot guide](docs/COMPATIBILITY_PILOT.md)
+   to compare the result with one willing external
+   builder's existing workflow. Record whether the checker catches a mismatch
+   or saves time. Obtain approval for outreach and any new live-test work.
+4. **Review before expanding.** Add more actions, a UI, chat integration or
+   Agent ID report attribution after there is evidence that users need them.
+   UI, hosting, on-chain actions and release each remain separately gated.
+
+The historical plans below explain the existing code and deployment. The
+active milestones are listed above.
+
+## Historical ordered delivery
 
 1. **G0 — foundation and review:** source review and repository foundation recorded. Outstanding deployed-contract checks remain in STATUS.md.
 2. **G1a — reproducible fixtures:** implement the 40-scenario manifest and harness against the actual SDK callback path. Run deterministic tests; label simulated contract reads clearly.
@@ -8,7 +32,7 @@
 6. **G3 — workflow:** minimal registry and web flow only after G2 passes. Deployment requires separate approval of chain, deployer, cost, and verification.
 7. **G4 — release:** independent review, reproducible demo, source verification, real-user eligibility checks, explicit release/submission approval.
 
-Current delivery: G1 fixtures and offline comparison infrastructure hardened by the user-requested team. Real BSC testnet job1766 lifecycle completed. Optional local runtime transport implemented with mocked tests; next choose runtime, add durable inference journal, and collect real-worker comparison evidence. G1 value remains unproven; G2 has not started. Keep each delivery reviewable.
+Initial delivery snapshot: G1 fixtures and offline comparison infrastructure hardened by the user-requested team. Real BSC testnet job1766 lifecycle completed. Optional local runtime transport implemented with mocked tests. The original G1 value gate remained unpassed.
 
 2026-11-20 exploratory decision: completed16scenario C/C_RETRY/D subset found1/1/1accepted analyses and no D-only completion. NO-GO for G2 on current evidence; full repeated gate remains pending. Owner review of docs/G1_EXPLORATORY_RESULT.md required before revised scope or further paid experiment.
 
@@ -18,7 +42,7 @@ Narrowed utility completion: independent evidence reader, strict validator and r
 
 Local narrowed-utility handoff complete: unified CLI and docs delivered,313fullsuite tests pass. No further action required for approved utility scope; broader product requires scope/value review.
 
-## New owner EvidenceLab track — separate from historical gates
+## Historical EvidenceLab track
 
 - G0: inspect actual code/artifacts, dependency map and strong deterministic baseline. Completed; docs/EVIDENCELAB_G0.md. No feature code changed.
 - G1: versioned Evidence Validity Envelope, temporal/snapshot distinctions and compatibility strategy. OWNER APPROVAL PENDING.

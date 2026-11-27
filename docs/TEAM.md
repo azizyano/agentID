@@ -1,4 +1,8 @@
-# First-part engineering team
+# Historical first-part engineering team
+
+This guide records past file ownership and coordination. For current scope and
+gates, use [AGENTS.md](../AGENTS.md) and [PLANS.md](../PLANS.md). Apply this
+coordination process when the owner requests delegation.
 
 The owner requested a collaborating team on 20 November 2026. The lead launches bounded specialist tasks, routes findings to the file owner, reviews changes, and runs the integrated checks. All work stays in this local repository.
 
